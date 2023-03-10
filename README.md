@@ -1,4 +1,4 @@
-# gf180 0.0.1
+# gf180 0.0.2
 
 GlobalFoundries 180nm MCU
 

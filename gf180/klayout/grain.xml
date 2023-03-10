@@ -3,7 +3,7 @@
  <name>gf180mcu</name>
  <token/>
  <hidden>false</hidden>
- <version>0.0.1</version>
+ <version>0.0.2</version>
  <api-version/>
  <title>gf180mcu</title>
  <doc>GlobalFoundries 180nm MCU primitive libraries</doc>
