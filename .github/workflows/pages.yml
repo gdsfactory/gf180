@@ -22,15 +22,13 @@ jobs:
         shell: bash -l {0}
         run: |
           make dev
-          sudo apt install pandoc
       - name: make docs
         run: |
-          cd docs
-          make html
+          make docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "./docs/build/html/"
+          path: "./docs/.build/html/"
   deploy-docs:
     needs: build-docs
     permissions:

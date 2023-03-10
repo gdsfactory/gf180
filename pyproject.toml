@@ -21,7 +21,7 @@ authors = [
 keywords = ["python"]
 license = {file = "LICENSE"}
 dependencies = [
-    "gdsfactory[full]==6.56.0",
+    "gdsfactory[full]==6.57.0",
     "matplotlib",
 ]
 readme = "README.md"
