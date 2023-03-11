@@ -31,7 +31,7 @@ jobs:
           cache-dependency-path: pyproject.toml
       - name: Install dependencies
         run: |
-          pip install -e[tests]
+          pip install -e .[tests]
       - name: Test with pytest
         run: pytest
   test_code_coverage:
@@ -45,7 +45,7 @@ jobs:
           python-version: '3.10'
       - name: Install dependencies
         run: |
-          pip install -e[tests]
+          pip install -e .[tests]
       - name: Test with pytest
         run: |
           pytest --cov={{ cookiecutter.package_name }} {{ cookiecutter.package_name }}
