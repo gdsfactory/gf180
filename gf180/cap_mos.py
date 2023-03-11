@@ -114,7 +114,7 @@ def cap_mos_inst(
     return c_inst
 
 
-def draw_cap_mos(
+def cap_mos(
     type: str = "cap_nmos",
     lc: float = 0.1,
     wc: float = 0.1,

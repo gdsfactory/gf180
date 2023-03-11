@@ -4,5 +4,8 @@
 format: jb-book
 root: index
 chapters:
-  - file: api
+  - file: components
+  - file: tutorial
+    sections:
+      - glob: notebooks/*
   - file: changelog

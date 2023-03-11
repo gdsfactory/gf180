@@ -1,5 +1,9 @@
 from pydantic import BaseModel
+
+import gdsfactory as gf
 from gdsfactory.typings import Layer
+
+from gf180.config import PATH
 
 
 class LayerMap(BaseModel):
@@ -113,3 +117,7 @@ class LayerMap(BaseModel):
 
 LAYER = LayerMap()
 layer = dict(LAYER)
+LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
+
+if __name__ == "__main__":
+    LAYER_VIEWS.to_lyp(PATH.lyp)
