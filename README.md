@@ -2,8 +2,13 @@
 
 GlobalFoundries 180nm MCU
 
-## Usage
 
 ## Installation
 
-`make install`
+```
+git clone https://github.com/gdsfactory/gf180.git
+cd gf180
+make install
+
+
+```
