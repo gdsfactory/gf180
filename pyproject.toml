@@ -21,7 +21,7 @@ authors = [
 keywords = ["python"]
 license = {file = "LICENSE"}
 dependencies = [
-    "gdsfactory[full]==6.57.1",
+    "gdsfactory[full]==6.60.3",
 ]
 readme = "README.md"
 requires-python = ">=3.7"
@@ -39,7 +39,7 @@ docs = [
     "autodoc_pydantic",
     "matplotlib",
     "jupytext",
-    "jupyter-book==0.14.0",
+    "jupyter-book==0.15.1",
     "sphinx-autodoc-typehints",
     "sphinx-click",
     ]
