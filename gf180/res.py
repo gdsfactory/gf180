@@ -205,6 +205,7 @@ def plus_res_inst(
     return c
 
 
+@gf.cell
 def nplus_res(
     l_res: float = 0.1,
     w_res: float = 0.1,
@@ -217,7 +218,7 @@ def nplus_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-    c = gf.Component("res_dev")
+    c = gf.Component()
 
     lvpwell_enc_cmp = 0.43
     dn_enc_lvpwell = 2.5
@@ -279,6 +280,7 @@ def nplus_res(
     return c
 
 
+@gf.cell
 def pplus_res(
     l_res: float = 0.1,
     w_res: float = 0.1,
@@ -482,6 +484,7 @@ def polyf_res_inst(
     return c
 
 
+@gf.cell
 def npolyf_res(
     l_res: float = 0.1,
     w_res: float = 0.1,
@@ -554,6 +557,7 @@ def npolyf_res(
     return c
 
 
+@gf.cell
 def ppolyf_res(
     l_res: float = 0.1,
     w_res: float = 0.1,
@@ -619,6 +623,7 @@ def ppolyf_res(
     return c
 
 
+@gf.cell
 def ppolyf_u_high_Rs_res(
     l_res: float = 0.42,
     w_res: float = 0.42,
@@ -815,6 +820,7 @@ def ppolyf_u_high_Rs_res(
     return c
 
 
+@gf.cell
 def well_res(
     l_res: float = 0.42,
     w_res: float = 0.42,

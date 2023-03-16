@@ -1,0 +1,27 @@
+name: well_res
+settings:
+  changed: {}
+  child: null
+  default:
+    l_res: 0.42
+    lbl: 0
+    pcmpgr: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: nwell
+    sub_lbl: ''
+    w_res: 0.42
+  full:
+    l_res: 0.42
+    lbl: 0
+    pcmpgr: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: nwell
+    sub_lbl: ''
+    w_res: 0.42
+  function_name: well_res
+  info: {}
+  info_version: 2
+  module: gf180.res
+  name: well_res

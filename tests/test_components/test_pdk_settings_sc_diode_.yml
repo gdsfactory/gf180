@@ -1,0 +1,27 @@
+name: sc_diode
+settings:
+  changed: {}
+  child: null
+  default:
+    cw: 0.1
+    la: 0.1
+    lbl: 0
+    m: 1
+    n_lbl: ''
+    p_lbl: ''
+    pcmpgr: 0
+    wa: 0.1
+  full:
+    cw: 0.1
+    la: 0.1
+    lbl: 0
+    m: 1
+    n_lbl: ''
+    p_lbl: ''
+    pcmpgr: 0
+    wa: 0.1
+  function_name: sc_diode
+  info: {}
+  info_version: 2
+  module: gf180.diode
+  name: sc_diode

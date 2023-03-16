@@ -1,0 +1,43 @@
+name: plus_res_inst
+settings:
+  changed: {}
+  child: null
+  default:
+    cmp_imp_layer:
+    - 32
+    - 0
+    cmp_res_ext: 0.1
+    con_enc: 0.1
+    l_res: 0.1
+    lbl: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: nplus_s
+    sub: 0
+    sub_imp_layer:
+    - 31
+    - 0
+    sub_lbl: ''
+    w_res: 0.1
+  full:
+    cmp_imp_layer:
+    - 32
+    - 0
+    cmp_res_ext: 0.1
+    con_enc: 0.1
+    l_res: 0.1
+    lbl: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: nplus_s
+    sub: 0
+    sub_imp_layer:
+    - 31
+    - 0
+    sub_lbl: ''
+    w_res: 0.1
+  function_name: plus_res_inst
+  info: {}
+  info_version: 2
+  module: gf180.res
+  name: plus_res_inst

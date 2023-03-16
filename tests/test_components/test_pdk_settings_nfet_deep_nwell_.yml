@@ -1,0 +1,27 @@
+name: nfet_deep_nwell
+settings:
+  changed: {}
+  child: null
+  default:
+    deepnwell: 0
+    grw: 0.36
+    inst_size:
+    - 0.1
+    - 0.1
+    inst_xmin: 0.1
+    inst_ymin: 0.1
+    pcmpgr: 0
+  full:
+    deepnwell: 0
+    grw: 0.36
+    inst_size:
+    - 0.1
+    - 0.1
+    inst_xmin: 0.1
+    inst_ymin: 0.1
+    pcmpgr: 0
+  function_name: nfet_deep_nwell
+  info: {}
+  info_version: 2
+  module: gf180.fet
+  name: nfet_deep_nwell

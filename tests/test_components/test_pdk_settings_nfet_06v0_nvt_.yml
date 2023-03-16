@@ -1,0 +1,43 @@
+name: nfet_06v0_nvt
+settings:
+  changed: {}
+  child: null
+  default:
+    bulk: None
+    con_bet_fin: 1
+    g_lbl: []
+    gate_con_pos: alternating
+    grw: 0.22
+    inter_sd_l: 0.24
+    interdig: 0
+    l_gate: 1.8
+    lbl: 0
+    nf: 1
+    patt: ''
+    patt_lbl: 0
+    sd_con_col: 1
+    sd_lbl: []
+    sub_lbl: ''
+    w_gate: 0.8
+  full:
+    bulk: None
+    con_bet_fin: 1
+    g_lbl: []
+    gate_con_pos: alternating
+    grw: 0.22
+    inter_sd_l: 0.24
+    interdig: 0
+    l_gate: 1.8
+    lbl: 0
+    nf: 1
+    patt: ''
+    patt_lbl: 0
+    sd_con_col: 1
+    sd_lbl: []
+    sub_lbl: ''
+    w_gate: 0.8
+  function_name: nfet_06v0_nvt
+  info: {}
+  info_version: 2
+  module: gf180.fet
+  name: nfet_06v0_nvt

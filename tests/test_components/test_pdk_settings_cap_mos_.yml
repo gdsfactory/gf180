@@ -1,0 +1,29 @@
+name: cap_mos
+settings:
+  changed: {}
+  child: null
+  default:
+    deepnwell: 0
+    g_lbl: ''
+    lbl: 0
+    lc: 0.1
+    pcmpgr: 0
+    sd_lbl: ''
+    type: cap_nmos
+    volt: 3.3V
+    wc: 0.1
+  full:
+    deepnwell: 0
+    g_lbl: ''
+    lbl: 0
+    lc: 0.1
+    pcmpgr: 0
+    sd_lbl: ''
+    type: cap_nmos
+    volt: 3.3V
+    wc: 0.1
+  function_name: cap_mos
+  info: {}
+  info_version: 2
+  module: gf180.cap_mos
+  name: cap_mos

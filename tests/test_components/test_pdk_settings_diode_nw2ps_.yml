@@ -1,0 +1,25 @@
+name: diode_nw2ps
+settings:
+  changed: {}
+  child: null
+  default:
+    cw: 0.1
+    la: 0.1
+    lbl: 0
+    n_lbl: ''
+    p_lbl: ''
+    volt: 3.3V
+    wa: 0.1
+  full:
+    cw: 0.1
+    la: 0.1
+    lbl: 0
+    n_lbl: ''
+    p_lbl: ''
+    volt: 3.3V
+    wa: 0.1
+  function_name: diode_nw2ps
+  info: {}
+  info_version: 2
+  module: gf180.diode
+  name: diode_nw2ps
