@@ -84,12 +84,9 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < np_l:
-            self.la = np_l
-        if (self.wa) < np_w:
-            self.wa = np_w
-        if (self.cw) < np_w:
-            self.cw = np_w
+        self.la = max(self.la, np_l)
+        self.wa = max(self.wa, np_w)
+        self.cw = max(self.cw, np_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -172,10 +169,8 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < pn_l:
-            self.la = pn_l
-        if (self.wa) < pn_w:
-            self.wa = pn_w
+        self.la = max(self.la, pn_l)
+        self.wa = max(self.wa, pn_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -256,12 +251,9 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < nwp_l:
-            self.la = nwp_l
-        if (self.wa) < nwp_w:
-            self.wa = nwp_w
-        if (self.cw) < nwp_w:
-            self.cw = nwp_w
+        self.la = max(self.la, nwp_l)
+        self.wa = max(self.wa, nwp_w)
+        self.cw = max(self.cw, nwp_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -341,12 +333,9 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < diode_pw2dw_l:
-            self.la = diode_pw2dw_l
-        if (self.wa) < diode_pw2dw_w:
-            self.wa = diode_pw2dw_w
-        if (self.cw) < diode_pw2dw_w:
-            self.cw = diode_pw2dw_w
+        self.la = max(self.la, diode_pw2dw_l)
+        self.wa = max(self.wa, diode_pw2dw_w)
+        self.cw = max(self.cw, diode_pw2dw_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -427,12 +416,9 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < diode_dw2ps_l:
-            self.la = diode_dw2ps_l
-        if (self.wa) < diode_dw2ps_w:
-            self.wa = diode_dw2ps_w
-        if (self.cw) < diode_dw2ps_w:
-            self.cw = diode_dw2ps_w
+        self.la = max(self.la, diode_dw2ps_l)
+        self.wa = max(self.wa, diode_dw2ps_w)
+        self.cw = max(self.cw, diode_dw2ps_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -512,8 +498,7 @@ class sc_diode(pya.PCellDeclarationHelper):
         self.area = self.wa * self.la
         self.perim = 2 * (self.wa + self.la)
         # w,l must be larger or equal than min. values.
-        if (self.la) < sc_l:
-            self.la = sc_l
+        self.la = max(self.la, sc_l)
         if (self.wa) != sc_w:
             self.wa = sc_w
 

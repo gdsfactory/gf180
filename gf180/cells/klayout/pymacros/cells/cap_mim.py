@@ -67,10 +67,8 @@ class cap_mim(pya.PCellDeclarationHelper):
         self.area = self.wc * self.lc
         self.perim = 2 * (self.wc + self.lc)
         # w,l must be larger or equal than min. values.
-        if (self.lc) < mim_l:
-            self.lc = mim_l
-        if (self.wc) < mim_w:
-            self.wc = mim_w
+        self.lc = max(self.lc, mim_l)
+        self.wc = max(self.wc, mim_w)
         if (self.mim_option) == "MIM-A":
             self.metal_level = "M3"
 
@@ -92,12 +90,13 @@ class cap_mim(pya.PCellDeclarationHelper):
 
     def produce_impl(self):
         option = os.environ["GF_PDK_OPTION"]
-        if option == "A":
-            if (self.mim_option) == "MIM-B":
-                raise TypeError(f"Current stack ({option}) doesn't allow this option")
-        else:
-            if (self.mim_option) == "MIM-A":
-                raise TypeError(f"Current stack ({option}) doesn't allow this option")
+        if (
+            option == "A"
+            and (self.mim_option) == "MIM-B"
+            or option != "A"
+            and (self.mim_option) == "MIM-A"
+        ):
+            raise TypeError(f"Current stack ({option}) doesn't allow this option")
         np_instance = draw_cap_mim(
             self.layout,
             lc=self.lc,

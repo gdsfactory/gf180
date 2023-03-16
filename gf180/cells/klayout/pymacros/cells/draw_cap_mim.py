@@ -31,14 +31,7 @@ def draw_cap_mim(
     # used dimensions and layers
 
     # MIM Option selection
-    if mim_option == "MIM-A":
-        upper_layer = layer["metal3"]
-        bottom_layer = layer["metal2"]
-        via_layer = layer["via2"]
-        up_lbl_layer = layer["metal3_label"]
-        bot_lbl_layer = layer["metal2_label"]
-
-    elif mim_option == "MIM-B":
+    if mim_option == "MIM-B":
         if metal_level == "M4":
             upper_layer = layer["metal4"]
             bottom_layer = layer["metal3"]
