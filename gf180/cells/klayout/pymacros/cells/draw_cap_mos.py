@@ -104,7 +104,10 @@ def cap_mos_inst(
     )
 
     pl_con = c_inst.add_array(
-        component=pl_con_el, rows=2, columns=1, spacing=(0, pl_l - con_w),
+        component=pl_con_el,
+        rows=2,
+        columns=1,
+        spacing=(0, pl_l - con_w),
     )
 
     # Gate labels_generation
@@ -288,7 +291,6 @@ def draw_cap_mos(
             lvpwell.ymin = cmp_ymin - np_enc_gate
 
     if deepnwell == 1:
-
         if type == "cap_nmos":
             lvp_rect = c.add_ref(
                 gf.components.rectangle(
@@ -331,7 +333,6 @@ def draw_cap_mos(
             dn_rect.ymin = c_inst.ymin - dnwell_enc_pcmp
 
         if pcmpgr == 1:
-
             c_temp_gr = gf.Component("temp_store guard ring")
             rect_pcmpgr_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
@@ -374,7 +375,10 @@ def draw_cap_mos(
                 )
             )
             psdm_in.move(
-                (rect_pcmpgr_in.xmin + comp_pp_enc, rect_pcmpgr_in.ymin + comp_pp_enc,)
+                (
+                    rect_pcmpgr_in.xmin + comp_pp_enc,
+                    rect_pcmpgr_in.ymin + comp_pp_enc,
+                )
             )
             psdm_out = c_temp_gr.add_ref(
                 gf.components.rectangle(

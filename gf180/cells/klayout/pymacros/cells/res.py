@@ -83,7 +83,6 @@ class metal_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(metal_resistor, self).__init__()
 
@@ -209,7 +208,6 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(nplus_s_resistor, self).__init__()
 
@@ -307,7 +305,6 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(pplus_s_resistor, self).__init__()
 
@@ -403,7 +400,6 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(nplus_u_resistor, self).__init__()
 
@@ -501,7 +497,6 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(pplus_u_resistor, self).__init__()
 
@@ -597,7 +592,6 @@ class nwell_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(nwell_resistor, self).__init__()
 
@@ -690,7 +684,6 @@ class pwell_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(pwell_resistor, self).__init__()
 
@@ -784,7 +777,6 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(npolyf_s_resistor, self).__init__()
 
@@ -880,7 +872,6 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(ppolyf_s_resistor, self).__init__()
 
@@ -976,7 +967,6 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(npolyf_u_resistor, self).__init__()
 
@@ -1072,7 +1062,6 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(ppolyf_u_resistor, self).__init__()
 
@@ -1168,7 +1157,6 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(ppolyf_u_high_Rs_resistor, self).__init__()
 

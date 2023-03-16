@@ -26,7 +26,6 @@ class efuse(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Important: initialize the super class
         super(efuse, self).__init__()
         self.param(
@@ -76,7 +75,6 @@ class efuse(pya.PCellDeclarationHelper):
         pass
 
     def produce_impl(self):
-
         # This is the main part of the implementation: create the layout
 
         self.percision = 1 / self.layout.dbu

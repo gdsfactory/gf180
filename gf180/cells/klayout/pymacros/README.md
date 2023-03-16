@@ -15,7 +15,7 @@ export KLAYOUT_HOME=`pwd`
 ```
 2.(optional step to enable GUI menu for running DRC/LVS) You will need to run the following commands as well from inside `cells/klayout` folder:
 ```bash
-ln -s ../../rules/klayout/drc 
+ln -s ../../rules/klayout/drc
 ln -s ../../rules/klayout/lvs
 ln -s ../../rules/klayout/macros
 ln -s ../../tech/klayout/gf180mcu.lyt
@@ -31,6 +31,3 @@ klayout -e
 7. Select the search botton and it will give the list of PCells that is available in the library.
 8. Select any cell and it will show the cell.
 9. Go to the PCell tap and change the parameters as needed to change the layout of the PCells.
-
-
-

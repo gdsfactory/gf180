@@ -1,6 +1,6 @@
 import gdsfactory as gf
 
-from .via_generator import via_generator, via_stack
+from .via_generator import via_generator
 from .layers_def import layer
 
 
@@ -14,7 +14,6 @@ def draw_cap_mim(
     top_lbl: str = "",
     bot_lbl: str = "",
 ):
-
     """
     Retern mim cap
 
@@ -66,7 +65,12 @@ def draw_cap_mim(
 
     # drawing cap identifier and bottom , upper layers
 
-    m_up = c.add_ref(gf.components.rectangle(size=(wc, lc), layer=upper_layer,))
+    m_up = c.add_ref(
+        gf.components.rectangle(
+            size=(wc, lc),
+            layer=upper_layer,
+        )
+    )
 
     fusetop = c.add_ref(
         gf.components.rectangle(
@@ -101,7 +105,6 @@ def draw_cap_mim(
 
     # generating labels
     if lbl == 1:
-
         c.add_label(
             top_lbl,
             position=(m_up.xmin + (m_up.size[0] / 2), m_dn.xmin + (m_dn.size[1] / 2)),

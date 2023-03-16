@@ -30,7 +30,6 @@ class cap_mim(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(cap_mim, self).__init__()
 

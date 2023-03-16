@@ -44,7 +44,6 @@ from .res import (
     nwell_resistor,
     pwell_resistor,
 )
-from .efuse import efuse
 
 
 # It's a Python class that inherits from the pya.Library class

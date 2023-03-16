@@ -22,7 +22,6 @@ gds_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bjt")
 
 
 def draw_bjt(layout, device_name):
-
     gds_file = f"{gds_path}/{device_name}.gds"
 
     if os.path.exists(gds_file) and os.path.isfile(gds_file):

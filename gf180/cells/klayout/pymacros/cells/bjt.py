@@ -26,7 +26,6 @@ class npn_bjt(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Important: initialize the super class
         super(npn_bjt, self).__init__()
         self.Type_handle = self.param(
@@ -72,7 +71,6 @@ class npn_bjt(pya.PCellDeclarationHelper):
         pass
 
     def produce_impl(self):
-
         # This is the main part of the implementation: create the layout
 
         self.percision = 1 / self.layout.dbu
@@ -97,7 +95,6 @@ class pnp_bjt(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Important: initialize the super class
         super(pnp_bjt, self).__init__()
         self.Type_handle = self.param(
@@ -141,7 +138,6 @@ class pnp_bjt(pya.PCellDeclarationHelper):
         pass
 
     def produce_impl(self):
-
         # This is the main part of the implementation: create the layout
 
         self.percision = 1 / self.layout.dbu

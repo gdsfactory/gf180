@@ -40,7 +40,6 @@ class cap_nmos(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(cap_nmos, self).__init__()
 
@@ -123,7 +122,6 @@ class cap_pmos(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(cap_pmos, self).__init__()
 
@@ -206,7 +204,6 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(cap_nmos_b, self).__init__()
 
@@ -287,7 +284,6 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
     """
 
     def __init__(self):
-
         # Initializing super class.
         super(cap_pmos_b, self).__init__()
 

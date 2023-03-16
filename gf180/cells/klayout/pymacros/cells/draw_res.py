@@ -136,7 +136,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
     rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - grw, rect_pcmpgr_in.ymin - grw))
     c.add_ref(
         gf.geometry.boolean(
-            A=rect_pcmpgr_out, B=rect_pcmpgr_in, operation="A-B", layer=layer["comp"],
+            A=rect_pcmpgr_out,
+            B=rect_pcmpgr_in,
+            operation="A-B",
+            layer=layer["comp"],
         )
     )  # guardring bulk
 
@@ -150,7 +153,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
         )
     )
     psdm_in.move(
-        (rect_pcmpgr_in.xmin + comp_pp_enc, rect_pcmpgr_in.ymin + comp_pp_enc,)
+        (
+            rect_pcmpgr_in.xmin + comp_pp_enc,
+            rect_pcmpgr_in.ymin + comp_pp_enc,
+        )
     )
     psdm_out = c_temp_gr.add_ref(
         gf.components.rectangle(
@@ -162,7 +168,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
         )
     )
     psdm_out.move(
-        (rect_pcmpgr_out.xmin - comp_pp_enc, rect_pcmpgr_out.ymin - comp_pp_enc,)
+        (
+            rect_pcmpgr_out.xmin - comp_pp_enc,
+            rect_pcmpgr_out.ymin - comp_pp_enc,
+        )
     )
     c.add_ref(
         gf.geometry.boolean(
@@ -174,7 +183,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
 
     c.add_ref(
         via_generator(
-            x_range=(rect_pcmpgr_in.xmin + con_size, rect_pcmpgr_in.xmax - con_size,),
+            x_range=(
+                rect_pcmpgr_in.xmin + con_size,
+                rect_pcmpgr_in.xmax - con_size,
+            ),
             y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
@@ -185,7 +197,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
 
     c.add_ref(
         via_generator(
-            x_range=(rect_pcmpgr_in.xmin + con_size, rect_pcmpgr_in.xmax - con_size,),
+            x_range=(
+                rect_pcmpgr_in.xmin + con_size,
+                rect_pcmpgr_in.xmax - con_size,
+            ),
             y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
@@ -197,7 +212,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
     c.add_ref(
         via_generator(
             x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
-            y_range=(rect_pcmpgr_in.ymin + con_size, rect_pcmpgr_in.ymax - con_size,),
+            y_range=(
+                rect_pcmpgr_in.ymin + con_size,
+                rect_pcmpgr_in.ymax - con_size,
+            ),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
             via_size=(con_size, con_size),
@@ -208,7 +226,10 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
     c.add_ref(
         via_generator(
             x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
-            y_range=(rect_pcmpgr_in.ymin + con_size, rect_pcmpgr_in.ymax - con_size,),
+            y_range=(
+                rect_pcmpgr_in.ymin + con_size,
+                rect_pcmpgr_in.ymax - con_size,
+            ),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
             via_size=(con_size, con_size),
@@ -225,14 +246,20 @@ def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
 
     comp_m1_out = c_temp_gr.add_ref(
         gf.components.rectangle(
-            size=((comp_m1_in.size[0]) + 2 * grw, (comp_m1_in.size[1]) + 2 * grw,),
+            size=(
+                (comp_m1_in.size[0]) + 2 * grw,
+                (comp_m1_in.size[1]) + 2 * grw,
+            ),
             layer=layer["metal1"],
         )
     )
     comp_m1_out.move((rect_pcmpgr_in.xmin - grw, rect_pcmpgr_in.ymin - grw))
     c.add_ref(
         gf.geometry.boolean(
-            A=rect_pcmpgr_out, B=rect_pcmpgr_in, operation="A-B", layer=layer["metal1"],
+            A=rect_pcmpgr_out,
+            B=rect_pcmpgr_in,
+            operation="A-B",
+            layer=layer["metal1"],
         )
     )  # metal1 guardring
 
@@ -254,7 +281,6 @@ def plus_res_inst(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component()
 
     np_enc_cmp: float = 0.16
@@ -326,7 +352,6 @@ def plus_res_inst(
     cmp_imp.ymin = cmp.ymin - np_enc_cmp
 
     if sub == 1:
-
         sub_w: float = 0.36
         sub_rect = c.add_ref(
             gf.components.rectangle(size=(sub_w, w_res), layer=layer["comp"])
@@ -385,7 +410,6 @@ def draw_nplus_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     if res_type == "nplus_s":
@@ -465,7 +489,6 @@ def draw_pplus_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     if res_type == "pplus_s":
@@ -494,7 +517,6 @@ def draw_pplus_res(
     )
 
     if deepnwell == 1:
-
         dn_enc_ncmp = 0.66
         dn_enc_pcmp = 1.02
         dn_rect = c.add_ref(
@@ -515,7 +537,6 @@ def draw_pplus_res(
             c.add_ref(pcmpgr_gen(dn_rect=dn_rect, grw=sub_w))
 
     else:
-
         nw_enc_pcmp = 0.6
         nw_rect = c.add_ref(
             gf.components.rectangle(
@@ -550,7 +571,6 @@ def polyf_res_inst(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component()
 
     sub_w: float = 0.36
@@ -623,7 +643,10 @@ def polyf_res_inst(
 
     sub_imp = c.add_ref(
         gf.components.rectangle(
-            size=(sub_rect.size[0] + (2 * pp_enc_cmp), pl.size[1] + (2 * pp_enc_cmp),),
+            size=(
+                sub_rect.size[0] + (2 * pp_enc_cmp),
+                pl.size[1] + (2 * pp_enc_cmp),
+            ),
             layer=sub_imp_layer,
         )
     )
@@ -673,7 +696,6 @@ def draw_npolyf_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     if res_type == "npolyf_s":
@@ -751,7 +773,6 @@ def draw_ppolyf_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     if res_type == "ppolyf_s":
@@ -780,7 +801,6 @@ def draw_ppolyf_res(
     )
 
     if deepnwell == 1:
-
         dn_enc_ncmp = 0.66
         dn_enc_poly2 = 1.34
 
@@ -819,7 +839,6 @@ def draw_ppolyf_u_high_Rs_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     dn_enc_ncmp = 0.62
@@ -882,7 +901,10 @@ def draw_ppolyf_u_high_Rs_res(
     )
 
     pl_con_arr = c.add_array(
-        component=pl_con, rows=1, columns=2, spacing=(pl.size[0] - con_size, 0),
+        component=pl_con,
+        rows=1,
+        columns=2,
+        spacing=(pl.size[0] - con_size, 0),
     )  # comp contact array
 
     pplus = gf.components.rectangle(
@@ -948,7 +970,10 @@ def draw_ppolyf_u_high_Rs_res(
 
     sub_imp = c.add_ref(
         gf.components.rectangle(
-            size=(sub_rect.size[0] + (2 * pp_enc_cmp), pl.size[1] + (2 * pp_enc_cmp),),
+            size=(
+                sub_rect.size[0] + (2 * pp_enc_cmp),
+                pl.size[1] + (2 * pp_enc_cmp),
+            ),
             layer=sub_layer,
         )
     )
@@ -956,7 +981,6 @@ def draw_ppolyf_u_high_Rs_res(
     sub_imp.ymin = sub_rect.ymin - pp_enc_cmp
 
     if deepnwell == 1:
-
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -1015,7 +1039,6 @@ def draw_well_res(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
-
     c = gf.Component("res_dev")
 
     nw_res_ext = 0.48
@@ -1052,7 +1075,6 @@ def draw_well_res(
 
     @gf.cell
     def comp_related_gen(size: Float2 = (0.42, 0.42)) -> gf.Component:
-
         c = gf.Component()
 
         cmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
@@ -1129,7 +1151,6 @@ def draw_well_res(
     sub_imp.ymin = sub_rect.ymin - pp_enc_cmp
 
     if res_type == "pwell":
-
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
