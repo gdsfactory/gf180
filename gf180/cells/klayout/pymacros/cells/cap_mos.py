@@ -72,10 +72,8 @@ class cap_nmos(pya.PCellDeclarationHelper):
         self.area = self.wc * self.lc
         self.perim = 2 * (self.wc + self.lc)
         # w,l must be larger or equal than min. values.
-        if (self.lc) < cap_nmos_l:
-            self.lc = cap_nmos_l
-        if (self.wc) < cap_nmos_w:
-            self.wc = cap_nmos_w
+        self.lc = max(self.lc, cap_nmos_l)
+        self.wc = max(self.wc, cap_nmos_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -157,10 +155,8 @@ class cap_pmos(pya.PCellDeclarationHelper):
         self.area = self.wc * self.lc
         self.perim = 2 * (self.wc + self.lc)
         # w,l must be larger or equal than min. values.
-        if (self.lc) < cap_pmos_l:
-            self.lc = cap_pmos_l
-        if (self.wc) < cap_pmos_w:
-            self.wc = cap_pmos_w
+        self.lc = max(self.lc, cap_pmos_l)
+        self.wc = max(self.wc, cap_pmos_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -240,10 +236,8 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
         self.area = self.wc * self.lc
         self.perim = 2 * (self.wc + self.lc)
         # w,l must be larger or equal than min. values.
-        if (self.lc) < cap_nmos_b_l:
-            self.lc = cap_nmos_b_l
-        if (self.wc) < cap_nmos_b_w:
-            self.wc = cap_nmos_b_w
+        self.lc = max(self.lc, cap_nmos_b_l)
+        self.wc = max(self.wc, cap_nmos_b_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -323,10 +317,8 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
         self.area = self.wc * self.lc
         self.perim = 2 * (self.wc + self.lc)
         # w,l must be larger or equal than min. values.
-        if (self.lc) < cap_pmos_b_l:
-            self.lc = cap_pmos_b_l
-        if (self.wc) < cap_pmos_b_w:
-            self.wc = cap_pmos_b_w
+        self.lc = max(self.lc, cap_pmos_b_l)
+        self.wc = max(self.wc, cap_pmos_b_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which

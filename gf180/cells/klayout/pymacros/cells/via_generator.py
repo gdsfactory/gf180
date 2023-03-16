@@ -48,9 +48,7 @@ def via_generator(
     if (length - nr * via_size[1] - (nr - 1) * via_spacing[1]) / 2 < via_enclosure[1]:
         nr -= 1
 
-    if nr < 1:
-        nr = 1
-
+    nr = max(nr, 1)
     nc = ceil(width / (via_size[0] + via_spacing[0]))
 
     if (
@@ -58,9 +56,7 @@ def via_generator(
     ) / 2 < via_enclosure[0]:
         nc -= 1
 
-    if nc < 1:
-        nc = 1
-
+    nc = max(nc, 1)
     via_sp = (via_size[0] + via_spacing[0], via_size[1] + via_spacing[1])
 
     rect_via = gf.components.rectangle(size=via_size, layer=via_layer)
@@ -101,7 +97,6 @@ def via_stack(
     # vias dimensions
 
     con_size = (0.22, 0.22)
-    con_enc = 0.07
     m_enc = 0.06
 
     con_spacing = (0.28, 0.28)
@@ -111,6 +106,7 @@ def via_stack(
     via_enc = (0.06, 0.06)
 
     if metal_level >= 1:
+        con_enc = 0.07
         con_gen = via_generator(
             x_range=x_range,
             y_range=y_range,

@@ -127,13 +127,6 @@ class metal_resistor(pya.PCellDeclarationHelper):
             + ("%.3f" % self.w_res)
             + ")"
         )
-        return (
-            "metal_resistor(L="
-            + ("%.3f" % self.l_res)
-            + ",W="
-            + ("%.3f" % self.w_res)
-            + ")"
-        )
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -144,38 +137,22 @@ class metal_resistor(pya.PCellDeclarationHelper):
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
         if (self.res_type) == "rm1":
-            if (self.l_res) < rm1_l:
-                self.l_res = rm1_l
-            if (self.w_res) < rm1_w:
-                self.w_res = rm1_w
-            if (self.l_res) < rm1_l:
-                self.l_res = rm1_l
-            if (self.w_res) < rm1_w:
-                self.w_res = rm1_w
-
-        if (self.res_type) == "rm2" or (self.res_type) == "rm3":
-            if (self.l_res) < rm2_3_l:
-                self.l_res = rm2_3_l
-            if (self.w_res) < rm2_3_w:
-                self.w_res = rm2_3_w
-
+            self.l_res = max(self.l_res, rm1_l)
+            self.w_res = max(self.w_res, rm1_w)
+            self.l_res = max(self.l_res, rm1_l)
+            self.w_res = max(self.w_res, rm1_w)
+        if self.res_type in ["rm2", "rm3"]:
+            self.l_res = max(self.l_res, rm2_3_l)
+            self.w_res = max(self.w_res, rm2_3_w)
         if (self.res_type) == "tm6k":
-            if (self.l_res) < tm6k_l:
-                self.l_res = tm6k_l
-            if (self.w_res) < tm6k_w:
-                self.w_res = tm6k_w
-
-        if (self.res_type) == "tm9k" or (self.res_type) == "tm11k":
-            if (self.l_res) < tm9_11k_l:
-                self.l_res = tm9_11k_l
-            if (self.w_res) < tm9_11k_w:
-                self.w_res = tm9_11k_w
-
+            self.l_res = max(self.l_res, tm6k_l)
+            self.w_res = max(self.w_res, tm6k_w)
+        if self.res_type in ["tm9k", "tm11k"]:
+            self.l_res = max(self.l_res, tm9_11k_l)
+            self.w_res = max(self.w_res, tm9_11k_w)
         if (self.res_type) == "tm30k":
-            if (self.l_res) < tm30k_l:
-                self.l_res = tm30k_l
-            if (self.w_res) < tm30k_w:
-                self.w_res = tm30k_w
+            self.l_res = max(self.l_res, tm30k_l)
+            self.w_res = max(self.w_res, tm30k_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -197,27 +174,13 @@ class metal_resistor(pya.PCellDeclarationHelper):
         dbu_PERCISION = 1 / self.layout.dbu
         option = os.environ["GF_PDK_OPTION"]
         if option == "A":
-            if (
-                ((self.res_type) == "rm3")
-                or ((self.res_type) == "tm6k")
-                or ((self.res_type) == "tm9k")
-                or ((self.res_type) == "tm11k")
-            ):
+            if self.res_type in ["rm3", "tm6k", "tm9k", "tm11k"]:
                 raise TypeError(f"Current stack ({option}) doesn't allow this option")
         elif option == "B":
-            if (
-                ((self.res_type) == "tm6k")
-                or ((self.res_type) == "tm9k")
-                or ((self.res_type) == "tm30k")
-            ):
+            if self.res_type in ["tm6k", "tm9k", "tm30k"]:
                 raise TypeError(f"Current stack ({option}) doesn't allow this option")
-        else:
-            if (
-                ((self.res_type) == "tm6k")
-                or ((self.res_type) == "tm11k")
-                or ((self.res_type) == "tm30k")
-            ):
-                raise TypeError(f"Current stack ({option}) doesn't allow this option")
+        elif self.res_type in ["tm6k", "tm11k", "tm30k"]:
+            raise TypeError(f"Current stack ({option}) doesn't allow this option")
         np_instance = draw_metal_res(
             layout=self.layout,
             l_res=self.l_res,
@@ -291,10 +254,8 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < nplus_s_l:
-            self.l_res = nplus_s_l
-        if (self.w_res) < nplus_s_w:
-            self.w_res = nplus_s_w
+        self.l_res = max(self.l_res, nplus_s_l)
+        self.w_res = max(self.w_res, nplus_s_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -390,10 +351,8 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < pplus_s_l:
-            self.l_res = pplus_s_l
-        if (self.w_res) < pplus_s_w:
-            self.w_res = pplus_s_w
+        self.l_res = max(self.l_res, pplus_s_l)
+        self.w_res = max(self.w_res, pplus_s_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -489,10 +448,8 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < nplus_u_l:
-            self.l_res = nplus_u_l
-        if (self.w_res) < nplus_u_w:
-            self.w_res = nplus_u_w
+        self.l_res = max(self.l_res, nplus_u_l)
+        self.w_res = max(self.w_res, nplus_u_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -588,10 +545,8 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < pplus_u_l:
-            self.l_res = pplus_u_l
-        if (self.w_res) < pplus_u_w:
-            self.w_res = pplus_u_w
+        self.l_res = max(self.l_res, pplus_u_l)
+        self.w_res = max(self.w_res, pplus_u_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -684,10 +639,8 @@ class nwell_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < nwell_l:
-            self.l_res = nwell_l
-        if (self.w_res) < nwell_w:
-            self.w_res = nwell_w
+        self.l_res = max(self.l_res, nwell_l)
+        self.w_res = max(self.w_res, nwell_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -780,10 +733,8 @@ class pwell_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < pwell_l:
-            self.l_res = pwell_l
-        if (self.w_res) < pwell_w:
-            self.w_res = pwell_w
+        self.l_res = max(self.l_res, pwell_l)
+        self.w_res = max(self.w_res, pwell_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -877,10 +828,8 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < npolyf_s_l:
-            self.l_res = npolyf_s_l
-        if (self.w_res) < npolyf_s_w:
-            self.w_res = npolyf_s_w
+        self.l_res = max(self.l_res, npolyf_s_l)
+        self.w_res = max(self.w_res, npolyf_s_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -975,10 +924,8 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < ppolyf_s_l:
-            self.l_res = ppolyf_s_l
-        if (self.w_res) < ppolyf_s_w:
-            self.w_res = ppolyf_s_w
+        self.l_res = max(self.l_res, ppolyf_s_l)
+        self.w_res = max(self.w_res, ppolyf_s_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -1073,10 +1020,8 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < npolyf_u_l:
-            self.l_res = npolyf_u_l
-        if (self.w_res) < npolyf_u_w:
-            self.w_res = npolyf_u_w
+        self.l_res = max(self.l_res, npolyf_u_l)
+        self.w_res = max(self.w_res, npolyf_u_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -1171,10 +1116,8 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < ppolyf_u_l:
-            self.l_res = ppolyf_u_l
-        if (self.w_res) < ppolyf_u_w:
-            self.w_res = ppolyf_u_w
+        self.l_res = max(self.l_res, ppolyf_u_l)
+        self.w_res = max(self.w_res, ppolyf_u_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -1277,10 +1220,8 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
         self.area = self.w_res * self.l_res
         self.perim = 2 * (self.w_res + self.l_res)
         # w,l must be larger or equal than min. values.
-        if (self.l_res) < ppolyf_u_h_res_l:
-            self.l_res = ppolyf_u_h_res_l
-        if (self.w_res) < ppolyf_u_h_res_w:
-            self.w_res = ppolyf_u_h_res_w
+        self.l_res = max(self.l_res, ppolyf_u_h_res_l)
+        self.w_res = max(self.w_res, ppolyf_u_h_res_w)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which

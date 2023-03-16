@@ -116,29 +116,18 @@ class nfet(pya.PCellDeclarationHelper):
         self.perim = 2 * (self.w_gate + self.l_gate)
         # w,l must be larger or equal than min. values.
         if self.volt == "3.3V":
-            if (self.l_gate) < fet_3p3_l:
-                self.l_gate = fet_3p3_l
-            if (self.w_gate) < fet_3p3_w:
-                self.w_gate = fet_3p3_w
-            if self.con_bet_fin == 1:
-                if (self.w_gate) < fet_3p3_w_con:
-                    self.w_gate = fet_3p3_w_con
+            self.l_gate = max(self.l_gate, fet_3p3_l)
+            self.w_gate = max(self.w_gate, fet_3p3_w)
+            if self.con_bet_fin == 1 and (self.w_gate) < fet_3p3_w_con:
+                self.w_gate = fet_3p3_w_con
         elif self.volt == "5V":
-            if (self.l_gate) < nfet_05v0_l:
-                self.l_gate = nfet_05v0_l
-            if (self.w_gate) < fet_5_6_w:
-                self.w_gate = fet_5_6_w
+            self.l_gate = max(self.l_gate, nfet_05v0_l)
+            self.w_gate = max(self.w_gate, fet_5_6_w)
         elif self.volt == "6V":
-            if (self.l_gate) < nfet_06v0_l:
-                self.l_gate = nfet_06v0_l
-            if (self.w_gate) < fet_5_6_w:
-                self.w_gate = fet_5_6_w
-
-        if (self.ld) < fet_ld:
-            self.ld = fet_ld
-
-        if (self.grw) < fet_grw:
-            self.grw = fet_grw
+            self.l_gate = max(self.l_gate, nfet_06v0_l)
+            self.w_gate = max(self.w_gate, fet_5_6_w)
+        self.ld = max(self.ld, fet_ld)
+        self.grw = max(self.grw, fet_grw)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -266,29 +255,18 @@ class pfet(pya.PCellDeclarationHelper):
         self.perim = 2 * (self.w_gate + self.l_gate)
         # w,l must be larger or equal than min. values.
         if self.volt == "3.3V":
-            if (self.l_gate) < fet_3p3_l:
-                self.l_gate = fet_3p3_l
-            if (self.w_gate) < fet_3p3_w:
-                self.w_gate = fet_3p3_w
-            if self.con_bet_fin == 1:
-                if (self.w_gate) < fet_3p3_w_con:
-                    self.w_gate = fet_3p3_w_con
+            self.l_gate = max(self.l_gate, fet_3p3_l)
+            self.w_gate = max(self.w_gate, fet_3p3_w)
+            if self.con_bet_fin == 1 and (self.w_gate) < fet_3p3_w_con:
+                self.w_gate = fet_3p3_w_con
         elif self.volt == "5V":
-            if (self.l_gate) < pfet_05v0_l:
-                self.l_gate = pfet_05v0_l
-            if (self.w_gate) < fet_5_6_w:
-                self.w_gate = fet_5_6_w
+            self.l_gate = max(self.l_gate, pfet_05v0_l)
+            self.w_gate = max(self.w_gate, fet_5_6_w)
         elif self.volt == "6V":
-            if (self.l_gate) < pfet_06v0_l:
-                self.l_gate = pfet_06v0_l
-            if (self.w_gate) < fet_5_6_w:
-                self.w_gate = fet_5_6_w
-
-        if (self.ld) < fet_ld:
-            self.ld = fet_ld
-
-        if (self.grw) < fet_grw:
-            self.grw = fet_grw
+            self.l_gate = max(self.l_gate, pfet_06v0_l)
+            self.w_gate = max(self.w_gate, fet_5_6_w)
+        self.ld = max(self.ld, fet_ld)
+        self.grw = max(self.grw, fet_grw)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which
@@ -415,17 +393,10 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
         self.area = self.w_gate * self.l_gate
         self.perim = 2 * (self.w_gate + self.l_gate)
         # w,l must be larger or equal than min. values.
-        if (self.l_gate) < nfet_nat_l:
-            self.l_gate = nfet_nat_l
-
-        if (self.w_gate) < nfet_nat_w:
-            self.w_gate = nfet_nat_w
-
-        if (self.grw) < fet_grw:
-            self.grw = fet_grw
-
-        if (self.ld) < fet_ld:
-            self.ld = fet_ld
+        self.l_gate = max(self.l_gate, nfet_nat_l)
+        self.w_gate = max(self.w_gate, nfet_nat_w)
+        self.grw = max(self.grw, fet_grw)
+        self.ld = max(self.ld, fet_ld)
 
     def can_create_from_shape_impl(self):
         # Implement the "Create PCell from shape" protocol: we can use any shape which

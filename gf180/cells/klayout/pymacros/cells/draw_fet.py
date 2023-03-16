@@ -48,12 +48,11 @@ def labels_gen(
 
     c = gf.Component()
 
-    if lbl == 1:
-        if len(lbl_lst) == lbl_valid_len:
-            if lbl_str == "None":
-                c.add_label(lbl_lst[index], position=position, layer=layer)
-            else:
-                c.add_label(lbl_str, position=position, layer=layer)
+    if lbl == 1 and len(lbl_lst) == lbl_valid_len:
+        if lbl_str == "None":
+            c.add_label(lbl_lst[index], position=position, layer=layer)
+        else:
+            c.add_label(lbl_str, position=position, layer=layer)
 
     return c
 
@@ -77,15 +76,9 @@ def get_patt_lbl(nl_b, nl, nt, nt_e, g_lbl, nl_u, nt_o):
     if nt == len(g_lbl):
 
         for i in range(nl_b):
-            for j in range(nl):
-                if nt[j] == nt_e[i]:
-                    g_lbl_e.append(g_lbl[j])
-
+            g_lbl_e.extend(g_lbl[j] for j in range(nl) if nt[j] == nt_e[i])
         for i in range(nl_u):
-            for j in range(nl):
-                if nt[j] == nt_o[i]:
-                    g_lbl_o.append(g_lbl[j])
-
+            g_lbl_o.extend(g_lbl[j] for j in range(nl) if nt[j] == nt_o[i])
     return [g_lbl_e, g_lbl_o]
 
 
@@ -380,7 +373,7 @@ def interdigit(
             []
         )  # list to store the symbols of transistors and thier number nt(number of transistors)
         [nt.append(x) for x in pat if x not in nt]
-        nl = int(len(nt))
+        nl = len(nt)
 
         m2_spacing = 0.28
         via_size = (0.26, 0.26)
@@ -573,7 +566,7 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
     """
     # c = gf.Component()
 
-    if volt == "5V" or volt == "6V":
+    if volt in ["5V", "6V"]:
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(c_inst.size[0] + (2 * dg_encx), c_inst.size[1] + (2 * dg_ency),),
@@ -583,14 +576,14 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
         dg.xmin = c_inst.xmin - dg_encx
         dg.ymin = c_inst.ymin - dg_ency
 
-        if volt == "5V":
-            v5x = c.add_ref(
-                gf.components.rectangle(
-                    size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
-                )
+    if volt == "5V":
+        v5x = c.add_ref(
+            gf.components.rectangle(
+                size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
             )
-            v5x.xmin = dg.xmin
-            v5x.ymin = dg.ymin
+        )
+        v5x.xmin = dg.xmin
+        v5x.ymin = dg.ymin
 
     # return c
 
@@ -967,14 +960,9 @@ def nfet_deep_nwell(
 
     c = gf.Component()
 
-    dn_enc_lvpwell = 2.5
-    lvpwell_enc_ncmp = 0.44
-    dg_enc_dn = 0.5
-    dg_enc_cmp = 0.24
-    dg_enc_poly = 0.4
-
     if deepnwell == 1:
 
+        lvpwell_enc_ncmp = 0.44
         lvp_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -985,9 +973,10 @@ def nfet_deep_nwell(
             )
         )
 
-        lvp_rect.xmin = inst_xmin - lvpwell_enc_ncmp
         lvp_rect.ymin = inst_ymin - lvpwell_enc_ncmp
 
+        dn_enc_lvpwell = 2.5
+        lvp_rect.xmin = inst_xmin - lvpwell_enc_ncmp
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -1004,7 +993,8 @@ def nfet_deep_nwell(
         if pcmpgr == 1:
             c.add_ref(pcmpgr_gen(dn_rect=dn_rect, grw=grw))
 
-        if volt == "5V" or volt == "6V":
+        if volt in ["5V", "6V"]:
+            dg_enc_dn = 0.5
             dg = c.add_ref(
                 gf.components.rectangle(
                     size=(
@@ -1017,37 +1007,30 @@ def nfet_deep_nwell(
             dg.xmin = dn_rect.xmin - dg_enc_dn
             dg.ymin = dn_rect.ymin - dg_enc_dn
 
-            if volt == "5V":
-                v5x = c.add_ref(
-                    gf.components.rectangle(
-                        size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
-                    )
-                )
-                v5x.xmin = dg.xmin
-                v5x.ymin = dg.ymin
+    elif volt in ["5V", "6V"]:
+        dg_enc_cmp = 0.24
+        dg_enc_poly = 0.4
 
-    else:
-        if volt == "5V" or volt == "6V":
-            dg = c.add_ref(
-                gf.components.rectangle(
-                    size=(
-                        inst_size[0] + (2 * dg_enc_cmp),
-                        inst_size[1] + (2 * dg_enc_poly),
-                    ),
-                    layer=layer["dualgate"],
-                )
+        dg = c.add_ref(
+            gf.components.rectangle(
+                size=(
+                    inst_size[0] + (2 * dg_enc_cmp),
+                    inst_size[1] + (2 * dg_enc_poly),
+                ),
+                layer=layer["dualgate"],
             )
-            dg.xmin = inst_xmin - dg_enc_cmp
-            dg.ymin = inst_ymin - dg_enc_poly
+        )
+        dg.xmin = inst_xmin - dg_enc_cmp
+        dg.ymin = inst_ymin - dg_enc_poly
 
-            if volt == "5V":
-                v5x = c.add_ref(
-                    gf.components.rectangle(
-                        size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
-                    )
-                )
-                v5x.xmin = dg.xmin
-                v5x.ymin = dg.ymin
+    if volt == "5V":
+        v5x = c.add_ref(
+            gf.components.rectangle(
+                size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
+            )
+        )
+        v5x.xmin = dg.xmin
+        v5x.ymin = dg.ymin
 
     return c
 
@@ -1070,11 +1053,7 @@ def add_inter_sd_labels(
         con_bet_fin : boolean of having contact between fingers
     """
 
-    if con_bet_fin == 1:
-        lbl_layer = layer["metal1_label"]
-    else:
-        lbl_layer = layer["comp_label"]
-
+    lbl_layer = layer["metal1_label"] if con_bet_fin == 1 else layer["comp_label"]
     for i in range(int(nf - 1)):
         c.add_ref(
             labels_gen(

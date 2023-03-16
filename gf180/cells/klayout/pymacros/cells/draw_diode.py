@@ -56,16 +56,6 @@ def draw_diode_nd2ps(
     np_enc_comp: float = 0.16
     pp_enc_comp: float = 0.16
 
-    con_size = 0.22
-    con_sp = 0.28
-    con_comp_enc = 0.07
-
-    dg_enc_cmp = 0.24
-    dn_enc_lvpwell = 2.5
-    lvpwell_enc_ncmp = 0.6
-    lvpwell_enc_pcmp = 0.16
-    pcmpgr_enc_dn = 2.5
-
     # n generation
     ncmp = c.add_ref(gf.components.rectangle(size=(wa, la), layer=layer["comp"]))
     nplus = c.add_ref(
@@ -138,6 +128,7 @@ def draw_diode_nd2ps(
         )
 
     if volt == "5/6V":
+        dg_enc_cmp = 0.24
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -151,6 +142,8 @@ def draw_diode_nd2ps(
         dg.ymin = pcmp.ymin - dg_enc_cmp
 
     if deepnwell == 1:
+        lvpwell_enc_ncmp = 0.6
+        lvpwell_enc_pcmp = 0.16
         lvpwell = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -164,6 +157,7 @@ def draw_diode_nd2ps(
         lvpwell.xmin = pcmp.xmin - lvpwell_enc_pcmp
         lvpwell.ymin = ncmp.ymin - lvpwell_enc_ncmp
 
+        dn_enc_lvpwell = 2.5
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
@@ -180,6 +174,8 @@ def draw_diode_nd2ps(
         if pcmpgr == 1:
 
             c_temp_gr = gf.Component("temp_store guard ring")
+            pcmpgr_enc_dn = 2.5
+
             rect_pcmpgr_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
@@ -243,6 +239,10 @@ def draw_diode_nd2ps(
                     A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
                 )
             )  # psdm draw
+
+            con_size = 0.22
+            con_sp = 0.28
+            con_comp_enc = 0.07
 
             # generating contacts
 
