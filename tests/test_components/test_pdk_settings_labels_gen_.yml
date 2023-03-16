@@ -1,0 +1,33 @@
+name: labels_gen
+settings:
+  changed: {}
+  child: null
+  default:
+    index: 0
+    labels: null
+    layer:
+    - 34
+    - 10
+    lbl: 0
+    lbl_str: ''
+    lbl_valid_len: 1
+    position:
+    - 0.1
+    - 0.1
+  full:
+    index: 0
+    labels: null
+    layer:
+    - 34
+    - 10
+    lbl: 0
+    lbl_str: ''
+    lbl_valid_len: 1
+    position:
+    - 0.1
+    - 0.1
+  function_name: labels_gen
+  info: {}
+  info_version: 2
+  module: gf180.fet
+  name: labels_gen

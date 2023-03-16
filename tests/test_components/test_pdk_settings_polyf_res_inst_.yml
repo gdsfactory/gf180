@@ -1,0 +1,41 @@
+name: polyf_res_inst
+settings:
+  changed: {}
+  child: null
+  default:
+    con_enc: 0.1
+    l_res: 0.1
+    lbl: 0
+    pl_imp_layer:
+    - 32
+    - 0
+    pl_res_ext: 0.1
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: npolyf_s
+    sub_imp_layer:
+    - 31
+    - 0
+    sub_lbl: ''
+    w_res: 0.1
+  full:
+    con_enc: 0.1
+    l_res: 0.1
+    lbl: 0
+    pl_imp_layer:
+    - 32
+    - 0
+    pl_res_ext: 0.1
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: npolyf_s
+    sub_imp_layer:
+    - 31
+    - 0
+    sub_lbl: ''
+    w_res: 0.1
+  function_name: polyf_res_inst
+  info: {}
+  info_version: 2
+  module: gf180.res
+  name: polyf_res_inst

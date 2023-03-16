@@ -114,6 +114,7 @@ def cap_mos_inst(
     return c_inst
 
 
+@gf.cell
 def cap_mos(
     type: str = "cap_nmos",
     lc: float = 0.1,

@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+tests/test_components.gds/gds_diff
+tests/test_components.gds/gds_run
 
 # C extensions
 *.so

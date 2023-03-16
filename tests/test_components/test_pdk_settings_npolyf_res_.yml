@@ -1,0 +1,29 @@
+name: npolyf_res
+settings:
+  changed: {}
+  child: null
+  default:
+    deepnwell: 0
+    l_res: 0.1
+    lbl: 0
+    pcmpgr: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: npolyf_s
+    sub_lbl: ''
+    w_res: 0.1
+  full:
+    deepnwell: 0
+    l_res: 0.1
+    lbl: 0
+    pcmpgr: 0
+    r0_lbl: ''
+    r1_lbl: ''
+    res_type: npolyf_s
+    sub_lbl: ''
+    w_res: 0.1
+  function_name: npolyf_res
+  info: {}
+  info_version: 2
+  module: gf180.res
+  name: npolyf_res
