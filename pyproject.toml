@@ -21,7 +21,7 @@ authors = [
 keywords = ["python"]
 license = {file = "LICENSE"}
 dependencies = [
-    "gdsfactory[full]==6.60.3",
+    "gdsfactory[full]==6.88.0",
 ]
 readme = "README.md"
 requires-python = ">=3.7"
