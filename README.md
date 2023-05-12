@@ -18,7 +18,6 @@ If you already have python installed. Open Anaconda Prompt and then install the 
 
 ```
 pip install gf180 --upgrade
-gf tool install
 ```
 
 Then you need to restart Klayout to make sure the new technology installed appears.

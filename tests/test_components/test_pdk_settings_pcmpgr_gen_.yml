@@ -1,4 +1,5 @@
 name: pcmpgr_gen
+ports: {}
 settings:
   changed: {}
   child: null

@@ -4,7 +4,7 @@
 format: jb-book
 root: index
 chapters:
-  - file: components
+  - file: cells
   - file: tutorial
     sections:
       - glob: notebooks/*

@@ -1,9 +1,9 @@
 
 
-Here are the components available in the PDK
+Here are the parametric cells available in the PDK
 
 
-Components
+Cells
 =============================
 
 
@@ -378,6 +378,21 @@ sc_diode
   import gf180
 
   c = gf180.sc_diode(la=0.1, wa=0.1, cw=0.1, m=1, pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c.plot()
+
+
+
+via_generator
+----------------------------------------------------
+
+.. autofunction:: gf180.via_generator
+
+.. plot::
+  :include-source:
+
+  import gf180
+
+  c = gf180.via_generator(x_range=(0, 1), y_range=(0, 1), via_size=(0.17, 0.17), via_layer=(66, 44), via_enclosure=(0.06, 0.06), via_spacing=(0.17, 0.17))
   c.plot()
 
 

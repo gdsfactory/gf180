@@ -13,7 +13,7 @@ def via_generator(
     via_layer: LayerSpec = (66, 44),
     via_enclosure: Float2 = (0.06, 0.06),
     via_spacing: Float2 = (0.17, 0.17),
-) -> gf.Component():
+) -> gf.Component:
     """
     return only vias withen the range xrange and yrange while enclosing by via_enclosure
     and set number of rows and number of coloumns according to ranges and via size and spacing

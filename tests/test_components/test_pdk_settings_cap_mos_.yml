@@ -1,4 +1,5 @@
 name: cap_mos
+ports: {}
 settings:
   changed: {}
   child: null

@@ -1,4 +1,5 @@
 name: nfet_06v0_nvt
+ports: {}
 settings:
   changed: {}
   child: null

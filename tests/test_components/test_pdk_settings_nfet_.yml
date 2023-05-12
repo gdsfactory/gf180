@@ -1,4 +1,5 @@
 name: nfet
+ports: {}
 settings:
   changed: {}
   child: null

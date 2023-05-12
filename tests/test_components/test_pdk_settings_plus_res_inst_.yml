@@ -1,4 +1,5 @@
 name: plus_res_inst
+ports: {}
 settings:
   changed: {}
   child: null

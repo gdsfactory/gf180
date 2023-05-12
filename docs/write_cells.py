@@ -4,7 +4,7 @@ import inspect
 
 from gf180 import cells
 
-filepath = pathlib.Path(__file__).parent.absolute() / "components.rst"
+filepath = pathlib.Path(__file__).parent.absolute() / "cells.rst"
 
 skip = {
     "LIBRARY",
@@ -28,10 +28,10 @@ with open(filepath, "w+") as f:
     f.write(
         """
 
-Here are the components available in the PDK
+Here are the parametric cells available in the PDK
 
 
-Components
+Cells
 =============================
 """
     )

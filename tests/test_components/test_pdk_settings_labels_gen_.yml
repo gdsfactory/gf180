@@ -1,4 +1,5 @@
 name: labels_gen
+ports: {}
 settings:
   changed: {}
   child: null

@@ -1,4 +1,5 @@
 name: via_stack
+ports: {}
 settings:
   changed: {}
   child: null

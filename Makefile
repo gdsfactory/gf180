@@ -6,6 +6,8 @@ install:
 dev:
 	pip install -e .[dev,docs]
 
+tech:
+	python install_tech.py
 
 test:
 	pytest -s

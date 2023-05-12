@@ -1,4 +1,5 @@
 name: diode_nw2ps
+ports: {}
 settings:
   changed: {}
   child: null

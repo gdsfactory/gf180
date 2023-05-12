@@ -1,4 +1,5 @@
 name: sc_diode
+ports: {}
 settings:
   changed: {}
   child: null
