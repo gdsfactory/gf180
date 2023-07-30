@@ -9,7 +9,7 @@ from gf180 import cells
 
 skip_test = {"res_dev"}
 cell_names = set(cells.keys()) - set(skip_test)
-dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds")
+dirpath = pathlib.Path(__file__).absolute().parent / "gds_ref"
 
 
 @pytest.fixture(params=cell_names, scope="function")

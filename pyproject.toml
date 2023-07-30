@@ -21,12 +21,15 @@ authors = [
 keywords = ["python"]
 license = {file = "LICENSE"}
 dependencies = [
-    "gdsfactory[full]>=6.60.3",
+    "gdsfactory==6.115.0",
 ]
 readme = "README.md"
 requires-python = ">=3.7"
 
 [project.optional-dependencies]
+full = [
+    "gdsfactory[full]==6.115.0",
+    ]
 tests = ["pytest", "pytest-cov"]
 dev = [
     "pre-commit",
