@@ -23,6 +23,8 @@ jobs:
         run: |
           make dev
       - name: make docs
+        env:
+          GDSFACTORY_DISPLAY_TYPE: klayout
         run: |
           make docs
       - name: Upload artifact
