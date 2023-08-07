@@ -1,7 +1,7 @@
 import gdsfactory as gf
-from gf180.layers import layer, LAYER
-from gf180.via_generator import via_generator
 
+from gf180.layers import LAYER, layer
+from gf180.via_generator import via_generator
 
 dn_rect = gf.partial(gf.components.rectangle, layer=LAYER.dnwell)
 

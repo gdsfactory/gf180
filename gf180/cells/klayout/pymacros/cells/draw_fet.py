@@ -19,9 +19,10 @@
 from math import ceil, floor
 
 import gdsfactory as gf
-from gdsfactory.types import Float2, LayerSpec
-from .via_generator import via_generator, via_stack
+from gdsfactory.typings import Float2, LayerSpec
+
 from .layers_def import layer
+from .via_generator import via_generator, via_stack
 
 
 @gf.cell

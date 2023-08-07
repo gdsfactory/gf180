@@ -1,7 +1,7 @@
 import gdsfactory as gf
 
-from .via_generator import via_generator
 from .layers_def import layer
+from .via_generator import via_generator
 
 
 def draw_cap_mim(

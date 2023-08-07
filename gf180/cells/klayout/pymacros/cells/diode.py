@@ -17,6 +17,7 @@
 ########################################################################################################################
 
 import pya
+
 from .draw_diode import (
     draw_diode_dw2ps,
     draw_diode_nd2ps,
@@ -52,7 +53,7 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(diode_nd2ps, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -136,7 +137,7 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(diode_pd2nw, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -219,7 +220,7 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(diode_nw2ps, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("volt", self.TypeList, "Voltage area")
@@ -299,7 +300,7 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(diode_pw2dw, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("pcmpgr", self.TypeBoolean, "Guard Ring", default=0)
@@ -381,7 +382,7 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(diode_dw2ps, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("pcmpgr", self.TypeBoolean, "Guard Ring", default=0)
@@ -463,7 +464,7 @@ class sc_diode(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(sc_diode, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("pcmpgr", self.TypeBoolean, "Guard Ring", default=0)

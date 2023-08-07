@@ -17,6 +17,7 @@
 ########################################################################################################################
 
 import pya
+
 from .draw_cap_mos import draw_cap_mos
 
 cap_nmos_w = 1.88
@@ -41,7 +42,7 @@ class cap_nmos(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(cap_nmos, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -123,7 +124,7 @@ class cap_pmos(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(cap_pmos, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -205,7 +206,7 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(cap_nmos_b, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("volt", self.TypeList, "Voltage area")
@@ -285,7 +286,7 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(cap_pmos_b, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("volt", self.TypeList, "Voltage area")

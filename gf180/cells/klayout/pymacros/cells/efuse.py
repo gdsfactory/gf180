@@ -17,6 +17,7 @@
 ########################################################################################################################
 
 import pya
+
 from .draw_efuse import draw_efuse
 
 
@@ -27,7 +28,7 @@ class efuse(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Important: initialize the super class
-        super(efuse, self).__init__()
+        super().__init__()
         self.param(
             "Model",
             self.TypeString,

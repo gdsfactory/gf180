@@ -16,6 +16,7 @@
 # FET Generator for GF180MCU
 ########################################################################################################################
 import pya
+
 from .draw_fet import draw_nfet, draw_nfet_06v0_nvt, draw_pfet
 
 fet_3p3_l = 0.28
@@ -48,7 +49,7 @@ class nfet(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initialize super class.
-        super(nfet, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -187,7 +188,7 @@ class pfet(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initialize super class.
-        super(pfet, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -326,7 +327,7 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initialize super class.
-        super(nfet_06v0_nvt, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("bulk", self.TypeList, "Bulk Type")

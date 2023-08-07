@@ -16,8 +16,10 @@
 # MIM Capacitor Generator for GF180MCU
 ########################################################################################################################
 
-import pya
 import os
+
+import pya
+
 from .draw_cap_mim import draw_cap_mim
 
 mim_l = 1.02
@@ -31,7 +33,7 @@ class cap_mim(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(cap_mim, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("mim_option", self.TypeList, "MIM-Option")

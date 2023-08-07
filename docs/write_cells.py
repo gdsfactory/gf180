@@ -1,6 +1,5 @@
-import pathlib
-from typing import Tuple
 import inspect
+import pathlib
 
 from gf180 import cells
 
@@ -20,8 +19,8 @@ skip = {
     "waveguide_template",
 }
 
-skip_plot: Tuple[str, ...] = ("add_fiber_array_siepic",)
-skip_settings: Tuple[str, ...] = ("flatten", "safe_cell_names")
+skip_plot: tuple[str, ...] = ("add_fiber_array_siepic",)
+skip_settings: tuple[str, ...] = ("flatten", "safe_cell_names")
 
 
 with open(filepath, "w+") as f:

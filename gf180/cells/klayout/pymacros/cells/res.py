@@ -16,13 +16,15 @@
 # Resistor Generator for GF180MCU
 ########################################################################################################################
 
-import pya
 import os
+
+import pya
+
 from .draw_res import (
     draw_metal_res,
     draw_nplus_res,
-    draw_pplus_res,
     draw_npolyf_res,
+    draw_pplus_res,
     draw_ppolyf_res,
     draw_ppolyf_u_high_Rs_res,
     draw_well_res,
@@ -84,7 +86,7 @@ class metal_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(metal_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.Type_handle = self.param("res_type", self.TypeList, "Metal resistor type")
@@ -209,7 +211,7 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(nplus_s_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -306,7 +308,7 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(pplus_s_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -401,7 +403,7 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(nplus_u_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -498,7 +500,7 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(pplus_u_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -593,7 +595,7 @@ class nwell_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(nwell_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("w_res", self.TypeDouble, "Width", default=nwell_l, unit="um")
@@ -685,7 +687,7 @@ class pwell_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(pwell_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("pcmpgr", self.TypeBoolean, "Guard Ring", default=0)
@@ -778,7 +780,7 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(npolyf_s_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -873,7 +875,7 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(ppolyf_s_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -968,7 +970,7 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(npolyf_u_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -1063,7 +1065,7 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(ppolyf_u_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)
@@ -1158,7 +1160,7 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Initializing super class.
-        super(ppolyf_u_high_Rs_resistor, self).__init__()
+        super().__init__()
 
         # ===================== PARAMETERS DECLARATIONS =====================
         self.param("deepnwell", self.TypeBoolean, "Deep NWELL", default=0)

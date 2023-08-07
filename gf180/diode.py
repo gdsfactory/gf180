@@ -1,9 +1,9 @@
-import numpy as np
-
 import gdsfactory as gf
+import numpy as np
 from gdsfactory.typings import Float2
-from gf180.via_generator import via_generator, via_stack
+
 from gf180.layers import layer
+from gf180.via_generator import via_generator, via_stack
 
 
 @gf.cell

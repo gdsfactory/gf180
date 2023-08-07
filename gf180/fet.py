@@ -3,9 +3,9 @@ from math import ceil, floor
 import gdsfactory as gf
 from gdsfactory.typings import Float2, LayerSpec, Optional, Strs
 
-from gf180.via_generator import via_generator, via_stack
-from gf180.layers import layer
 from gf180.guardring import pcmpgr_gen
+from gf180.layers import layer
+from gf180.via_generator import via_generator, via_stack
 
 
 @gf.cell

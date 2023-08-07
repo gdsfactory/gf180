@@ -1,7 +1,6 @@
-from pydantic import BaseModel
-
 import gdsfactory as gf
 from gdsfactory.typings import Layer
+from pydantic import BaseModel
 
 from gf180.config import PATH
 

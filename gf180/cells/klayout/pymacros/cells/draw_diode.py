@@ -17,11 +17,11 @@
 ########################################################################################################################
 
 import gdsfactory as gf
-from .layers_def import layer
-from gdsfactory.types import Float2
-from .via_generator import via_generator, via_stack
-
 import numpy as np
+from gdsfactory.typings import Float2
+
+from .layers_def import layer
+from .via_generator import via_generator, via_stack
 
 
 def draw_diode_nd2ps(

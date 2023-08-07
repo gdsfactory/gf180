@@ -17,6 +17,7 @@
 ########################################################################################################################
 
 import pya
+
 from .draw_bjt import draw_bjt
 
 
@@ -27,7 +28,7 @@ class npn_bjt(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Important: initialize the super class
-        super(npn_bjt, self).__init__()
+        super().__init__()
         self.Type_handle = self.param(
             "Type", self.TypeList, "Type", default="npn_10p00x10p00"
         )
@@ -96,7 +97,7 @@ class pnp_bjt(pya.PCellDeclarationHelper):
 
     def __init__(self):
         # Important: initialize the super class
-        super(pnp_bjt, self).__init__()
+        super().__init__()
         self.Type_handle = self.param(
             "Type", self.TypeList, "Type", default="pnp_10p00x10p00"
         )
