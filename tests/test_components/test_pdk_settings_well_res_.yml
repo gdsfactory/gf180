@@ -5,21 +5,21 @@ settings:
   child: null
   default:
     l_res: 0.42
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: nwell
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.42
   full:
     l_res: 0.42
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: nwell
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.42
   function_name: well_res
   info: {}

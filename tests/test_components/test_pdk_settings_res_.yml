@@ -5,16 +5,16 @@ settings:
   child: null
   default:
     l_res: 0.1
-    lbl: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    label: 0
+    r0_label: ''
+    r1_label: ''
     res_type: rm1
     w_res: 0.1
   full:
     l_res: 0.1
-    lbl: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    label: 0
+    r0_label: ''
+    r1_label: ''
     res_type: rm1
     w_res: 0.1
   function_name: res

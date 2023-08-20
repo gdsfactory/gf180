@@ -6,17 +6,17 @@ settings:
   default:
     cw: 0.1
     la: 0.1
-    lbl: 0
-    n_lbl: ''
-    p_lbl: ''
+    label: 0
+    n_label: ''
+    p_label: ''
     volt: 3.3V
     wa: 0.1
   full:
     cw: 0.1
     la: 0.1
-    lbl: 0
-    n_lbl: ''
-    p_lbl: ''
+    label: 0
+    n_label: ''
+    p_label: ''
     volt: 3.3V
     wa: 0.1
   function_name: diode_nw2ps

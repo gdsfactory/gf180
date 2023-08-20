@@ -6,34 +6,34 @@ settings:
   default:
     con_enc: 0.1
     l_res: 0.1
-    lbl: 0
+    label: 0
     pl_imp_layer:
     - 32
     - 0
     pl_res_ext: 0.1
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: npolyf_s
     sub_imp_layer:
     - 31
     - 0
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.1
   full:
     con_enc: 0.1
     l_res: 0.1
-    lbl: 0
+    label: 0
     pl_imp_layer:
     - 32
     - 0
     pl_res_ext: 0.1
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: npolyf_s
     sub_imp_layer:
     - 31
     - 0
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.1
   function_name: polyf_res_inst
   info: {}

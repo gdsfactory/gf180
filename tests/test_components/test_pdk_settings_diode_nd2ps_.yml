@@ -7,9 +7,9 @@ settings:
     cw: 0.1
     deepnwell: 0
     la: 0.1
-    lbl: 0
-    n_lbl: ''
-    p_lbl: ''
+    label: 0
+    n_label: ''
+    p_label: ''
     pcmpgr: 0
     volt: 3.3V
     wa: 0.1
@@ -17,9 +17,9 @@ settings:
     cw: 0.1
     deepnwell: 0
     la: 0.1
-    lbl: 0
-    n_lbl: ''
-    p_lbl: ''
+    label: 0
+    n_label: ''
+    p_label: ''
     pcmpgr: 0
     volt: 3.3V
     wa: 0.1

@@ -10,38 +10,38 @@ from gf180.via_generator import via_generator, via_stack
 
 @gf.cell
 def labels_gen(
-    lbl_str: str = "",
+    label_str: str = "",
     position: Float2 = (0.1, 0.1),
     layer: LayerSpec = layer["metal1_label"],
-    lbl: bool = 0,
+    label: bool = False,
     labels: Optional[Strs] = None,
-    lbl_valid_len: int = 1,
+    label_valid_len: int = 1,
     index: int = 0,
 ) -> gf.Component:
-    """Returns labels at given position when lbl is enabled
+    """Returns labels at given position when label is enabled
 
     Args :
-        lbl_str : string of the label.
+        label_str : string of the label.
         position : position of the label.
         layer : layer of the label.
-        lbl : boolean of having the label.
+        label : boolean of having the label.
         labels : list of given labels.
-        lbl_valid_len : valid length of labels.
+        label_valid_len : valid length of labels.
     """
 
     c = gf.Component()
 
-    if lbl == 1:
-        if len(labels) == lbl_valid_len:
-            if lbl_str == "None":
+    if label == 1:
+        if len(labels) == label_valid_len:
+            if label_str == "None":
                 c.add_label(labels[index], position=position, layer=layer)
             else:
-                c.add_label(lbl_str, position=position, layer=layer)
+                c.add_label(label_str, position=position, layer=layer)
 
     return c
 
 
-def get_patt_lbl(nl_b, nl, nt, nt_e, g_lbl, nl_u, nt_o):
+def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
     """Returns list of odd,even gate label patterns for alternating gate connection
 
     Args:
@@ -49,26 +49,26 @@ def get_patt_lbl(nl_b, nl, nt, nt_e, g_lbl, nl_u, nt_o):
         nl : number of transistor.
         nt : patterns of tansistor [with out redundency].
         nt_e : number of transistor with even order.
-        g_lbl : list of transistors gate label.
+        g_label : list of transistors gate label.
         nl_u :  number of upper connected gates transistors.
         nt_o : number of transistor with odd order.
     """
 
-    g_lbl_e = []
-    g_lbl_o = []
+    g_label_e = []
+    g_label_o = []
 
-    if nt == len(g_lbl):
+    if nt == len(g_label):
         for i in range(nl_b):
             for j in range(nl):
                 if nt[j] == nt_e[i]:
-                    g_lbl_e.append(g_lbl[j])
+                    g_label_e.append(g_label[j])
 
         for i in range(nl_u):
             for j in range(nl):
                 if nt[j] == nt_o[i]:
-                    g_lbl_o.append(g_lbl[j])
+                    g_label_o.append(g_label[j])
 
-    return [g_lbl_e, g_lbl_o]
+    return [g_label_e, g_label_o]
 
 
 @gf.cell
@@ -85,10 +85,10 @@ def alter_interdig(
     pat="",
     pc_x=0.1,
     pc_spacing=0.1,
-    lbl: bool = 0,
-    g_lbl: list = [],
+    label: bool = False,
+    g_label: list = [],
     nl: int = 1,
-    patt_lbl: bool = 0,
+    patt_label: bool = False,
 ) -> gf.Component:
     """Returns interdigitation polygons of gate with alterating poly contacts
 
@@ -133,7 +133,7 @@ def alter_interdig(
     nl_b = len(nt_e)
     nl_u = len(nt_o)
 
-    g_lbl_e, g_lbl_o = get_patt_lbl(nl_b, nl, nt, nt_e, g_lbl, nl_u, nt_o)
+    g_label_e, g_label_o = get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o)
 
     m2_y = via_size[1] + 2 * via_enc[1]
     m2 = gf.components.rectangle(
@@ -187,15 +187,15 @@ def alter_interdig(
 
                 c_inst.add_ref(
                     labels_gen(
-                        lbl_str="None",
+                        label_str="None",
                         position=(
                             (via1.xmax + via1.xmin) / 2,
                             (via1.ymax + via1.ymin) / 2,
                         ),
                         layer=layer["metal2_label"],
-                        lbl=patt_lbl,
+                        label=patt_label,
                         labels=pat_o,
-                        lbl_valid_len=len(pat_o),
+                        label_valid_len=len(pat_o),
                         index=j,
                     )
                 )
@@ -203,15 +203,15 @@ def alter_interdig(
                 # adding gate_label
                 c_inst.add_ref(
                     labels_gen(
-                        lbl_str="None",
+                        label_str="None",
                         position=(
                             m1.xmin + (m1.size[0] / 2),
                             pc2.ymin + (pc2.size[1] / 2),
                         ),
                         layer=layer["metal1_label"],
-                        lbl=lbl,
-                        labels=g_lbl_o,
-                        lbl_valid_len=nl_u,
+                        label=label,
+                        labels=g_label_o,
+                        label_valid_len=nl_u,
                         index=i,
                     )
                 )
@@ -246,15 +246,15 @@ def alter_interdig(
 
                 c_inst.add_ref(
                     labels_gen(
-                        lbl_str="None",
+                        label_str="None",
                         position=(
                             (via1.xmax + via1.xmin) / 2,
                             (via1.ymax + via1.ymin) / 2,
                         ),
                         layer=layer["metal2_label"],
-                        lbl=patt_lbl,
+                        label=patt_label,
                         labels=pat_e,
-                        lbl_valid_len=len(pat_e),
+                        label_valid_len=len(pat_e),
                         index=j,
                     )
                 )
@@ -262,15 +262,15 @@ def alter_interdig(
                 # adding gate_label
                 c_inst.add_ref(
                     labels_gen(
-                        lbl_str="None",
+                        label_str="None",
                         position=(
                             m1.xmin + (m1.size[0] / 2),
                             pc1.ymin + (pc1.size[1] / 2),
                         ),
                         layer=layer["metal1_label"],
-                        lbl=lbl,
-                        labels=g_lbl_e,
-                        lbl_valid_len=nl_b,
+                        label=label,
+                        labels=g_label_e,
+                        label_valid_len=nl_b,
                         index=i,
                     )
                 )
@@ -356,9 +356,9 @@ def interdigit(
     gate_con_pos="top",
     pc_x=0.1,
     pc_spacing=0.1,
-    lbl: bool = 0,
-    g_lbl: Optional[Strs] = [],
-    patt_lbl: bool = 0,
+    label: bool = False,
+    g_label: Optional[Strs] = [],
+    patt_label: bool = False,
 ) -> gf.Component:
     """Returns interdigitation related polygons
 
@@ -409,10 +409,10 @@ def interdigit(
                     pat=pat,
                     pc_x=pc_x,
                     pc_spacing=pc_spacing,
-                    lbl=lbl,
-                    g_lbl=g_lbl,
+                    label=label,
+                    g_label=g_label,
                     nl=nl,
-                    patt_lbl=patt_lbl,
+                    patt_label=patt_label,
                 )
             )
 
@@ -460,15 +460,15 @@ def interdigit(
 
                         c_inst.add_ref(
                             labels_gen(
-                                lbl_str="None",
+                                label_str="None",
                                 position=(
                                     (via1.xmax + via1.xmin) / 2,
                                     (via1.ymax + via1.ymin) / 2,
                                 ),
                                 layer=layer["metal2_label"],
-                                lbl=patt_lbl,
+                                label=patt_label,
                                 labels=pat,
-                                lbl_valid_len=nl,
+                                label_valid_len=nl,
                                 index=j,
                             )
                         )
@@ -476,15 +476,15 @@ def interdigit(
                         # adding gate_label
                         c_inst.add_ref(
                             labels_gen(
-                                lbl_str="None",
+                                label_str="None",
                                 position=(
                                     m1.xmin + (m1.size[0] / 2),
                                     pc1.ymin + (pc1.size[1] / 2),
                                 ),
                                 layer=layer["metal1_label"],
-                                lbl=lbl,
-                                labels=g_lbl,
-                                lbl_valid_len=nl,
+                                label=label,
+                                labels=g_label,
+                                label_valid_len=nl,
                                 index=i,
                             )
                         )
@@ -533,15 +533,15 @@ def interdigit(
 
                         c_inst.add_ref(
                             labels_gen(
-                                lbl_str="None",
+                                label_str="None",
                                 position=(
                                     (via1.xmax + via1.xmin) / 2,
                                     (via1.ymax + via1.ymin) / 2,
                                 ),
                                 layer=layer["metal2_label"],
-                                lbl=patt_lbl,
+                                label=patt_label,
                                 labels=pat,
-                                lbl_valid_len=nl,
+                                label_valid_len=nl,
                                 index=j,
                             )
                         )
@@ -549,15 +549,15 @@ def interdigit(
                         # adding gate_label
                         c_inst.add_ref(
                             labels_gen(
-                                lbl_str="None",
+                                label_str="None",
                                 position=(
                                     m1.xmin + (m1.size[0] / 2),
                                     pc1.ymin + (pc1.size[1] / 2),
                                 ),
                                 layer=layer["metal1_label"],
-                                lbl=lbl,
-                                labels=g_lbl,
-                                lbl_valid_len=nl,
+                                label=label,
+                                labels=g_label,
+                                label_valid_len=nl,
                                 index=i,
                             )
                         )
@@ -611,10 +611,10 @@ def bulk_gr_gen(
     grw: float = 0.36,
     l_d: float = 0.1,
     implant_layer: LayerSpec = layer["pplus"],
-    lbl: bool = 0,
-    sub_lbl: str = "",
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
+    label: bool = False,
+    sub_label: str = "",
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
     nw_enc_pcmp: float = 0.1,
 ):
     """Returns guardring
@@ -789,15 +789,15 @@ def bulk_gr_gen(
 
     c.add_ref(
         labels_gen(
-            lbl_str=sub_lbl,
+            label_str=sub_label,
             position=(
                 B.xmin + (grw + 2 * (comp_pp_enc)) / 2,
                 B.ymin + (B.size[1] / 2),
             ),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=[sub_lbl],
-            lbl_valid_len=1,
+            label=label,
+            labels=[sub_label],
+            label_valid_len=1,
         )
     )
 
@@ -830,8 +830,8 @@ def bulk_gr_gen(
 
 @gf.cell
 def nfet_deep_nwell(
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
     inst_size: Float2 = (0.1, 0.1),
     inst_xmin: float = 0.1,
     inst_ymin: float = 0.1,
@@ -887,58 +887,58 @@ def nfet_deep_nwell(
 
 
 def add_inter_sd_labels(
-    c, nf, sd_lbl, poly1, l_gate, inter_sd_l, sd_diff_intr, lbl, layer, con_bet_fin
+    c, nf, sd_label, poly1, l_gate, inter_sd_l, sd_diff_intr, label, layer, con_bet_fin
 ):
     """Adds label to intermediate source/drain diffusion
 
     Args :
         c : instance componenet of the device
         nf : number of fingers
-        sd_lbl : required source and drain labels list
+        sd_label : required source and drain labels list
         poly1 : componenet of poly array
         l_gate : length of fet gate
         inter_sd_l : length of intermediate source/drain diffusion
         sd_diff_inter : componenet of intermediate source/drain polygon
-        lbl: boolean of having labels
+        label: boolean of having labels
         layer : layer of label
         con_bet_fin : boolean of having contact between fingers
     """
 
     if con_bet_fin == 1:
-        lbl_layer = layer["metal1_label"]
+        label_layer = layer["metal1_label"]
     else:
-        lbl_layer = layer["comp_label"]
+        label_layer = layer["comp_label"]
 
     for i in range(int(nf - 1)):
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(
                     poly1.xmin + l_gate + (inter_sd_l / 2) + i * (l_gate + inter_sd_l),
                     sd_diff_intr.ymin + (sd_diff_intr.size[1] / 2),
                 ),
-                layer=lbl_layer,
-                lbl=lbl,
-                labels=sd_lbl,
-                lbl_valid_len=nf + 1,
+                layer=label_layer,
+                label=label,
+                labels=sd_label,
+                label_valid_len=nf + 1,
                 index=i + 1,
             )
         )
 
 
-def add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, nf):
-    """Adds gate label when lbl is enabled
+def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf):
+    """Adds gate label when label is enabled
 
     Args :
         c : instance componenet of the device
-        g_lbl : required gate labels list
+        g_label : required gate labels list
         pc1 : componenet of poly array1
         c_pc : componenet of poly array element
         pc_spacing : float of space between labels
         nc1 : number of columns in poly array1
         nc2 : number of columns in poly array2
         pc2 : componenet of poly array2
-        lbl : boolean of having labels
+        label : boolean of having labels
         layer : layer of labels
         nf : number of fingers
     """
@@ -946,15 +946,15 @@ def add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, 
     for i in range(nc1):
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(
                     pc1.xmin + (c_pc.size[0] / 2) + i * (pc_spacing),
                     pc1.ymin + (c_pc.size[1] / 2),
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=g_lbl,
-                lbl_valid_len=nf,
+                label=label,
+                labels=g_label,
+                label_valid_len=nf,
                 index=2 * i,
             )
         )
@@ -962,15 +962,15 @@ def add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, 
     for i in range(nc2):
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(
                     pc2.xmin + (c_pc.size[0] / 2) + i * (pc_spacing),
                     pc2.ymin + (c_pc.size[1] / 2),
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=g_lbl,
-                lbl_valid_len=nf,
+                label=label,
+                labels=g_label,
+                label_valid_len=nf,
                 index=(2 * i) + 1,
             )
         )
@@ -992,11 +992,11 @@ def nfet(
     patt="",
     deepnwell: int = 0,
     pcmpgr: int = 0,
-    lbl: bool = 0,
-    sd_lbl: Optional[Strs] = [],
-    g_lbl: str = [],
-    sub_lbl: str = "",
-    patt_lbl: bool = 0,
+    label: bool = False,
+    sd_label: Optional[Strs] = [],
+    g_label: str = [],
+    sub_label: str = "",
+    patt_label: bool = False,
 ) -> gf.Component:
     """
     Return nfet
@@ -1113,24 +1113,24 @@ def nfet(
     ### adding source/drain labels
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmin + (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=0,
         )
     )
 
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmax - (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=nf,
         )
     )
@@ -1188,12 +1188,12 @@ def nfet(
         # gate_lablel
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(pc.xmin + c_pc.size[0] / 2, pc.ymin + c_pc.size[1] / 2),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=g_lbl,
-                lbl_valid_len=nf,
+                label=label,
+                labels=g_label,
+                label_valid_len=nf,
                 index=0,
             )
         )
@@ -1277,17 +1277,17 @@ def nfet(
         add_inter_sd_labels(
             c,
             nf,
-            sd_lbl,
+            sd_label,
             poly1,
             l_gate,
             inter_sd_l,
             sd_diff_intr,
-            lbl,
+            label,
             layer,
             con_bet_fin,
         )
 
-        # add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, nf)
+        # add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf)
 
         if interdig == 1:
             c_inst.add_ref(
@@ -1305,14 +1305,14 @@ def nfet(
                     gate_con_pos=gate_con_pos,
                     pc_x=pc_x,
                     pc_spacing=pc_spacing,
-                    lbl=lbl,
-                    g_lbl=g_lbl,
-                    patt_lbl=patt_lbl,
+                    label=label,
+                    g_label=g_label,
+                    patt_label=patt_label,
                 )
             )
         else:
             add_gate_labels(
-                c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, nf
+                c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
             )
 
     # generating bulk
@@ -1366,15 +1366,15 @@ def nfet(
 
         c.add_ref(
             labels_gen(
-                lbl_str=sub_lbl,
+                label_str=sub_label,
                 position=(
                     bulk_con.xmin + bulk_con.size[0] / 2,
                     bulk_con.ymin + bulk_con.size[1] / 2,
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=[sub_lbl],
-                lbl_valid_len=1,
+                label=label,
+                labels=[sub_label],
+                label_valid_len=1,
             )
         )
 
@@ -1399,8 +1399,8 @@ def nfet(
             grw=grw,
             l_d=l_d,
             implant_layer=layer["pplus"],
-            lbl=lbl,
-            sub_lbl=sub_lbl,
+            label=label,
+            sub_label=sub_label,
             deepnwell=deepnwell,
             pcmpgr=pcmpgr,
         )
@@ -1434,8 +1434,8 @@ def nfet(
 
 @gf.cell
 def pfet_deep_nwell(
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
     enc_size: Float2 = (0.1, 0.1),
     enc_xmin: float = 0.1,
     enc_ymin: float = 0.1,
@@ -1508,11 +1508,11 @@ def pfet(
     patt="",
     deepnwell: int = 0,
     pcmpgr: int = 0,
-    lbl: bool = 0,
-    sd_lbl: Optional[Strs] = [],
-    g_lbl: str = [],
-    sub_lbl: str = "",
-    patt_lbl: bool = 0,
+    label: bool = False,
+    sd_label: Optional[Strs] = [],
+    g_label: str = [],
+    sub_label: str = "",
+    patt_label: bool = False,
 ) -> gf.Component:
     """
     Return pfet
@@ -1631,24 +1631,24 @@ def pfet(
     ### adding source/drain labels
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmin + (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=0,
         )
     )
 
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmax - (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=nf,
         )
     )
@@ -1706,12 +1706,12 @@ def pfet(
         # gate_lablel
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(pc.xmin + c_pc.size[0] / 2, pc.ymin + c_pc.size[1] / 2),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=g_lbl,
-                lbl_valid_len=nf,
+                label=label,
+                labels=g_label,
+                label_valid_len=nf,
                 index=0,
             )
         )
@@ -1795,17 +1795,19 @@ def pfet(
         add_inter_sd_labels(
             c,
             nf,
-            sd_lbl,
+            sd_label,
             poly1,
             l_gate,
             inter_sd_l,
             sd_diff_intr,
-            lbl,
+            label,
             layer,
             con_bet_fin,
         )
 
-        add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, nf)
+        add_gate_labels(
+            c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
+        )
 
         if interdig == 1:
             c_inst.add_ref(
@@ -1823,9 +1825,9 @@ def pfet(
                     gate_con_pos=gate_con_pos,
                     pc_x=pc_x,
                     pc_spacing=pc_spacing,
-                    lbl=lbl,
-                    g_lbl=g_lbl,
-                    patt_lbl=patt_lbl,
+                    label=label,
+                    g_label=g_label,
+                    patt_label=patt_label,
                 )
             )
 
@@ -1905,15 +1907,15 @@ def pfet(
 
         c.add_ref(
             labels_gen(
-                lbl_str=sub_lbl,
+                label_str=sub_label,
                 position=(
                     bulk_con.xmin + bulk_con.size[0] / 2,
                     bulk_con.ymin + bulk_con.size[1] / 2,
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=[sub_lbl],
-                lbl_valid_len=1,
+                label=label,
+                labels=[sub_label],
+                label_valid_len=1,
             )
         )
 
@@ -1957,8 +1959,8 @@ def pfet(
             grw=grw,
             l_d=l_d,
             implant_layer=layer["nplus"],
-            lbl=lbl,
-            sub_lbl=sub_lbl,
+            label=label,
+            sub_label=sub_label,
             deepnwell=deepnwell,
             pcmpgr=pcmpgr,
             nw_enc_pcmp=nw_enc_pcmp,
@@ -1981,11 +1983,11 @@ def nfet_06v0_nvt(
     gate_con_pos="alternating",
     interdig: int = 0,
     patt="",
-    lbl: bool = 0,
-    sd_lbl: Optional[Strs] = [],
-    g_lbl: str = [],
-    sub_lbl: str = "",
-    patt_lbl: bool = 0,
+    label: bool = False,
+    sd_label: Optional[Strs] = [],
+    g_label: str = [],
+    sub_label: str = "",
+    patt_label: bool = False,
 ) -> gf.Component:
     """
     Usage:-
@@ -2097,24 +2099,24 @@ def nfet_06v0_nvt(
     ### adding source/drain labels
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmin + (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=0,
         )
     )
 
     c.add_ref(
         labels_gen(
-            lbl_str="None",
+            label_str="None",
             position=(sd_diff.xmax - (sd_l / 2), sd_diff.ymin + (sd_diff.size[1] / 2)),
             layer=layer["metal1_label"],
-            lbl=lbl,
-            labels=sd_lbl,
-            lbl_valid_len=nf + 1,
+            label=label,
+            labels=sd_label,
+            label_valid_len=nf + 1,
             index=nf,
         )
     )
@@ -2172,12 +2174,12 @@ def nfet_06v0_nvt(
         # gate_lablel
         c.add_ref(
             labels_gen(
-                lbl_str="None",
+                label_str="None",
                 position=(pc.xmin + c_pc.size[0] / 2, pc.ymin + c_pc.size[1] / 2),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=g_lbl,
-                lbl_valid_len=nf,
+                label=label,
+                labels=g_label,
+                label_valid_len=nf,
                 index=0,
             )
         )
@@ -2261,17 +2263,19 @@ def nfet_06v0_nvt(
         add_inter_sd_labels(
             c,
             nf,
-            sd_lbl,
+            sd_label,
             poly1,
             l_gate,
             inter_sd_l,
             sd_diff_intr,
-            lbl,
+            label,
             layer,
             con_bet_fin,
         )
 
-        add_gate_labels(c, g_lbl, pc1, c_pc, pc_spacing, nc1, nc2, pc2, lbl, layer, nf)
+        add_gate_labels(
+            c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
+        )
 
         if interdig == 1:
             c_inst.add_ref(
@@ -2289,9 +2293,9 @@ def nfet_06v0_nvt(
                     gate_con_pos=gate_con_pos,
                     pc_x=pc_x,
                     pc_spacing=pc_spacing,
-                    lbl=lbl,
-                    g_lbl=g_lbl,
-                    patt_lbl=patt_lbl,
+                    label=label,
+                    g_label=g_label,
+                    patt_label=patt_label,
                 )
             )
 
@@ -2346,15 +2350,15 @@ def nfet_06v0_nvt(
 
         c.add_ref(
             labels_gen(
-                lbl_str=sub_lbl,
+                label_str=sub_label,
                 position=(
                     bulk_con.xmin + bulk_con.size[0] / 2,
                     bulk_con.ymin + bulk_con.size[1] / 2,
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=[sub_lbl],
-                lbl_valid_len=1,
+                label=label,
+                labels=[sub_label],
+                label_valid_len=1,
             )
         )
 
@@ -2521,15 +2525,15 @@ def nfet_06v0_nvt(
 
         c.add_ref(
             labels_gen(
-                lbl_str=sub_lbl,
+                label_str=sub_label,
                 position=(
                     b_gr.xmin + (grw + 2 * (comp_pp_enc)) / 2,
                     b_gr.ymin + (b_gr.size[1] / 2),
                 ),
                 layer=layer["metal1_label"],
-                lbl=lbl,
-                labels=[sub_lbl],
-                lbl_valid_len=1,
+                label=label,
+                labels=[sub_label],
+                label_valid_len=1,
             )
         )
 

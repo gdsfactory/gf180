@@ -17,21 +17,23 @@ def cap_mos_inst(
     pl_ext: float = 0.1,
     implant_layer: LayerSpec = layer["nplus"],
     implant_enc: Float2 = (0.1, 0.1),
-    lbl: bool = 0,
-    g_lbl: str = "",
+    label: bool = False,
+    g_label: str = "",
 ) -> gf.Component:
     """Returns mos cap simple instance
 
-    Args :
-        lc : length of mos_cap
-        ws : width of mos_cap
-        cmp_w : width of layer["comp"]
-        con_w : min width of comp contain contact
-        pl_l : length od layer["poly2"]
-        cmp_ext : comp extension beyond poly2
-        pl_ext : poly2 extension beyond comp
-        implant_layer : Layer of implant [nplus,pplus]
-        implant_enc : enclosure of implant_layer to comp
+    Args:
+        lc : length of mos_cap.
+        ws : width of mos_cap.
+        cmp_w : width of layer["comp"].
+        con_w : min width of comp contain contact.
+        pl_l : length od layer["poly2"].
+        cmp_ext : comp extension beyond poly2.
+        pl_ext : poly2 extension beyond comp.
+        implant_layer : Layer of implant [nplus,pplus].
+        implant_enc : enclosure of implant_layer to comp.
+        label : 1 to add labels.
+        g_label : gate label.
     """
 
     c_inst = gf.Component()
@@ -93,9 +95,9 @@ def cap_mos_inst(
 
     # Gate labels_generation
 
-    if lbl == 1:
+    if label == 1:
         c_inst.add_label(
-            g_lbl,
+            g_label,
             position=(
                 pl_con.xmin + (pl_con.size[0] / 2),
                 pl_con.ymin + (pl_con_el.size[1] / 2),
@@ -120,11 +122,11 @@ def cap_mos(
     lc: float = 0.1,
     wc: float = 0.1,
     volt: str = "3.3V",
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    g_lbl: str = "",
-    sd_lbl: str = "",
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
+    label: bool = False,
+    g_label: str = "",
+    sd_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -183,8 +185,8 @@ def cap_mos(
             pl_ext=end_cap,
             implant_layer=implant_layer,
             implant_enc=(np_enc_cmp, np_enc_gate),
-            lbl=lbl,
-            g_lbl=g_lbl,
+            label=label,
+            g_label=g_label,
         )
     )
 
@@ -212,9 +214,9 @@ def cap_mos(
     cmp_m1_h.ymax = cmp_m1_v.ymin
 
     # sd labels generation
-    if lbl == 1:
+    if label == 1:
         c.add_label(
-            sd_lbl,
+            sd_label,
             position=(
                 cmp_m1_h.xmin + (cmp_m1_h.size[0] / 2),
                 cmp_m1_h.ymin + (cmp_m1_h.size[1] / 2),

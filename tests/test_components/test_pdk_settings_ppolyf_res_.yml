@@ -6,22 +6,22 @@ settings:
   default:
     deepnwell: 0
     l_res: 0.1
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: ppolyf_s
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.1
   full:
     deepnwell: 0
     l_res: 0.1
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
+    r0_label: ''
+    r1_label: ''
     res_type: ppolyf_s
-    sub_lbl: ''
+    sub_label: ''
     w_res: 0.1
   function_name: ppolyf_res
   info: {}

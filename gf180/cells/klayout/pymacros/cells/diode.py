@@ -68,11 +68,11 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -113,9 +113,9 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
             volt=self.volt,
             deepnwell=self.deepnwell,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             np_instance.cell_index(),
@@ -152,11 +152,11 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -196,9 +196,9 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
             volt=self.volt,
             deepnwell=self.deepnwell,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             np_instance.cell_index(),
@@ -233,11 +233,11 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -276,9 +276,9 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
             wa=self.wa,
             cw=self.cw,
             volt=self.volt,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             nwp_instance.cell_index(),
@@ -314,11 +314,11 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -358,9 +358,9 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
             cw=self.cw,
             volt=self.volt,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             diode_pw2dw_instance.cell_index(),
@@ -396,11 +396,11 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -440,9 +440,9 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
             cw=self.cw,
             volt=self.volt,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             diode_dw2ps_instance.cell_index(),
@@ -477,11 +477,11 @@ class sc_diode(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("p_lbl", self.TypeString, "plus label", default="")
+        self.param("p_label", self.TypeString, "plus label", default="")
 
-        self.param("n_lbl", self.TypeString, "minus label", default="")
+        self.param("n_label", self.TypeString, "minus label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -521,9 +521,9 @@ class sc_diode(pya.PCellDeclarationHelper):
             cw=self.cw,
             m=self.m,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            p_lbl=self.p_lbl,
-            n_lbl=self.n_lbl,
+            label=self.label,
+            p_label=self.p_label,
+            n_label=self.n_label,
         )
         write_cells = pya.CellInstArray(
             sc_instance.cell_index(),

@@ -88,21 +88,21 @@ class nfet(pya.PCellDeclarationHelper):
             "patt", self.TypeString, "Pattern in case of Interdigitation", default=""
         )
         self.param(
-            "patt_lbl", self.TypeBoolean, "Interdigitation pattern label", default=0
+            "patt_label", self.TypeBoolean, "Interdigitation pattern label", default=0
         )
 
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
         self.param(
-            "sd_lbl", self.TypeList, "Pattern of Source/Drain Labels", default=[]
+            "sd_label", self.TypeList, "Pattern of Source/Drain Labels", default=[]
         )
 
-        self.param("g_lbl", self.TypeList, "Pattern of Gate Labels", default=[])
+        self.param("g_label", self.TypeList, "Pattern of Gate Labels", default=[])
 
-        self.param("sub_lbl", self.TypeString, "Substrate Label", default="")
+        self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -163,11 +163,11 @@ class nfet(pya.PCellDeclarationHelper):
             patt=self.patt,
             deepnwell=self.deepnwell,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            sd_lbl=self.sd_lbl,
-            g_lbl=self.g_lbl,
-            sub_lbl=self.sub_lbl,
-            patt_lbl=self.patt_lbl,
+            label=self.label,
+            sd_label=self.sd_label,
+            g_label=self.g_label,
+            sub_label=self.sub_label,
+            patt_label=self.patt_label,
         )
         write_cells = pya.CellInstArray(
             instance.cell_index(),
@@ -227,21 +227,21 @@ class pfet(pya.PCellDeclarationHelper):
             "patt", self.TypeString, "Pattern in case of Interdigitation", default=""
         )
         self.param(
-            "patt_lbl", self.TypeBoolean, "Interdigitation pattern label", default=0
+            "patt_label", self.TypeBoolean, "Interdigitation pattern label", default=0
         )
 
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
         self.param(
-            "sd_lbl", self.TypeList, "Pattern of Source/Drain Labels", default=[]
+            "sd_label", self.TypeList, "Pattern of Source/Drain Labels", default=[]
         )
 
-        self.param("g_lbl", self.TypeList, "Pattern of Gate Labels", default=[])
+        self.param("g_label", self.TypeList, "Pattern of Gate Labels", default=[])
 
-        self.param("sub_lbl", self.TypeString, "Substrate Label", default="")
+        self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -302,11 +302,11 @@ class pfet(pya.PCellDeclarationHelper):
             patt=self.patt,
             deepnwell=self.deepnwell,
             pcmpgr=self.pcmpgr,
-            lbl=self.lbl,
-            sd_lbl=self.sd_lbl,
-            g_lbl=self.g_lbl,
-            sub_lbl=self.sub_lbl,
-            patt_lbl=self.patt_lbl,
+            label=self.label,
+            sd_label=self.sd_label,
+            g_label=self.g_label,
+            sub_label=self.sub_label,
+            patt_label=self.patt_label,
         )
         write_cells = pya.CellInstArray(
             instance.cell_index(),
@@ -360,21 +360,21 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
             "patt", self.TypeString, "Pattern in case of Interdigitation", default=""
         )
         self.param(
-            "patt_lbl", self.TypeBoolean, "Interdigitation pattern label", default=0
+            "patt_label", self.TypeBoolean, "Interdigitation pattern label", default=0
         )
 
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
         self.param(
-            "sd_lbl", self.TypeList, "Pattern of Source/Drain Labels", default=[]
+            "sd_label", self.TypeList, "Pattern of Source/Drain Labels", default=[]
         )
 
-        self.param("g_lbl", self.TypeList, "Pattern of Gate Labels", default=[])
+        self.param("g_label", self.TypeList, "Pattern of Gate Labels", default=[])
 
-        self.param("sub_lbl", self.TypeString, "Substrate Label", default="")
+        self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -429,11 +429,11 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
             gate_con_pos=self.gate_con_pos,
             interdig=self.interdig,
             patt=self.patt,
-            lbl=self.lbl,
-            sd_lbl=self.sd_lbl,
-            g_lbl=self.g_lbl,
-            sub_lbl=self.sub_lbl,
-            patt_lbl=self.patt_lbl,
+            label=self.label,
+            sd_label=self.sd_label,
+            g_label=self.g_label,
+            sub_label=self.sub_label,
+            patt_label=self.patt_label,
         )
 
         write_cells = pya.CellInstArray(

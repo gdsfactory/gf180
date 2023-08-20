@@ -52,11 +52,11 @@ class cap_mim(pya.PCellDeclarationHelper):
         self.param("area", self.TypeDouble, "Area", readonly=True, unit="um^2")
         self.param("perim", self.TypeDouble, "Perimeter", readonly=True, unit="um")
 
-        self.param("lbl", self.TypeBoolean, "Labels", default=0)
+        self.param("label", self.TypeBoolean, "Labels", default=0)
 
-        self.param("top_lbl", self.TypeString, "Top plate label", default="")
+        self.param("top_label", self.TypeString, "Top plate label", default="")
 
-        self.param("bot_lbl", self.TypeString, "Bottom plate label", default="")
+        self.param("bot_label", self.TypeString, "Bottom plate label", default="")
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
@@ -104,9 +104,9 @@ class cap_mim(pya.PCellDeclarationHelper):
             wc=self.wc,
             mim_option=self.mim_option,
             metal_level=self.metal_level,
-            lbl=self.lbl,
-            top_lbl=self.top_lbl,
-            bot_lbl=self.bot_lbl,
+            label=self.label,
+            top_label=self.top_label,
+            bot_label=self.bot_label,
         )
         write_cells = pya.CellInstArray(
             np_instance.cell_index(),

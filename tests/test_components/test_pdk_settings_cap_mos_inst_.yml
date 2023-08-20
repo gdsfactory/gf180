@@ -7,14 +7,14 @@ settings:
     cmp_ext: 0.1
     cmp_w: 0.1
     con_w: 0.1
-    g_lbl: ''
+    g_label: ''
     implant_enc:
     - 0.1
     - 0.1
     implant_layer:
     - 32
     - 0
-    lbl: 0
+    label: 0
     lc: 0.1
     pl_ext: 0.1
     pl_l: 0.1
@@ -23,14 +23,14 @@ settings:
     cmp_ext: 0.1
     cmp_w: 0.1
     con_w: 0.1
-    g_lbl: ''
+    g_label: ''
     implant_enc:
     - 0.1
     - 0.1
     implant_layer:
     - 32
     - 0
-    lbl: 0
+    label: 0
     lc: 0.1
     pl_ext: 0.1
     pl_l: 0.1

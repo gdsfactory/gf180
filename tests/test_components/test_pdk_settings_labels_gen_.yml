@@ -9,9 +9,9 @@ settings:
     layer:
     - 34
     - 10
-    lbl: 0
-    lbl_str: ''
-    lbl_valid_len: 1
+    label: 0
+    label_str: ''
+    label_valid_len: 1
     position:
     - 0.1
     - 0.1
@@ -21,9 +21,9 @@ settings:
     layer:
     - 34
     - 10
-    lbl: 0
-    lbl_str: ''
-    lbl_valid_len: 1
+    label: 0
+    label_str: ''
+    label_valid_len: 1
     position:
     - 0.1
     - 0.1

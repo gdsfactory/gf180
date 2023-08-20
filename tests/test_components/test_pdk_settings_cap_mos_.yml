@@ -5,21 +5,21 @@ settings:
   child: null
   default:
     deepnwell: 0
-    g_lbl: ''
-    lbl: 0
+    g_label: ''
+    label: 0
     lc: 0.1
     pcmpgr: 0
-    sd_lbl: ''
+    sd_label: ''
     type: cap_nmos
     volt: 3.3V
     wc: 0.1
   full:
     deepnwell: 0
-    g_lbl: ''
-    lbl: 0
+    g_label: ''
+    label: 0
     lc: 0.1
     pcmpgr: 0
-    sd_lbl: ''
+    sd_label: ''
     type: cap_nmos
     volt: 3.3V
     wc: 0.1

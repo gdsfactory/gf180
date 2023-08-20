@@ -6,21 +6,21 @@ settings:
   default:
     deepnwell: 0
     l_res: 0.42
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
-    sub_lbl: ''
+    r0_label: ''
+    r1_label: ''
+    sub_label: ''
     volt: 3.3V
     w_res: 0.42
   full:
     deepnwell: 0
     l_res: 0.42
-    lbl: 0
+    label: 0
     pcmpgr: 0
-    r0_lbl: ''
-    r1_lbl: ''
-    sub_lbl: ''
+    r0_label: ''
+    r1_label: ''
+    sub_label: ''
     volt: 3.3V
     w_res: 0.42
   function_name: ppolyf_u_high_Rs_res

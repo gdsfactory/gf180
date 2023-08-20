@@ -6,19 +6,19 @@ settings:
   default:
     cw: 0.1
     la: 0.1
-    lbl: 0
+    label: 0
     m: 1
-    n_lbl: ''
-    p_lbl: ''
+    n_label: ''
+    p_label: ''
     pcmpgr: 0
     wa: 0.1
   full:
     cw: 0.1
     la: 0.1
-    lbl: 0
+    label: 0
     m: 1
-    n_lbl: ''
-    p_lbl: ''
+    n_label: ''
+    p_label: ''
     pcmpgr: 0
     wa: 0.1
   function_name: sc_diode

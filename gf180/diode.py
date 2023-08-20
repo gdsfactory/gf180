@@ -12,22 +12,23 @@ def diode_nd2ps(
     wa: float = 0.1,
     cw: float = 0.1,
     volt: str = "3.3V",
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
 
-    Arguments:
-        la         : Float of diff length (anode)
-        wa         : Float of diff width (anode)
-        cw         : Float of cathode width
-        volt       : String of operating voltage of the diode [3.3V, 5V/6V]
-        deepnwell  : Boolean of using Deep NWELL device
-        pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only
+    Args::
+        la: Float of diff length (anode).
+        wa: Float of diff width (anode).
+        cw: Float of cathode width.
+        volt: String of operating voltage of the diode [3.3V, 5V/6V].
+        deepnwell: Boolean of using Deep NWELL device.
+        pcmpgr : Boolean of using P+ Guard Ring for Deep NWELL devices only.
+        label: Boolean of adding labels.
     """
 
     c = gf.Component("diode_nd2ps_dev")
@@ -101,10 +102,10 @@ def diode_nd2ps(
     )  # pcomp_con
 
     # labels generation
-    if lbl == 1:
+    if label == 1:
         # n_label generation
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 ncmp_con.xmin + (ncmp_con.size[0] / 2),
                 ncmp_con.ymin + (ncmp_con.size[1] / 2),
@@ -114,7 +115,7 @@ def diode_nd2ps(
 
         # p_label generation
         c.add_label(
-            p_lbl,
+            p_label,
             position=(
                 pcmp_con.xmin + (pcmp_con.size[0] / 2),
                 pcmp_con.ymin + (pcmp_con.size[1] / 2),
@@ -325,11 +326,11 @@ def diode_pd2nw(
     wa: float = 0.1,
     cw: float = 0.1,
     volt: str = "3.3V",
-    deepnwell: bool = 0,
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    deepnwell: bool = False,
+    pcmpgr: bool = False,
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -413,10 +414,10 @@ def diode_pd2nw(
     )  # ncomp contact
 
     # labels generation
-    if lbl == 1:
+    if label == 1:
         # n_label generation
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 ncmp_con.xmin + (ncmp_con.size[0] / 2),
                 ncmp_con.ymin + (ncmp_con.size[1] / 2),
@@ -426,7 +427,7 @@ def diode_pd2nw(
 
         # p_label generation
         c.add_label(
-            p_lbl,
+            p_label,
             position=(
                 pcmp_con.xmin + (pcmp_con.size[0] / 2),
                 pcmp_con.ymin + (pcmp_con.size[1] / 2),
@@ -637,9 +638,9 @@ def diode_nw2ps(
     wa: float = 0.1,
     cw: float = 0.1,
     volt: str = "3.3V",
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -728,10 +729,10 @@ def diode_nw2ps(
     )  # pcmop contact
 
     # labels generation
-    if lbl == 1:
+    if label == 1:
         # n_label generation
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 n_con.xmin + (n_con.size[0] / 2),
                 n_con.ymin + (n_con.size[1] / 2),
@@ -741,7 +742,7 @@ def diode_nw2ps(
 
         # p_label generation
         c.add_label(
-            p_lbl,
+            p_label,
             position=(
                 p_con.xmin + (p_con.size[0] / 2),
                 p_con.ymin + (p_con.size[1] / 2),
@@ -771,10 +772,10 @@ def diode_pw2dw(
     wa: float = 0.1,
     cw: float = 0.1,
     volt: str = "3.3V",
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    pcmpgr: bool = False,
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -871,10 +872,10 @@ def diode_pw2dw(
     )  # ncomp contact
 
     # labels generation
-    if lbl == 1:
+    if label == 1:
         # n_label generation
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 n_con.xmin + (n_con.size[0] / 2),
                 n_con.ymin + (n_con.size[1] / 2),
@@ -884,7 +885,7 @@ def diode_pw2dw(
 
         # p_label generation
         c.add_label(
-            p_lbl,
+            p_label,
             position=(
                 p_con.xmin + (p_con.size[0] / 2),
                 p_con.ymin + (p_con.size[1] / 2),
@@ -1080,10 +1081,10 @@ def diode_dw2ps(
     wa: float = 0.1,
     cw: float = 0.1,
     volt: str = "3.3V",
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    pcmpgr: bool = False,
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -1281,10 +1282,10 @@ def diode_dw2ps(
         )  # guardring metal1
 
     # labels generation
-    if lbl == 1:
+    if label == 1:
         # n_label generation
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 n_con.xmin + (n_con.size[0] / 2),
                 n_con.ymin + (n_con.size[1] / 2),
@@ -1442,10 +1443,10 @@ def diode_dw2ps(
         )  # right contact
 
         # labels generation
-        if lbl == 1:
+        if label == 1:
             # n_label generation
             c.add_label(
-                p_lbl,
+                p_label,
                 position=(
                     p_con.xmin + (p_con.size[0] / 2),
                     p_con.ymin + (p_con.size[1] / 2),
@@ -1503,10 +1504,10 @@ def sc_diode(
     wa: float = 0.1,
     cw: float = 0.1,
     m: int = 1,
-    pcmpgr: bool = 0,
-    lbl: bool = 0,
-    p_lbl: str = "",
-    n_lbl: str = "",
+    pcmpgr: bool = False,
+    label: bool = False,
+    p_label: str = "",
+    n_label: str = "",
 ) -> gf.Component:
     """
     Usage:-
@@ -1630,9 +1631,9 @@ def sc_diode(
     cath_m1_h.ymax = cath_m1_v.ymin
 
     # cathode label generation
-    if lbl == 1:
+    if label == 1:
         c.add_label(
-            n_lbl,
+            n_label,
             position=(
                 cath_m1_h.xmin + (cath_m1_h.size[0] / 2),
                 cath_m1_h.ymin + (cath_m1_h.size[1] / 2),
@@ -1679,9 +1680,9 @@ def sc_diode(
         an_m1_h.ymin = an_m1_v.ymax
 
         # anode label generation
-        if lbl == 1:
+        if label == 1:
             c.add_label(
-                p_lbl,
+                p_label,
                 position=(
                     an_m1_h.xmin + (an_m1_h.size[0] / 2),
                     an_m1_h.ymin + (an_m1_h.size[1] / 2),
@@ -1691,9 +1692,9 @@ def sc_diode(
 
     else:
         # anode label generation
-        if lbl == 1:
+        if label == 1:
             c.add_label(
-                p_lbl,
+                p_label,
                 position=(
                     an_m1_xmin + ((an_m1_xmax - an_m1_xmin) / 2),
                     an_m1_ymin + ((an_m1_ymax - an_m1_ymin) / 2),

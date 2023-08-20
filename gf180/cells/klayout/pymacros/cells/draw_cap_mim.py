@@ -10,9 +10,9 @@ def draw_cap_mim(
     metal_level: str = "M4",
     lc: float = 2,
     wc: float = 2,
-    lbl: bool = 0,
-    top_lbl: str = "",
-    bot_lbl: str = "",
+    label: bool = False,
+    top_label: str = "",
+    bot_label: str = "",
 ):
     """
     Retern mim cap
@@ -35,26 +35,26 @@ def draw_cap_mim(
             upper_layer = layer["metal4"]
             bottom_layer = layer["metal3"]
             via_layer = layer["via3"]
-            up_lbl_layer = layer["metal4_label"]
-            bot_lbl_layer = layer["metal3_label"]
+            up_label_layer = layer["metal4_label"]
+            bot_label_layer = layer["metal3_label"]
         elif metal_level == "M5":
             upper_layer = layer["metal5"]
             bottom_layer = layer["metal4"]
             via_layer = layer["via4"]
-            up_lbl_layer = layer["metal5_label"]
-            bot_lbl_layer = layer["metal4_label"]
+            up_label_layer = layer["metal5_label"]
+            bot_label_layer = layer["metal4_label"]
         elif metal_level == "M6":
             upper_layer = layer["metaltop"]
             bottom_layer = layer["metal5"]
             via_layer = layer["via5"]
-            up_lbl_layer = layer["metaltop_label"]
-            bot_lbl_layer = layer["metal5_label"]
+            up_label_layer = layer["metaltop_label"]
+            bot_label_layer = layer["metal5_label"]
     else:
         upper_layer = layer["metal3"]
         bottom_layer = layer["metal2"]
         via_layer = layer["via2"]
-        up_lbl_layer = layer["metal3_label"]
-        bot_lbl_layer = layer["metal2_label"]
+        up_label_layer = layer["metal3_label"]
+        bot_label_layer = layer["metal2_label"]
 
     via_size = (0.22, 0.22)
     via_spacing = (0.5, 0.5)
@@ -104,20 +104,20 @@ def draw_cap_mim(
     cap_mk.ymin = m_dn.ymin
 
     # generating labels
-    if lbl == 1:
+    if label == 1:
         c.add_label(
-            top_lbl,
+            top_label,
             position=(m_up.xmin + (m_up.size[0] / 2), m_dn.xmin + (m_dn.size[1] / 2)),
-            layer=up_lbl_layer,
+            layer=up_label_layer,
         )
 
         c.add_label(
-            bot_lbl,
+            bot_label,
             position=(
                 m_dn.xmin + (m_dn.size[0] / 2),
                 m_dn.ymin + (m_up.ymin - m_dn.ymin) / 2,
             ),
-            layer=bot_lbl_layer,
+            layer=bot_label_layer,
         )
 
     # generating vias

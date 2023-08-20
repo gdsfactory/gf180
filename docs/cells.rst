@@ -17,7 +17,7 @@ alter_interdig
 
   import gf180
 
-  c = gf180.alter_interdig(l_gate=0.15, inter_sd_l=0.15, sd_l=0.36, nf=1, pat='', pc_x=0.1, pc_spacing=0.1, lbl=0, nl=1, patt_lbl=0)
+  c = gf180.alter_interdig(l_gate=0.15, inter_sd_l=0.15, sd_l=0.36, nf=1, pat='', pc_x=0.1, pc_spacing=0.1, label=0, nl=1, patt_label=0)
   c.plot()
 
 
@@ -32,7 +32,7 @@ cap_mos
 
   import gf180
 
-  c = gf180.cap_mos(type='cap_nmos', lc=0.1, wc=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, lbl=0, g_lbl='', sd_lbl='')
+  c = gf180.cap_mos(type='cap_nmos', lc=0.1, wc=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, g_label='', sd_label='')
   c.plot()
 
 
@@ -47,7 +47,7 @@ cap_mos_inst
 
   import gf180
 
-  c = gf180.cap_mos_inst(lc=0.1, wc=0.1, cmp_w=0.1, con_w=0.1, pl_l=0.1, cmp_ext=0.1, pl_ext=0.1, implant_layer=(32, 0), implant_enc=(0.1, 0.1), lbl=0, g_lbl='')
+  c = gf180.cap_mos_inst(lc=0.1, wc=0.1, cmp_w=0.1, con_w=0.1, pl_l=0.1, cmp_ext=0.1, pl_ext=0.1, implant_layer=(32, 0), implant_enc=(0.1, 0.1), label=0, g_label='')
   c.plot()
 
 
@@ -62,7 +62,7 @@ diode_dw2ps
 
   import gf180
 
-  c = gf180.diode_dw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c = gf180.diode_dw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -77,7 +77,7 @@ diode_nd2ps
 
   import gf180
 
-  c = gf180.diode_nd2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c = gf180.diode_nd2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -92,7 +92,7 @@ diode_nw2ps
 
   import gf180
 
-  c = gf180.diode_nw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', lbl=0, p_lbl='', n_lbl='')
+  c = gf180.diode_nw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -107,7 +107,7 @@ diode_pd2nw
 
   import gf180
 
-  c = gf180.diode_pd2nw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c = gf180.diode_pd2nw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -122,7 +122,7 @@ diode_pw2dw
 
   import gf180
 
-  c = gf180.diode_pw2dw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c = gf180.diode_pw2dw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -137,7 +137,7 @@ interdigit
 
   import gf180
 
-  c = gf180.interdigit(l_gate=0.15, inter_sd_l=0.23, sd_l=0.15, nf=1, gate_con_pos='top', pc_x=0.1, pc_spacing=0.1, lbl=0, patt_lbl=0)
+  c = gf180.interdigit(l_gate=0.15, inter_sd_l=0.23, sd_l=0.15, nf=1, gate_con_pos='top', pc_x=0.1, pc_spacing=0.1, label=0, patt_label=0)
   c.plot()
 
 
@@ -152,7 +152,7 @@ labels_gen
 
   import gf180
 
-  c = gf180.labels_gen(lbl_str='', position=(0.1, 0.1), layer=(34, 10), lbl=0, lbl_valid_len=1, index=0)
+  c = gf180.labels_gen(label_str='', position=(0.1, 0.1), layer=(34, 10), label=0, label_valid_len=1, index=0)
   c.plot()
 
 
@@ -167,7 +167,7 @@ nfet
 
   import gf180
 
-  c = gf180.nfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, lbl=0, sub_lbl='', patt_lbl=0)
+  c = gf180.nfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, label=0, sub_label='', patt_label=0)
   c.plot()
 
 
@@ -182,7 +182,7 @@ nfet_06v0_nvt
 
   import gf180
 
-  c = gf180.nfet_06v0_nvt(l_gate=1.8, w_gate=0.8, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', lbl=0, sub_lbl='', patt_lbl=0)
+  c = gf180.nfet_06v0_nvt(l_gate=1.8, w_gate=0.8, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', label=0, sub_label='', patt_label=0)
   c.plot()
 
 
@@ -212,7 +212,7 @@ nplus_res
 
   import gf180
 
-  c = gf180.nplus_res(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, deepnwell=0, pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.nplus_res(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -227,7 +227,7 @@ npolyf_res
 
   import gf180
 
-  c = gf180.npolyf_res(l_res=0.1, w_res=0.1, res_type='npolyf_s', deepnwell=0, pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.npolyf_res(l_res=0.1, w_res=0.1, res_type='npolyf_s', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -257,7 +257,7 @@ pfet
 
   import gf180
 
-  c = gf180.pfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, lbl=0, sub_lbl='', patt_lbl=0)
+  c = gf180.pfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, label=0, sub_label='', patt_label=0)
   c.plot()
 
 
@@ -287,7 +287,7 @@ plus_res_inst
 
   import gf180
 
-  c = gf180.plus_res_inst(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, cmp_res_ext=0.1, con_enc=0.1, cmp_imp_layer=(32, 0), sub_imp_layer=(31, 0), lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.plus_res_inst(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, cmp_res_ext=0.1, con_enc=0.1, cmp_imp_layer=(32, 0), sub_imp_layer=(31, 0), label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -302,7 +302,7 @@ polyf_res_inst
 
   import gf180
 
-  c = gf180.polyf_res_inst(l_res=0.1, w_res=0.1, res_type='npolyf_s', pl_res_ext=0.1, con_enc=0.1, pl_imp_layer=(32, 0), sub_imp_layer=(31, 0), lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.polyf_res_inst(l_res=0.1, w_res=0.1, res_type='npolyf_s', pl_res_ext=0.1, con_enc=0.1, pl_imp_layer=(32, 0), sub_imp_layer=(31, 0), label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -317,7 +317,7 @@ pplus_res
 
   import gf180
 
-  c = gf180.pplus_res(l_res=0.1, w_res=0.1, res_type='pplus_s', sub=0, deepnwell=0, pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.pplus_res(l_res=0.1, w_res=0.1, res_type='pplus_s', sub=0, deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -332,7 +332,7 @@ ppolyf_res
 
   import gf180
 
-  c = gf180.ppolyf_res(l_res=0.1, w_res=0.1, res_type='ppolyf_s', deepnwell=0, pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.ppolyf_res(l_res=0.1, w_res=0.1, res_type='ppolyf_s', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -347,7 +347,7 @@ ppolyf_u_high_Rs_res
 
   import gf180
 
-  c = gf180.ppolyf_u_high_Rs_res(l_res=0.42, w_res=0.42, volt='3.3V', deepnwell=0, pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.ppolyf_u_high_Rs_res(l_res=0.42, w_res=0.42, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
 
 
@@ -362,7 +362,7 @@ res
 
   import gf180
 
-  c = gf180.res(l_res=0.1, w_res=0.1, res_type='rm1', lbl=0, r0_lbl='', r1_lbl='')
+  c = gf180.res(l_res=0.1, w_res=0.1, res_type='rm1', label=0, r0_label='', r1_label='')
   c.plot()
 
 
@@ -377,7 +377,7 @@ sc_diode
 
   import gf180
 
-  c = gf180.sc_diode(la=0.1, wa=0.1, cw=0.1, m=1, pcmpgr=0, lbl=0, p_lbl='', n_lbl='')
+  c = gf180.sc_diode(la=0.1, wa=0.1, cw=0.1, m=1, pcmpgr=0, label=0, p_label='', n_label='')
   c.plot()
 
 
@@ -422,5 +422,5 @@ well_res
 
   import gf180
 
-  c = gf180.well_res(l_res=0.42, w_res=0.42, res_type='nwell', pcmpgr=0, lbl=0, r0_lbl='', r1_lbl='', sub_lbl='')
+  c = gf180.well_res(l_res=0.42, w_res=0.42, res_type='nwell', pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
   c.plot()
