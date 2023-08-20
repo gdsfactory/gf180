@@ -11,17 +11,19 @@ def res(
     l_res: float = 0.1,
     w_res: float = 0.1,
     res_type: str = "rm1",
-    lbl: bool = 0,
+    lbl: bool = False,
     r0_lbl: str = "",
     r1_lbl: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
-     used to draw 2-terminal Metal resistor by specifying parameters
+    """Returns 2-terminal Metal resistor by specifying parameters.
 
     Args:
-         l      : Float of diff length
-         w      : Float of diff width
+        l_res: length of resistor.
+        w_res: width of resistor.
+        res_type: type of resistor.
+        lbl: label generation.
+        r0_lbl: label for resistor.
+        r1_lbl: label for resistor.
     """
 
     c = gf.Component("res_dev")
@@ -90,6 +92,7 @@ def plus_res_inst(
     r1_lbl: str = "",
     sub_lbl: str = "",
 ) -> gf.Component:
+    """Returns 2-terminal Metal resistor by specifying parameters."""
     c = gf.Component()
 
     sub_w: float = 0.36

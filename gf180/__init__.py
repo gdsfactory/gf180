@@ -104,7 +104,7 @@ __version__ = "0.0.3"
 
 cells = get_cells(sys.modules[__name__])
 PDK = Pdk(
-    name="tj",
+    name="gf180",
     cells=cells,
     layers=LAYER.dict(),
     layer_views=LAYER_VIEWS,

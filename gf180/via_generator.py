@@ -63,7 +63,16 @@ def via_stack(
     metal_level: int = 1,
     li_enc_dir="V",
 ) -> gf.Component:
-    """
+    """Returns a via stack withen the range xrange and yrange and expecting the base_layer to be drawen
+
+    Args:
+        x_range (Float2, optional): [description]. Defaults to (0, 1).
+        y_range (Float2, optional): [description]. Defaults to (0, 1).
+        base_layer (LayerSpec, optional): [description]. Defaults to layer["comp"].
+        slotted_licon (int, optional): [description]. Defaults to 0.
+        metal_level (int, optional): [description]. Defaults to 1.
+        li_enc_dir (str, optional): [description]. Defaults to "V".
+
     return via stack till the metal level indicated where :
     metal_level 1 : till m1
     metal_level 2 : till m2
