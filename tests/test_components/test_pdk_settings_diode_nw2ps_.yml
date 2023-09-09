@@ -6,7 +6,7 @@ settings:
   default:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     n_label: ''
     p_label: ''
     volt: 3.3V
@@ -14,7 +14,7 @@ settings:
   full:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     n_label: ''
     p_label: ''
     volt: 3.3V

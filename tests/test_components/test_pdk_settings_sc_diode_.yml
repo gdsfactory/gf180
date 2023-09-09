@@ -6,20 +6,20 @@ settings:
   default:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     m: 1
     n_label: ''
     p_label: ''
-    pcmpgr: 0
+    pcmpgr: false
     wa: 0.1
   full:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     m: 1
     n_label: ''
     p_label: ''
-    pcmpgr: 0
+    pcmpgr: false
     wa: 0.1
   function_name: sc_diode
   info: {}

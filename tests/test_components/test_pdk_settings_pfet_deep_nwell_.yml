@@ -4,7 +4,7 @@ settings:
   changed: {}
   child: null
   default:
-    deepnwell: 0
+    deepnwell: false
     enc_size:
     - 0.1
     - 0.1
@@ -12,9 +12,9 @@ settings:
     enc_ymin: 0.1
     grw: 0.36
     nw_enc_pcmp: 0.1
-    pcmpgr: 0
+    pcmpgr: false
   full:
-    deepnwell: 0
+    deepnwell: false
     enc_size:
     - 0.1
     - 0.1
@@ -22,7 +22,7 @@ settings:
     enc_ymin: 0.1
     grw: 0.36
     nw_enc_pcmp: 0.1
-    pcmpgr: 0
+    pcmpgr: false
   function_name: pfet_deep_nwell
   info: {}
   info_version: 2

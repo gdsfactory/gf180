@@ -6,19 +6,19 @@ settings:
   default:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     n_label: ''
     p_label: ''
-    pcmpgr: 0
+    pcmpgr: false
     volt: 3.3V
     wa: 0.1
   full:
     cw: 0.1
     la: 0.1
-    label: 0
+    label: false
     n_label: ''
     p_label: ''
-    pcmpgr: 0
+    pcmpgr: false
     volt: 3.3V
     wa: 0.1
   function_name: diode_pw2dw

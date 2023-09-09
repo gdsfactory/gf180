@@ -4,23 +4,23 @@ settings:
   changed: {}
   child: null
   default:
-    deepnwell: 0
+    deepnwell: false
     grw: 0.36
     inst_size:
     - 0.1
     - 0.1
     inst_xmin: 0.1
     inst_ymin: 0.1
-    pcmpgr: 0
+    pcmpgr: false
   full:
-    deepnwell: 0
+    deepnwell: false
     grw: 0.36
     inst_size:
     - 0.1
     - 0.1
     inst_xmin: 0.1
     inst_ymin: 0.1
-    pcmpgr: 0
+    pcmpgr: false
   function_name: nfet_deep_nwell
   info: {}
   info_version: 2

@@ -4,20 +4,20 @@ settings:
   changed: {}
   child: null
   default:
-    deepnwell: 0
+    deepnwell: false
     l_res: 0.1
-    label: 0
-    pcmpgr: 0
+    label: false
+    pcmpgr: false
     r0_label: ''
     r1_label: ''
     res_type: ppolyf_s
     sub_label: ''
     w_res: 0.1
   full:
-    deepnwell: 0
+    deepnwell: false
     l_res: 0.1
-    label: 0
-    pcmpgr: 0
+    label: false
+    pcmpgr: false
     r0_label: ''
     r1_label: ''
     res_type: ppolyf_s

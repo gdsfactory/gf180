@@ -1,0 +1,26 @@
+name: cap_mim
+ports: {}
+settings:
+  changed: {}
+  child: null
+  default:
+    bot_label: ''
+    label: false
+    lc: 2
+    metal_level: M4
+    mim_option: A
+    top_label: ''
+    wc: 2
+  full:
+    bot_label: ''
+    label: false
+    lc: 2
+    metal_level: M4
+    mim_option: A
+    top_label: ''
+    wc: 2
+  function_name: cap_mim
+  info: {}
+  info_version: 2
+  module: gf180.cap_mim
+  name: cap_mim

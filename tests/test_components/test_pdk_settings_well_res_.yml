@@ -5,8 +5,8 @@ settings:
   child: null
   default:
     l_res: 0.42
-    label: 0
-    pcmpgr: 0
+    label: false
+    pcmpgr: false
     r0_label: ''
     r1_label: ''
     res_type: nwell
@@ -14,8 +14,8 @@ settings:
     w_res: 0.42
   full:
     l_res: 0.42
-    label: 0
-    pcmpgr: 0
+    label: false
+    pcmpgr: false
     r0_label: ''
     r1_label: ''
     res_type: nwell

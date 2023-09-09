@@ -14,7 +14,7 @@ settings:
     implant_layer:
     - 32
     - 0
-    label: 0
+    label: false
     lc: 0.1
     pl_ext: 0.1
     pl_l: 0.1
@@ -30,7 +30,7 @@ settings:
     implant_layer:
     - 32
     - 0
-    label: 0
+    label: false
     lc: 0.1
     pl_ext: 0.1
     pl_l: 0.1

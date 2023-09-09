@@ -321,7 +321,6 @@ def diode_nd2ps(
 
 @gf.cell
 def diode_pd2nw(
-    layout,
     la: float = 0.1,
     wa: float = 0.1,
     cw: float = 0.1,
@@ -642,17 +641,16 @@ def diode_nw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
-     used to draw 3.3V Nwell/Psub diode by specifying parameters
-    Arguments:-
-     la         : Float of diff length (anode)
-     wa         : Float of diff width (anode)
-     cw         : Float of Cathode width
-     volt       : String of operating voltage of the diode [3.3V, 5V/6V]
+    """used to draw 3.3V Nwell/Psub diode by specifying parameters
+
+    Args:
+        la: anode length.
+        wa: anode width.
+        cw: cathode width.
+        volt: operating voltage of the diode [3.3V, 5V/6V]
     """
 
-    c = gf.Component("diode_nw2ps_dev")
+    c = gf.Component()
 
     comp_spacing: float = 0.48
     np_enc_comp: float = 0.16
@@ -778,17 +776,20 @@ def diode_pw2dw(
     n_label: str = "",
 ) -> gf.Component:
     """
-    Usage:-
-     used to draw LVPWELL/DNWELL diode by specifying parameters
-    Arguments:-
-     layout     : Object of layout
-     la         : Float of diff length (anode)
-     wa         : Float of diff width (anode)
-     cw         : Float of cathode width
-     volt       : String of operating voltage of the diode [3.3V, 5V/6V]
+    used to draw LVPWELL/DNWELL diode by specifying parameters
+
+    Args:
+        la: anode length.
+        wa: anode width.
+        cw: cathode width.
+        volt: operating voltage of the diode [3.3V, 5V/6V]
+        pcmpgr: if True, pcmpgr will be added.
+        label: if True, labels will be added.
+        p_label: p contact label.
+        n_label: n contact label.
     """
 
-    c = gf.Component("diode_pw2dw_dev")
+    c = gf.Component()
 
     comp_spacing: float = 0.48
     np_enc_comp: float = 0.16
@@ -1086,16 +1087,20 @@ def diode_dw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
-     used to draw LVPWELL/DNWELL diode by specifying parameters
-    Arguments:-
-     la         : Float of diff length (anode)
-     wa         : Float of diff width (anode)
-     volt       : String of operating voltage of the diode [3.3V, 5V/6V]
+    """used to draw LVPWELL/DNWELL diode by specifying parameters
+
+    Args:
+        la: anode length.
+        wa: anode width.
+        cw: cathode width.
+        volt: operating voltage of the diode [3.3V, 5V/6V].
+        pcmpgr: True if pwell guardring is required.
+        label: True if labels are required.
+        p_label: label for pwell.
+        n_label: label for nwell.
     """
 
-    c = gf.Component("diode_dw2ps_dev")
+    c = gf.Component()
 
     if volt == "5/6V":
         dn_enc_ncmp = 0.66
@@ -1886,5 +1891,6 @@ def sc_diode(
 
 
 if __name__ == "__main__":
-    c = sc_diode()
+    # c = sc_diode()
+    c = diode_pd2nw()
     c.show()

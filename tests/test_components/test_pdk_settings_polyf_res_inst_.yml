@@ -6,7 +6,7 @@ settings:
   default:
     con_enc: 0.1
     l_res: 0.1
-    label: 0
+    label: false
     pl_imp_layer:
     - 32
     - 0
@@ -22,7 +22,7 @@ settings:
   full:
     con_enc: 0.1
     l_res: 0.1
-    label: 0
+    label: false
     pl_imp_layer:
     - 32
     - 0

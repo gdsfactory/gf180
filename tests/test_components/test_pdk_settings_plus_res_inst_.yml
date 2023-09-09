@@ -10,11 +10,11 @@ settings:
     cmp_res_ext: 0.1
     con_enc: 0.1
     l_res: 0.1
-    label: 0
+    label: false
     r0_label: ''
     r1_label: ''
     res_type: nplus_s
-    sub: 0
+    sub: false
     sub_imp_layer:
     - 31
     - 0
@@ -27,11 +27,11 @@ settings:
     cmp_res_ext: 0.1
     con_enc: 0.1
     l_res: 0.1
-    label: 0
+    label: false
     r0_label: ''
     r1_label: ''
     res_type: nplus_s
-    sub: 0
+    sub: false
     sub_imp_layer:
     - 31
     - 0

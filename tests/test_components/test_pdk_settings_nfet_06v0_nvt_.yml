@@ -12,10 +12,10 @@ settings:
     inter_sd_l: 0.24
     interdig: 0
     l_gate: 1.8
-    label: 0
+    label: false
     nf: 1
     patt: ''
-    patt_label: 0
+    patt_label: false
     sd_con_col: 1
     sd_label: []
     sub_label: ''
@@ -29,10 +29,10 @@ settings:
     inter_sd_l: 0.24
     interdig: 0
     l_gate: 1.8
-    label: 0
+    label: false
     nf: 1
     patt: ''
-    patt_label: 0
+    patt_label: false
     sd_con_col: 1
     sd_label: []
     sub_label: ''

@@ -5,25 +5,25 @@ settings:
   child: null
   default:
     index: 0
+    label: false
+    label_str: ''
+    label_valid_len: 1
     labels: null
     layer:
     - 34
     - 10
-    label: 0
-    label_str: ''
-    label_valid_len: 1
     position:
     - 0.1
     - 0.1
   full:
     index: 0
+    label: false
+    label_str: ''
+    label_valid_len: 1
     labels: null
     layer:
     - 34
     - 10
-    label: 0
-    label_str: ''
-    label_valid_len: 1
     position:
     - 0.1
     - 0.1
