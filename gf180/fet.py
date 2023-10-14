@@ -86,7 +86,7 @@ def alter_interdig(
     pc_x=0.1,
     pc_spacing=0.1,
     label: bool = False,
-    g_label: list = [],
+    g_label: Strs | None = None,
     nl: int = 1,
     patt_label: bool = False,
 ) -> gf.Component:
@@ -357,7 +357,7 @@ def interdigit(
     pc_x=0.1,
     pc_spacing=0.1,
     label: bool = False,
-    g_label: Optional[Strs] = [],
+    g_label: Strs | None = None,
     patt_label: bool = False,
 ) -> gf.Component:
     """Returns interdigitation related polygons

@@ -106,7 +106,7 @@ cells = get_cells(sys.modules[__name__])
 PDK = Pdk(
     name="gf180",
     cells=cells,
-    layers=LAYER.dict(),
+    layers=dict(LAYER),
     layer_views=LAYER_VIEWS,
     # layer_stack=LAYER_STACK,
 )
