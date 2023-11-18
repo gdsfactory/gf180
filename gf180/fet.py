@@ -1,4 +1,5 @@
 from math import ceil, floor
+from functools import partial
 
 import gdsfactory as gf
 from gdsfactory.typings import Float2, LayerSpec, Optional, Strs
@@ -6,6 +7,9 @@ from gdsfactory.typings import Float2, LayerSpec, Optional, Strs
 from gf180.guardring import pcmpgr_gen
 from gf180.layers import layer
 from gf180.via_generator import via_generator, via_stack
+
+rectangle = partial(gf.components.rectangle, layer=layer["comp"])
+rectangle_array = partial(gf.components.array, component=rectangle)
 
 
 @gf.cell
@@ -73,13 +77,9 @@ def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
 
 @gf.cell
 def alter_interdig(
-    sd_diff,
-    pc1,
-    pc2,
-    poly_con,
-    sd_diff_intr,
-    l_gate=0.15,
-    inter_sd_l=0.15,
+    sd_diff=rectangle,
+    pc1=rectangle_array,
+    pc2=rectangle_array,
     sd_l=0.36,
     nf=1,
     pat="",
@@ -96,15 +96,20 @@ def alter_interdig(
         sd_diff : source/drain diffusion rectangle.
         pc1 : first poly contact array.
         pc2 : second poly contact array.
+        sd_l : source/drain length.
+        nf : number of fingers.
+        pat: string of the required pattern.
         poly_con : componenet of poly contact.
         sd_diff_inter : inter source/drain diffusion rectangle.
         l_gate : gate length.
         inter_sd_l : inter diffusion length.
         nf : number of fingers.
-        pat : string of the required pattern.
     """
 
     c_inst = gf.Component()
+    sd_diff = gf.get_component(sd_diff)
+    pc1 = gf.get_component(pc1)
+    pc2 = gf.get_component(pc2)
 
     m2_spacing = 0.28
     via_size = (0.26, 0.26)
@@ -114,11 +119,12 @@ def alter_interdig(
     pat_o = []
     pat_e = []
 
-    for i in range(int(nf)):
-        if i % 2 == 0:
-            pat_e.append(pat[i])
-        else:
-            pat_o.append(pat[i])
+    if pat:
+        for i in range(int(nf)):
+            if i % 2 == 0:
+                pat_e.append(pat[i])
+            else:
+                pat_o.append(pat[i])
 
     nt = []
     [nt.append(x) for x in pat if x not in nt]
@@ -133,7 +139,8 @@ def alter_interdig(
     nl_b = len(nt_e)
     nl_u = len(nt_o)
 
-    g_label_e, g_label_o = get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o)
+    if pat:
+        g_label_e, g_label_o = get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o)
 
     m2_y = via_size[1] + 2 * via_enc[1]
     m2 = gf.components.rectangle(
@@ -343,13 +350,10 @@ def alter_interdig(
 
 @gf.cell
 def interdigit(
-    sd_diff,
-    pc1,
-    pc2,
-    poly_con,
-    sd_diff_intr,
-    l_gate: float = 0.15,
-    inter_sd_l: float = 0.23,
+    sd_diff=rectangle,
+    pc1=rectangle_array,
+    pc2=rectangle_array,
+    poly_con=rectangle,
     sd_l: float = 0.15,
     nf=1,
     patt=[""],
@@ -364,9 +368,9 @@ def interdigit(
 
     Args :
         sd_diff : source/drain diffusion rectangle.
-        pc1 : first poly contact array.
-        pc2 : second poly contact array.
-        poly_con : componenet of poly contact.
+        pc1: first poly contact array.
+        pc2: second poly contact array.
+        poly_con: poly contact.
         sd_diff_inter : inter source/drain diffusion rectangle.
         l_gate : gate length.
         inter_sd_l : inter diffusion length.
@@ -375,6 +379,11 @@ def interdigit(
         gate_con_pos : position of gate contact.
     """
     c_inst = gf.Component()
+
+    sd_diff = gf.get_component(sd_diff)
+    poly_con = gf.get_component(poly_con)
+    pc1 = gf.get_component(pc1)
+    pc2 = gf.get_component(pc2)
 
     if nf == len(patt):
         pat = list(patt)
@@ -400,10 +409,6 @@ def interdigit(
                     sd_diff=sd_diff,
                     pc1=pc1,
                     pc2=pc2,
-                    poly_con=poly_con,
-                    sd_diff_intr=sd_diff_intr,
-                    l_gate=l_gate,
-                    inter_sd_l=inter_sd_l,
                     sd_l=sd_l,
                     nf=nf,
                     pat=pat,
@@ -565,7 +570,6 @@ def interdigit(
     return c_inst
 
 
-# @gf.cell
 def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
     """Returns high volatge related polygons
 
@@ -575,7 +579,6 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
         dg_encx : dualgate enclosure in x_direction
         dg_ency : dualgate enclosure in y_direction
     """
-    # c = gf.Component()
 
     if volt == "5V" or volt == "6V":
         dg = c.add_ref(
@@ -1296,9 +1299,6 @@ def nfet(
                     pc1=pc1,
                     pc2=pc2,
                     poly_con=poly_con,
-                    sd_diff_intr=sd_diff_intr,
-                    l_gate=l_gate,
-                    inter_sd_l=inter_sd_l,
                     sd_l=sd_l,
                     nf=nf,
                     patt=patt,
@@ -1492,7 +1492,7 @@ def pfet_deep_nwell(
     return c
 
 
-# @gf.cell
+@gf.cell
 def pfet(
     l_gate: float = 0.28,
     w_gate: float = 0.22,
@@ -1816,9 +1816,6 @@ def pfet(
                     pc1=pc1,
                     pc2=pc2,
                     poly_con=poly_con,
-                    sd_diff_intr=sd_diff_intr,
-                    l_gate=l_gate,
-                    inter_sd_l=inter_sd_l,
                     sd_l=sd_l,
                     nf=nf,
                     patt=patt,
@@ -1989,21 +1986,18 @@ def nfet_06v0_nvt(
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Usage:-
-     used to draw Native NFET 6V transistor by specifying parameters
+    """ Draw Native NFET 6V transistor by specifying parameters.
 
-    Arguments:-
-     l      : Float of gate length
-     w      : Float of gate width
-     ld     : Float of diffusion length
-     nf     : Integer of number of fingers
-     grw    : Float of guard ring width [If enabled]
-     bulk   : String of bulk connection type [None, Bulk Tie, Guard Ring]
+    Arg:
+        l      : Float of gate length
+        w      : Float of gate width
+        ld     : Float of diffusion length
+        nf     : Integer of number of fingers
+        grw    : Float of guard ring width [If enabled]
+        bulk   : String of bulk connection type [None, Bulk Tie, Guard Ring]
     """
 
     # used layers and dimensions
-
     end_cap: float = 0.22
 
     comp_spacing: float = 0.36
@@ -2284,9 +2278,6 @@ def nfet_06v0_nvt(
                     pc1=pc1,
                     pc2=pc2,
                     poly_con=poly_con,
-                    sd_diff_intr=sd_diff_intr,
-                    l_gate=l_gate,
-                    inter_sd_l=inter_sd_l,
                     sd_l=sd_l,
                     nf=nf,
                     patt=patt,
@@ -2576,6 +2567,9 @@ def nfet_06v0_nvt(
 
 
 if __name__ == "__main__":
+    c = pfet()
     # c = nfet()
-    c = nfet_06v0_nvt()
+    # c = nfet_06v0_nvt()
+    # c = interdigit()
+    # c = alter_interdig()
     c.show()

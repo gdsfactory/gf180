@@ -1,0 +1,78 @@
+name: alter_interdig
+ports: {}
+settings:
+  changed: {}
+  child: null
+  default:
+    g_label: null
+    label: false
+    nf: 1
+    nl: 1
+    pat: ''
+    patt_label: false
+    pc1:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc2:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc_spacing: 0.1
+    pc_x: 0.1
+    sd_diff:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_l: 0.36
+  full:
+    g_label: null
+    label: false
+    nf: 1
+    nl: 1
+    pat: ''
+    patt_label: false
+    pc1:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc2:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc_spacing: 0.1
+    pc_x: 0.1
+    sd_diff:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_l: 0.36
+  function_name: alter_interdig
+  info: {}
+  info_version: 2
+  module: gf180.fet
+  name: alter_interdig

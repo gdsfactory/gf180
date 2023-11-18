@@ -1,0 +1,92 @@
+name: interdigit
+ports: {}
+settings:
+  changed: {}
+  child: null
+  default:
+    g_label: null
+    gate_con_pos: top
+    label: false
+    nf: 1
+    patt:
+    - ''
+    patt_label: false
+    pc1:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc2:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc_spacing: 0.1
+    pc_x: 0.1
+    poly_con:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_diff:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_l: 0.15
+  full:
+    g_label: null
+    gate_con_pos: top
+    label: false
+    nf: 1
+    patt:
+    - ''
+    patt_label: false
+    pc1:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc2:
+      function: array
+      settings:
+        component:
+          function: rectangle
+          settings:
+            layer:
+            - 22
+            - 0
+    pc_spacing: 0.1
+    pc_x: 0.1
+    poly_con:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_diff:
+      function: rectangle
+      settings:
+        layer:
+        - 22
+        - 0
+    sd_l: 0.15
+  function_name: interdigit
+  info: {}
+  info_version: 2
+  module: gf180.fet
+  name: interdigit
