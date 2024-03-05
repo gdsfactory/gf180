@@ -1,9 +1,9 @@
 install:
-	pip install -e .[dev]
-	pre-commit install
+	pip install -e .[dev,docs]
 
 dev:
 	pip install -e .[dev,docs]
+	pre-commit install
 
 tech:
 	python install_tech.py
