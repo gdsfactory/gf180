@@ -37,7 +37,7 @@ def via_generator(
 ) -> gf.Component:
     """
     return only vias withen the range xrange and yrange while enclosing by via_enclosure
-    and set number of rows and number of coloumns according to ranges and via size and spacing
+    and set number of rows and number of columns according to ranges and via size and spacing
 
     """
 

@@ -28,6 +28,6 @@ klayout -e
 4. Create a new layout for testing.
 5. Press on insert instance.
 6. Go to the instance menu and select "GF180MCU" library from the library list.
-7. Select the search botton and it will give the list of PCells that is available in the library.
+7. Select the search button and it will give the list of PCells that is available in the library.
 8. Select any cell and it will show the cell.
 9. Go to the PCell tap and change the parameters as needed to change the layout of the PCells.

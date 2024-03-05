@@ -78,13 +78,13 @@ class efuse(pya.PCellDeclarationHelper):
     def produce_impl(self):
         # This is the main part of the implementation: create the layout
 
-        self.percision = 1 / self.layout.dbu
+        self.precision = 1 / self.layout.dbu
         efuse_instance = draw_efuse(layout=self.layout)
         write_cells = pya.CellInstArray(
             efuse_instance.cell_index(),
             pya.Trans(pya.Point(0, 0)),
-            pya.Vector(self.x_spacing * self.percision, 0),
-            pya.Vector(0, self.y_spacing * self.percision),
+            pya.Vector(self.x_spacing * self.precision, 0),
+            pya.Vector(0, self.y_spacing * self.precision),
             self.array_x,
             self.array_y,
         )

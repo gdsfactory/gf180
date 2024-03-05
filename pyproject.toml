@@ -114,7 +114,6 @@ src = "gf180/__init__.py"
 [[tool.tbump.file]]
 src = "gf180/klayout/grain.xml"
 
-
 [tool.tbump.version]
 current = "0.0.3"
 regex = '''

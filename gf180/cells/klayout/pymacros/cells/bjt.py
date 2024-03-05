@@ -74,7 +74,7 @@ class npn_bjt(pya.PCellDeclarationHelper):
     def produce_impl(self):
         # This is the main part of the implementation: create the layout
 
-        self.percision = 1 / self.layout.dbu
+        self.precision = 1 / self.layout.dbu
         npn_instance = draw_bjt(layout=self.layout, device_name=self.Type)
         write_cells = pya.CellInstArray(
             npn_instance.cell_index(),
@@ -141,7 +141,7 @@ class pnp_bjt(pya.PCellDeclarationHelper):
     def produce_impl(self):
         # This is the main part of the implementation: create the layout
 
-        self.percision = 1 / self.layout.dbu
+        self.precision = 1 / self.layout.dbu
         pnp_instance = draw_bjt(layout=self.layout, device_name=self.Type)
         write_cells = pya.CellInstArray(
             pnp_instance.cell_index(),

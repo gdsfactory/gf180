@@ -44,7 +44,7 @@ Cells
             [
                 f"{p}={repr(sig.parameters[p].default)}"
                 for p in sig.parameters
-                if isinstance(sig.parameters[p].default, (int, float, str, tuple))
+                if isinstance(sig.parameters[p].default, int | float | str | tuple)
                 and p not in skip_settings
             ]
         )

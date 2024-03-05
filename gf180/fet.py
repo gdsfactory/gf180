@@ -1,5 +1,5 @@
-from math import ceil, floor
 from functools import partial
+from math import ceil, floor
 
 import gdsfactory as gf
 from gdsfactory.typings import Float2, LayerSpec, Optional, Strs
@@ -51,7 +51,7 @@ def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
     Args:
         nl_b : number of bottom connected gates transistors.
         nl : number of transistor.
-        nt : patterns of tansistor [with out redundency].
+        nt : patterns of tansistor [with out redundancy].
         nt_e : number of transistor with even order.
         g_label : list of transistors gate label.
         nl_u :  number of upper connected gates transistors.
@@ -90,7 +90,7 @@ def alter_interdig(
     nl: int = 1,
     patt_label: bool = False,
 ) -> gf.Component:
-    """Returns interdigitation polygons of gate with alterating poly contacts
+    """Returns interdigitation polygons of gate with alternating poly contacts
 
     Args :
         sd_diff : source/drain diffusion rectangle.
@@ -99,7 +99,7 @@ def alter_interdig(
         sd_l : source/drain length.
         nf : number of fingers.
         pat: string of the required pattern.
-        poly_con : componenet of poly contact.
+        poly_con : component of poly contact.
         sd_diff_inter : inter source/drain diffusion rectangle.
         l_gate : gate length.
         inter_sd_l : inter diffusion length.
@@ -387,9 +387,7 @@ def interdigit(
 
     if nf == len(patt):
         pat = list(patt)
-        nt = (
-            []
-        )  # list to store the symbols of transistors and thier number nt(number of transistors)
+        nt = []  # list to store the symbols of transistors and their number nt(number of transistors)
         [nt.append(x) for x in pat if x not in nt]
         nl = int(len(nt))
 
@@ -571,10 +569,10 @@ def interdigit(
 
 
 def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
-    """Returns high volatge related polygons
+    """Returns high voltage related polygons
 
     Args :
-        c_inst : dualgate enclosed componenet
+        c_inst : dualgate enclosed component
         volt : operating voltage
         dg_encx : dualgate enclosure in x_direction
         dg_ency : dualgate enclosure in y_direction
@@ -623,7 +621,7 @@ def bulk_gr_gen(
     """Returns guardring
 
     Args :
-        c_inst : componenet enclosed by guardring
+        c_inst : component enclosed by guardring
         comp_spacing : spacing between comp polygons
         poly2_comp_spacing : spacing between comp and poly2 polygons
         volt : operating voltage
@@ -785,7 +783,7 @@ def bulk_gr_gen(
             operation="A-B",
             layer=layer["metal1"],
         )
-    )  # metal1_gaurdring
+    )  # metal1_guardring
 
     # c.add_ref(hv_gen(c_inst=B, volt=volt, dg_encx=dg_enc_cmp, dg_ency=dg_enc_cmp))
     hv_gen(c, c_inst=B, volt=volt, dg_encx=dg_enc_cmp, dg_ency=dg_enc_cmp)
@@ -895,13 +893,13 @@ def add_inter_sd_labels(
     """Adds label to intermediate source/drain diffusion
 
     Args :
-        c : instance componenet of the device
+        c : instance component of the device
         nf : number of fingers
         sd_label : required source and drain labels list
-        poly1 : componenet of poly array
+        poly1 : component of poly array
         l_gate : length of fet gate
         inter_sd_l : length of intermediate source/drain diffusion
-        sd_diff_inter : componenet of intermediate source/drain polygon
+        sd_diff_inter : component of intermediate source/drain polygon
         label: boolean of having labels
         layer : layer of label
         con_bet_fin : boolean of having contact between fingers
@@ -933,14 +931,14 @@ def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, lay
     """Adds gate label when label is enabled
 
     Args :
-        c : instance componenet of the device
+        c : instance component of the device
         g_label : required gate labels list
-        pc1 : componenet of poly array1
-        c_pc : componenet of poly array element
+        pc1 : component of poly array1
+        c_pc : component of poly array element
         pc_spacing : float of space between labels
         nc1 : number of columns in poly array1
         nc2 : number of columns in poly array2
-        pc2 : componenet of poly array2
+        pc2 : component of poly array2
         label : boolean of having labels
         layer : layer of labels
         nf : number of fingers
@@ -1011,7 +1009,7 @@ def nfet(
         inter_sd_l : Float of source and drain diffusion length between fingers
         nf : integer of number of fingers
         M : integer of number of multipliers
-        grw : gaurd ring width when enabled
+        grw : guard ring width when enabled
         type : string of the device type
         bulk : String of bulk connection type (None, Bulk Tie, Guard Ring)
         con_bet_fin : boolean of having contacts for diffusion between fingers
@@ -1524,7 +1522,7 @@ def pfet(
         inter_sd_l : Float of source and drain diffusion length between fingers
         nf : integer of number of fingers
         M : integer of number of multipliers
-        grw : gaurd ring width when enabled
+        grw : guard ring width when enabled
         type : string of the device type
         bulk : String of bulk connection type (None, Bulk Tie, Guard Ring)
         con_bet_fin : boolean of having contacts for diffusion between fingers
@@ -1986,7 +1984,7 @@ def nfet_06v0_nvt(
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """ Draw Native NFET 6V transistor by specifying parameters.
+    """Draw Native NFET 6V transistor by specifying parameters.
 
     Arg:
         l      : Float of gate length
