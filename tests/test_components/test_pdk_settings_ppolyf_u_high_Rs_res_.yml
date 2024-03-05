@@ -1,30 +1,14 @@
+function: ppolyf_u_high_Rs_res
+info: {}
+module: gf180.res
 name: ppolyf_u_high_Rs_res
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    deepnwell: false
-    l_res: 0.42
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    sub_label: ''
-    volt: 3.3V
-    w_res: 0.42
-  full:
-    deepnwell: false
-    l_res: 0.42
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    sub_label: ''
-    volt: 3.3V
-    w_res: 0.42
-  function_name: ppolyf_u_high_Rs_res
-  info: {}
-  info_version: 2
-  module: gf180.res
-  name: ppolyf_u_high_Rs_res
+  deepnwell: false
+  l_res: 0.42
+  label: false
+  pcmpgr: false
+  r0_label: ''
+  r1_label: ''
+  sub_label: ''
+  volt: 3.3V
+  w_res: 0.42

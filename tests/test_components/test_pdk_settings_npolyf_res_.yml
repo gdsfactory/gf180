@@ -1,30 +1,14 @@
+function: npolyf_res
+info: {}
+module: gf180.res
 name: npolyf_res
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    deepnwell: false
-    l_res: 0.1
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    res_type: npolyf_s
-    sub_label: ''
-    w_res: 0.1
-  full:
-    deepnwell: false
-    l_res: 0.1
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    res_type: npolyf_s
-    sub_label: ''
-    w_res: 0.1
-  function_name: npolyf_res
-  info: {}
-  info_version: 2
-  module: gf180.res
-  name: npolyf_res
+  deepnwell: false
+  l_res: 0.1
+  label: false
+  pcmpgr: false
+  r0_label: ''
+  r1_label: ''
+  res_type: npolyf_s
+  sub_label: ''
+  w_res: 0.1

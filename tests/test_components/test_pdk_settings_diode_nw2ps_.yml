@@ -1,26 +1,12 @@
+function: diode_nw2ps
+info: {}
+module: gf180.diode
 name: diode_nw2ps
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    cw: 0.1
-    la: 0.1
-    label: false
-    n_label: ''
-    p_label: ''
-    volt: 3.3V
-    wa: 0.1
-  full:
-    cw: 0.1
-    la: 0.1
-    label: false
-    n_label: ''
-    p_label: ''
-    volt: 3.3V
-    wa: 0.1
-  function_name: diode_nw2ps
-  info: {}
-  info_version: 2
-  module: gf180.diode
-  name: diode_nw2ps
+  cw: 0.1
+  la: 0.1
+  label: false
+  n_label: ''
+  p_label: ''
+  volt: 3.3V
+  wa: 0.1

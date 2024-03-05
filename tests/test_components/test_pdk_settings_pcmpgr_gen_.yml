@@ -1,26 +1,13 @@
+function: pcmpgr_gen
+info: {}
+module: gf180.guardring
 name: pcmpgr_gen
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    dn_rect:
-      function: rectangle
-      settings:
-        layer:
-        - 12
-        - 0
-    grw: 0.36
-  full:
-    dn_rect:
-      function: rectangle
-      settings:
-        layer:
-        - 12
-        - 0
-    grw: 0.36
-  function_name: pcmpgr_gen
-  info: {}
-  info_version: 2
-  module: gf180.guardring
-  name: pcmpgr_gen
+  dn_rect:
+    function: rectangle
+    module: gdsfactory.components.rectangle
+    settings:
+      layer:
+      - 12
+      - 0
+  grw: 0.36

@@ -1,28 +1,13 @@
+function: sc_diode
+info: {}
+module: gf180.diode
 name: sc_diode
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    cw: 0.1
-    la: 0.1
-    label: false
-    m: 1
-    n_label: ''
-    p_label: ''
-    pcmpgr: false
-    wa: 0.1
-  full:
-    cw: 0.1
-    la: 0.1
-    label: false
-    m: 1
-    n_label: ''
-    p_label: ''
-    pcmpgr: false
-    wa: 0.1
-  function_name: sc_diode
-  info: {}
-  info_version: 2
-  module: gf180.diode
-  name: sc_diode
+  cw: 0.1
+  la: 0.1
+  label: false
+  m: 1
+  n_label: ''
+  p_label: ''
+  pcmpgr: false
+  wa: 0.1

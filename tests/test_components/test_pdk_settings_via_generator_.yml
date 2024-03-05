@@ -1,48 +1,23 @@
+function: via_generator
+info: {}
+module: gf180.via_generator
 name: via_generator
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    via_enclosure:
-    - 0.06
-    - 0.06
-    via_layer:
-    - 66
-    - 44
-    via_size:
-    - 0.17
-    - 0.17
-    via_spacing:
-    - 0.17
-    - 0.17
-    x_range:
-    - 0
-    - 1
-    y_range:
-    - 0
-    - 1
-  full:
-    via_enclosure:
-    - 0.06
-    - 0.06
-    via_layer:
-    - 66
-    - 44
-    via_size:
-    - 0.17
-    - 0.17
-    via_spacing:
-    - 0.17
-    - 0.17
-    x_range:
-    - 0
-    - 1
-    y_range:
-    - 0
-    - 1
-  function_name: via_generator
-  info: {}
-  info_version: 2
-  module: gf180.via_generator
-  name: via_generator
+  via_enclosure:
+  - 0.06
+  - 0.06
+  via_layer:
+  - 66
+  - 44
+  via_size:
+  - 0.17
+  - 0.17
+  via_spacing:
+  - 0.17
+  - 0.17
+  x_range:
+  - 0
+  - 1
+  y_range:
+  - 0
+  - 1

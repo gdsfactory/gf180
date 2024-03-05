@@ -1,30 +1,14 @@
+function: diode_nd2ps
+info: {}
+module: gf180.diode
 name: diode_nd2ps
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    cw: 0.1
-    deepnwell: false
-    la: 0.1
-    label: false
-    n_label: ''
-    p_label: ''
-    pcmpgr: false
-    volt: 3.3V
-    wa: 0.1
-  full:
-    cw: 0.1
-    deepnwell: false
-    la: 0.1
-    label: false
-    n_label: ''
-    p_label: ''
-    pcmpgr: false
-    volt: 3.3V
-    wa: 0.1
-  function_name: diode_nd2ps
-  info: {}
-  info_version: 2
-  module: gf180.diode
-  name: diode_nd2ps
+  cw: 0.1
+  deepnwell: false
+  la: 0.1
+  label: false
+  n_label: ''
+  p_label: ''
+  pcmpgr: false
+  volt: 3.3V
+  wa: 0.1

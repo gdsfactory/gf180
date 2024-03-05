@@ -1,34 +1,16 @@
+function: labels_gen
+info: {}
+module: gf180.fet
 name: labels_gen
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    index: 0
-    label: false
-    label_str: ''
-    label_valid_len: 1
-    labels: null
-    layer:
-    - 34
-    - 10
-    position:
-    - 0.1
-    - 0.1
-  full:
-    index: 0
-    label: false
-    label_str: ''
-    label_valid_len: 1
-    labels: null
-    layer:
-    - 34
-    - 10
-    position:
-    - 0.1
-    - 0.1
-  function_name: labels_gen
-  info: {}
-  info_version: 2
-  module: gf180.fet
-  name: labels_gen
+  index: 0
+  label: false
+  label_str: ''
+  label_valid_len: 1
+  labels: null
+  layer:
+  - 34
+  - 10
+  position:
+  - 0.1
+  - 0.1

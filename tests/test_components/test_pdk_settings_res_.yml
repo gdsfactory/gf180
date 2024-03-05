@@ -1,24 +1,11 @@
+function: res
+info: {}
+module: gf180.res
 name: res
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    l_res: 0.1
-    label: false
-    r0_label: ''
-    r1_label: ''
-    res_type: rm1
-    w_res: 0.1
-  full:
-    l_res: 0.1
-    label: false
-    r0_label: ''
-    r1_label: ''
-    res_type: rm1
-    w_res: 0.1
-  function_name: res
-  info: {}
-  info_version: 2
-  module: gf180.res
-  name: res
+  l_res: 0.1
+  label: false
+  r0_label: ''
+  r1_label: ''
+  res_type: rm1
+  w_res: 0.1

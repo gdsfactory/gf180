@@ -1,50 +1,24 @@
+function: pfet
+info: {}
+module: gf180.fet
 name: pfet
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    bulk: None
-    con_bet_fin: 1
-    deepnwell: 0
-    g_label: []
-    gate_con_pos: alternating
-    grw: 0.22
-    inter_sd_l: 0.24
-    interdig: 0
-    l_gate: 0.28
-    label: false
-    nf: 1
-    patt: ''
-    patt_label: false
-    pcmpgr: 0
-    sd_con_col: 1
-    sd_label: []
-    sub_label: ''
-    volt: 3.3V
-    w_gate: 0.22
-  full:
-    bulk: None
-    con_bet_fin: 1
-    deepnwell: 0
-    g_label: []
-    gate_con_pos: alternating
-    grw: 0.22
-    inter_sd_l: 0.24
-    interdig: 0
-    l_gate: 0.28
-    label: false
-    nf: 1
-    patt: ''
-    patt_label: false
-    pcmpgr: 0
-    sd_con_col: 1
-    sd_label: []
-    sub_label: ''
-    volt: 3.3V
-    w_gate: 0.22
-  function_name: pfet
-  info: {}
-  info_version: 2
-  module: gf180.fet
-  name: pfet
+  bulk: None
+  con_bet_fin: 1
+  deepnwell: 0
+  g_label: []
+  gate_con_pos: alternating
+  grw: 0.22
+  inter_sd_l: 0.24
+  interdig: 0
+  l_gate: 0.28
+  label: false
+  nf: 1
+  patt: ''
+  patt_label: false
+  pcmpgr: 0
+  sd_con_col: 1
+  sd_label: []
+  sub_label: ''
+  volt: 3.3V
+  w_gate: 0.22

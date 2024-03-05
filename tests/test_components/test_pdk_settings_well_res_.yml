@@ -1,28 +1,13 @@
+function: well_res
+info: {}
+module: gf180.res
 name: well_res
-ports: {}
 settings:
-  changed: {}
-  child: null
-  default:
-    l_res: 0.42
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    res_type: nwell
-    sub_label: ''
-    w_res: 0.42
-  full:
-    l_res: 0.42
-    label: false
-    pcmpgr: false
-    r0_label: ''
-    r1_label: ''
-    res_type: nwell
-    sub_label: ''
-    w_res: 0.42
-  function_name: well_res
-  info: {}
-  info_version: 2
-  module: gf180.res
-  name: well_res
+  l_res: 0.42
+  label: false
+  pcmpgr: false
+  r0_label: ''
+  r1_label: ''
+  res_type: nwell
+  sub_label: ''
+  w_res: 0.42
