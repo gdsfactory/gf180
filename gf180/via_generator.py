@@ -18,6 +18,14 @@ def via_generator(
     """
     return only vias withen the range xrange and yrange while enclosing by via_enclosure
     and set number of rows and number of columns according to ranges and via size and spacing
+
+    Args:
+        x_range: x range.
+        y_range: y range.
+        via_size: via size.
+        via_layer: via layer.
+        via_enclosure: via enclosure.
+        via_spacing: via spacing.
     """
     c = gf.Component()
 
@@ -27,9 +35,7 @@ def via_generator(
     if (length - nr * via_size[1] - (nr - 1) * via_spacing[1]) / 2 < via_enclosure[1]:
         nr -= 1
 
-    if nr < 1:
-        nr = 1
-
+    nr = max(nr, 1)
     nc = ceil(width / (via_size[0] + via_spacing[0]))
 
     if (
@@ -37,9 +43,7 @@ def via_generator(
     ) / 2 < via_enclosure[0]:
         nc -= 1
 
-    if nc < 1:
-        nc = 1
-
+    nc = max(nc, 1)
     via_sp = (via_size[0] + via_spacing[0], via_size[1] + via_spacing[1])
 
     rect_via = gf.components.rectangle(size=via_size, layer=via_layer)
@@ -50,7 +54,6 @@ def via_generator(
 
     via_arr.movex((width - nc * via_size[0] - (nc - 1) * via_spacing[0]) / 2)
     via_arr.movey((length - nr * via_size[1] - (nr - 1) * via_spacing[1]) / 2)
-
     return c
 
 
@@ -58,20 +61,29 @@ def via_generator(
 def via_stack(
     x_range: Float2 = (0, 1),
     y_range: Float2 = (0, 1),
-    base_layer: LayerSpec = layer["comp"],
-    slotted_licon: int = 0,
     metal_level: int = 1,
-    li_enc_dir="V",
+    con_size=(0.22, 0.22),
+    con_enc=0.07,
+    m_enc=0.06,
+    con_spacing=(0.28, 0.28),
+    via_size=(0.22, 0.22),
+    via_spacing=(0.28, 0.28),
+    via_enc=(0.06, 0.06),
 ) -> gf.Component:
     """Returns a via stack withen the range xrange and yrange and expecting the base_layer to be drawen
 
     Args:
-        x_range (Float2, optional): [description]. Defaults to (0, 1).
-        y_range (Float2, optional): [description]. Defaults to (0, 1).
-        base_layer (LayerSpec, optional): [description]. Defaults to layer["comp"].
-        slotted_licon (int, optional): [description]. Defaults to 0.
-        metal_level (int, optional): [description]. Defaults to 1.
-        li_enc_dir (str, optional): [description]. Defaults to "V".
+        x_range: x range.
+        y_range: y range.
+        metal_level: metal level.
+        con_size: contact size.
+        con_enc: contact enclosure.
+        m_enc: metal enclosure.
+        con_spacing: contact spacing.
+        via_size: via size.
+        via_spacing: via spacing.
+        via_enc: via enclosure.
+
 
     return via stack till the metal level indicated where :
     metal_level 1 : till m1
@@ -80,23 +92,8 @@ def via_stack(
     metal_level 4 : till m4
     metal_level 5 : till m5
     withen the range xrange and yrange and expecting the base_layer to be drawen
-
     """
-
     c = gf.Component()
-
-    # vias dimensions
-
-    con_size = (0.22, 0.22)
-    con_enc = 0.07
-    m_enc = 0.06
-
-    con_spacing = (0.28, 0.28)
-
-    via_size = (0.22, 0.22)
-    via_spacing = (0.28, 0.28)
-    via_enc = (0.06, 0.06)
-
     if metal_level >= 1:
         con_gen = via_generator(
             x_range=x_range,

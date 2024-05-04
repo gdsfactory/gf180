@@ -14,7 +14,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory>=7.16.0,<7.17"
+  "gdsfactory==7.25.1"
 ]
 description = "GlobalFoundries 180nm MCU"
 keywords = ["python"]
@@ -37,26 +37,6 @@ docs = [
   "jupyter-book==1.0.0"
 ]
 tests = ["pytest", "pytest-cov"]
-
-[tool.black]
-exclude = '''  # Specify the files/dirs that should be ignored by the black formatter
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | env
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
-include = '\.pyi?$'
-line-length = 88
-target-version = ['py310']
 
 [tool.mypy]
 python_version = "3.10"
