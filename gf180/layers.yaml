@@ -212,6 +212,12 @@ LayerViews:
     line_style: solid
     width: 1
     color: "#2d4da8"
+  metal1:
+    layer: [34, 0]
+    hatch_pattern: coarsely dotted
+    line_style: solid
+    width: 1
+    color: "green"
   metal1_dummy:
     layer: [34, 4]
     hatch_pattern: coarsely dotted

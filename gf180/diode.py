@@ -1,5 +1,4 @@
 import gdsfactory as gf
-import numpy as np
 from gdsfactory.typings import Float2
 
 from gf180.layers import layer
@@ -1514,10 +1513,9 @@ def sc_diode(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
-     used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
-    Arguments:-
+    """used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
+
+    Args:
      la         : Float of diff length (anode)
      wa         : Float of diff width (anode)
      m          : Integer of number of fingers
@@ -1539,7 +1537,6 @@ def sc_diode(
     con_comp_enc = 0.07
 
     # cathode draw
-
     @gf.cell
     def sc_cathode_strap(size: Float2 = (0.1, 0.1)) -> gf.Component:
         """Returns sc_diode cathode array element
@@ -1584,9 +1581,7 @@ def sc_diode(
         """
 
         c = gf.Component()
-
         cmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
-
         c.add_ref(
             via_stack(
                 x_range=(cmp.xmin, cmp.xmax),
@@ -1595,7 +1590,6 @@ def sc_diode(
                 metal_level=1,
             )
         )  # comp contact
-
         return c
 
     sc_an = sc_anode_strap(size=(wa, la))
@@ -1608,10 +1602,9 @@ def sc_diode(
         spacing=((cw + wa + (2 * sc_comp_spacing)), 0),
     )
 
-    cath_m1_polys = sc_cath.get_polygons(by_spec=layer["metal1"])
-    cath_m1_xmin = np.min(cath_m1_polys[0][:, 0])
-    cath_m1_ymin = np.min(cath_m1_polys[0][:, 1])
-    cath_m1_xmax = np.max(cath_m1_polys[0][:, 0])
+    cath_m1_xmin = sc_cathode.xmin
+    cath_m1_ymin = sc_cathode.ymin
+    cath_m1_xmax = sc_cathode.xmax
 
     cath_m1_v = c.add_array(
         component=gf.components.rectangle(
@@ -1628,7 +1621,6 @@ def sc_diode(
 
     cath_m1_v.xmin = cath_m1_xmin
     cath_m1_v.ymax = cath_m1_ymin
-
     cath_m1_h = c.add_ref(
         gf.components.rectangle(size=(cath_m1_v.size[0], m1_w), layer=layer["metal1"])
     )
@@ -1654,12 +1646,10 @@ def sc_diode(
     )
 
     sc_anode.xmin = sc_cathode.xmin + (cw + sc_comp_spacing)
-
-    an_m1_polys = sc_anode.get_polygons(by_spec=layer["metal1"])
-    an_m1_xmin = np.min(an_m1_polys[0][:, 0])
-    an_m1_ymin = np.min(an_m1_polys[0][:, 1])
-    an_m1_xmax = np.max(an_m1_polys[0][:, 0])
-    an_m1_ymax = np.max(an_m1_polys[0][:, 1])
+    an_m1_xmin = sc_anode.xmin
+    an_m1_ymin = sc_anode.ymin
+    an_m1_xmax = sc_anode.xmax
+    an_m1_ymax = sc_anode.ymax
 
     if m > 1:
         an_m1_v = c.add_array(
@@ -1803,7 +1793,6 @@ def sc_diode(
         )  # psdm
 
         # generating contacts
-
         c.add_ref(
             via_generator(
                 x_range=(
@@ -1891,6 +1880,6 @@ def sc_diode(
 
 
 if __name__ == "__main__":
-    # c = sc_diode()
-    c = diode_pd2nw()
+    c = sc_diode()
+    # c = diode_pd2nw()
     c.show()

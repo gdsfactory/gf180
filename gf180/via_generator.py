@@ -70,6 +70,7 @@ def via_stack(
     via_spacing=(0.28, 0.28),
     via_enc=(0.06, 0.06),
     base_layer=layer["metal1"],
+    **kwargs,
 ) -> gf.Component:
     """Returns a via stack withen the range xrange and yrange and expecting the base_layer to be drawen
 
