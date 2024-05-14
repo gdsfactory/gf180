@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 tests/test_components.gds/gds_diff
 tests/test_components.gds/gds_run
+tests/gds_ref/*.oas
 
 # C extensions
 *.so

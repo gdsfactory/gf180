@@ -69,6 +69,7 @@ def via_stack(
     via_size=(0.22, 0.22),
     via_spacing=(0.28, 0.28),
     via_enc=(0.06, 0.06),
+    base_layer=layer["metal1"],
 ) -> gf.Component:
     """Returns a via stack withen the range xrange and yrange and expecting the base_layer to be drawen
 
@@ -104,14 +105,9 @@ def via_stack(
             via_spacing=con_spacing,
         )
         con = c.add_ref(con_gen)
-
         m1_x = con.size[0] + 2 * m_enc
-
         m1_y = con.size[1] + 2 * m_enc
-
-        m1 = c.add_ref(
-            gf.components.rectangle(size=(m1_x, m1_y), layer=layer["metal1"])
-        )
+        m1 = c.add_ref(gf.components.rectangle(size=(m1_x, m1_y), layer=base_layer))
         m1.xmin = con.xmin - m_enc
         m1.ymin = con.ymin - m_enc
 
