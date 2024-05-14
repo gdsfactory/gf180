@@ -50,9 +50,9 @@ strict = true
 [tool.pytest.ini_options]
 # addopts = --tb=no
 addopts = '--tb=short'
-norecursedirs = ["extra/*.py"]
+norecursedirs = ["extra/*.py", 'gf180/cells/klayout/*.py']
 python_files = ["gf180/*.py", "notebooks/*.ipynb", "tests/*.py"]
-testpaths = ["gf180/", "tests"]
+testpaths = ["tests"]
 
 [tool.ruff]
 fix = true
