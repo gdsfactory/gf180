@@ -1,11 +1,11 @@
 import gdsfactory as gf
+from gdsfactory.technology import LayerMap
 from gdsfactory.typings import Layer
-from pydantic import BaseModel
 
 from gf180.config import PATH
 
 
-class LayerMap(BaseModel):
+class LAYER(LayerMap):
     comp: Layer = (22, 0)
     dnwell: Layer = (12, 0)
     nwell: Layer = (21, 0)
@@ -114,8 +114,7 @@ class LayerMap(BaseModel):
     border: Layer = (63, 0)
 
 
-LAYER = LayerMap()
-layer = dict(LAYER)
+layer = LAYER
 LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 if __name__ == "__main__":

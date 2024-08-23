@@ -77,14 +77,14 @@ def draw_cap_mim(
             size=(m_up.size[0], m_up.size[1]), layer=layer["fusetop"]
         )
     )
-    fusetop.xmin = m_up.xmin
-    fusetop.ymin = m_up.ymin
+    fusetop.dxmin = m_up.dxmin
+    fusetop.dymin = m_up.dymin
 
     mim_l_mk = c.add_ref(
         gf.components.rectangle(size=(fusetop.size[0], l_mk_w), layer=layer["mim_l_mk"])
     )
-    mim_l_mk.xmin = fusetop.xmin
-    mim_l_mk.ymin = fusetop.ymin
+    mim_l_mk.dxmin = fusetop.dxmin
+    mim_l_mk.dymin = fusetop.dymin
 
     m_dn = c.add_ref(
         gf.components.rectangle(
@@ -92,30 +92,30 @@ def draw_cap_mim(
             layer=bottom_layer,
         )
     )
-    m_dn.xmin = m_up.xmin - bot_enc_top
-    m_dn.ymin = m_up.ymin - bot_enc_top
+    m_dn.dxmin = m_up.dxmin - bot_enc_top
+    m_dn.dymin = m_up.dymin - bot_enc_top
 
     cap_mk = c.add_ref(
         gf.components.rectangle(
             size=(m_dn.size[0], m_dn.size[1]), layer=layer["cap_mk"]
         )
     )
-    cap_mk.xmin = m_dn.xmin
-    cap_mk.ymin = m_dn.ymin
+    cap_mk.dxmin = m_dn.dxmin
+    cap_mk.dymin = m_dn.dymin
 
     # generating labels
     if label == 1:
         c.add_label(
             top_label,
-            position=(m_up.xmin + (m_up.size[0] / 2), m_dn.xmin + (m_dn.size[1] / 2)),
+            position=(m_up.dxmin + (m_up.size[0] / 2), m_dn.dxmin + (m_dn.size[1] / 2)),
             layer=up_label_layer,
         )
 
         c.add_label(
             bot_label,
             position=(
-                m_dn.xmin + (m_dn.size[0] / 2),
-                m_dn.ymin + (m_up.ymin - m_dn.ymin) / 2,
+                m_dn.dxmin + (m_dn.size[0] / 2),
+                m_dn.dymin + (m_up.dymin - m_dn.dymin) / 2,
             ),
             layer=bot_label_layer,
         )
@@ -123,8 +123,8 @@ def draw_cap_mim(
     # generating vias
 
     via = via_generator(
-        x_range=(m_up.xmin, m_up.xmax),
-        y_range=(m_up.ymin, m_up.ymax),
+        x_range=(m_up.dxmin, m_up.dxmax),
+        y_range=(m_up.dymin, m_up.dymax),
         via_enclosure=via_enc,
         via_layer=via_layer,
         via_size=via_size,

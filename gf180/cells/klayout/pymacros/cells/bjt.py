@@ -67,7 +67,7 @@ class npn_bjt(pya.PCellDeclarationHelper):
         pass
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
         pass
 
@@ -134,7 +134,7 @@ class pnp_bjt(pya.PCellDeclarationHelper):
         pass
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
         pass
 
