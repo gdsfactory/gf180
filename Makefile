@@ -8,10 +8,13 @@ tech:
 	python install_tech.py
 
 test:
-	pytest -s
+	uv run pytest -s
+
+test-force:
+	uv run pytest -s --force-regen
 
 cov:
-	pytest --cov=gf180
+	uv run pytest --cov=gf180
 
 
 git-rm-merged:

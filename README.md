@@ -6,30 +6,37 @@ This is a pure python implementation of the PDK.
 
 ## Installation
 
-### Installation for new python users
+We recommend `uv`
 
-If you don't have python installed on your system you can [download the gdsfactory installer](https://github.com/gdsfactory/gdsfactory/releases) that includes python3, miniconda and all gdsfactory plugins.
+```bash
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-### Installation for new gdsfactory users
+```bash
+# On Windows.
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
-If you already have python installed. Open Anaconda Prompt and then install the ubcpdk using pip.
+### Installation for users
 
-![anaconda prompt](https://i.imgur.com/Fyal5sT.png)
+Use python3.10, 3.11 or 3.12. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
 
 ```
-pip install gf180 --upgrade
+uv pip install cspdk --upgrade
 ```
 
 Then you need to restart Klayout to make sure the new technology installed appears.
 
-### Installation for developers
+### Installation for contributors
 
 For developers you need to `git clone` the GitHub repository, fork it, git add, git commit, git push and merge request your changes.
 
 ```
 git clone https://github.com/gdsfactory/gf180.git
 cd gf180
-make install
+uv venv --python 3.11
+uv sync --extra docs --extra dev
 ```
 
 ## Documentation
