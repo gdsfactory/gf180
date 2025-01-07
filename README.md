@@ -34,5 +34,4 @@ make install
 
 ## Documentation
 
-- Run notebooks on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gdsfactory/binder-sandbox/HEAD)
 - [gdsfactory docs](https://gdsfactory.github.io/gdsfactory/)

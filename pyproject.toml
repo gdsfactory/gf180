@@ -14,7 +14,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=8.7.3"
+  "gdsfactory~=8.29.0"
 ]
 description = "GlobalFoundries 180nm MCU"
 keywords = ["python"]
@@ -29,12 +29,13 @@ dev = [
   "pre-commit",
   "pytest",
   "pytest-cov",
-  "pytest_regressions"
+  "pytest_regressions",
+  "pytest-github-actions-annotate-failures"
 ]
 docs = [
   "autodoc_pydantic",
   "jupytext",
-  "jupyter-book==1.0.0"
+  "jupyter-book>=0.15.1,<1.1"
 ]
 tests = ["pytest", "pytest-cov"]
 
