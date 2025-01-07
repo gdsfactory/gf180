@@ -35,7 +35,7 @@ def labels_gen(
     label_valid_len: int = 1,
     index: int = 0,
 ) -> gf.Component:
-    """Returns labels at given position when label is enabled
+    """Returns labels at given position when label is enabled.
 
     Args :
         label_str : string of the label
@@ -45,7 +45,6 @@ def labels_gen(
         label_lst : list of given labels
         label_valid_len : valid length of labels
     """
-
     c = gf.Component()
 
     if label == 1 and len(label_lst) == label_valid_len:
@@ -58,7 +57,7 @@ def labels_gen(
 
 
 def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
-    """Returns list of odd,even gate label patterns for alternating gate connection
+    """Returns list of odd,even gate label patterns for alternating gate connection.
 
     Args :
         nl_b : number of bottom connected gates transistors
@@ -69,7 +68,6 @@ def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
         nl_u :  number of upper connected gates transistors
         nt_o : number of transistor with odd order
     """
-
     g_label_e = []
     g_label_o = []
 
@@ -99,7 +97,7 @@ def alter_interdig(
     nl: int = 1,
     patt_label: bool = False,
 ) -> gf.Component:
-    """Returns interdigitation polygons of gate with alternating poly contacts
+    """Returns interdigitation polygons of gate with alternating poly contacts.
 
     Args :
         sd_diff : source/drain diffusion rectangle
@@ -112,7 +110,6 @@ def alter_interdig(
         nf : number of fingers
         pat : string of the required pattern
     """
-
     c_inst = gf.Component()
 
     m2_spacing = 0.28
@@ -367,7 +364,7 @@ def interdigit(
     g_label: list = [],
     patt_label: bool = False,
 ) -> gf.Component:
-    """Returns interdigitation related polygons
+    """Returns interdigitation related polygons.
 
     Args :
         sd_diff : source/drain diffusion rectangle
@@ -569,8 +566,8 @@ def interdigit(
 
 
 # @gf.cell
-def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
-    """Returns high voltage related polygons
+def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1) -> None:
+    """Returns high voltage related polygons.
 
     Args :
         c_inst : dualgate enclosed component
@@ -621,8 +618,8 @@ def bulk_gr_gen(
     pcmpgr: bool = False,
     nw_enc_pcmp: float = 0.1,
     m1_sp: float = 0.1,
-):
-    """Returns guardring
+) -> None:
+    """Returns guardring.
 
     Args :
         c_inst : component enclosed by guardring
@@ -633,7 +630,6 @@ def bulk_gr_gen(
         l_d : total diffusion length
         implant_layer : layer of comp implant (nplus,pplus)
     """
-
     # c = gf.Component()
 
     comp_pp_enc: float = 0.16
@@ -836,13 +832,12 @@ def bulk_gr_gen(
 
 @gf.cell
 def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
-    """Return deepnwell guardring
+    """Return deepnwell guardring.
 
     Args :
         dn_rect : deepnwell polygon
         grw : guardring width
     """
-
     c = gf.Component()
 
     comp_pp_enc: float = 0.16
@@ -1014,7 +1009,7 @@ def nfet_deep_nwell(
     inst_ymin: float = 0.1,
     grw: float = 0.36,
 ) -> gf.Component:
-    """Return nfet deepnwell
+    """Return nfet deepnwell.
 
     Args :
         deepnwell : boolean of having deepnwell
@@ -1024,7 +1019,6 @@ def nfet_deep_nwell(
         inst_ymin : deepnwell enclosed dymin
         grw : guardring width
     """
-
     c = gf.Component()
 
     if deepnwell == 1:
@@ -1103,8 +1097,8 @@ def nfet_deep_nwell(
 
 def add_inter_sd_labels(
     c, nf, sd_label, poly1, l_gate, inter_sd_l, sd_diff_intr, label, layer, con_bet_fin
-):
-    """Adds label to intermediate source/drain diffusion
+) -> None:
+    """Adds label to intermediate source/drain diffusion.
 
     Args :
         c : instance component of the device
@@ -1118,7 +1112,6 @@ def add_inter_sd_labels(
         layer : layer of label
         con_bet_fin : boolean of having contact between fingers
     """
-
     label_layer = layer["metal1_label"] if con_bet_fin == 1 else layer["comp_label"]
     for i in range(int(nf - 1)):
         c.add_ref(
@@ -1137,8 +1130,10 @@ def add_inter_sd_labels(
         )
 
 
-def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf):
-    """Adds gate label when label is enabled
+def add_gate_labels(
+    c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
+) -> None:
+    """Adds gate label when label is enabled.
 
     Args :
         c : instance component of the device
@@ -1153,7 +1148,6 @@ def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, lay
         layer : layer of labels
         nf : number of fingers
     """
-
     for i in range(nc1):
         c.add_ref(
             labels_gen(
@@ -1189,7 +1183,7 @@ def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, lay
 
 def sd_m1_area_check(
     sd_con_area, m1_area, sd_con, c_inst, sd_l, nf, l_gate, inter_sd_l, pl_cmp_spacing
-):
+) -> None:
     if sd_con_area < m1_area:
         sd_con_m1 = gf.components.rectangle(
             size=(sd_con.size[0], m1_area / sd_con.size[1]), layer=layer["metal1"]
@@ -1207,7 +1201,7 @@ def sd_m1_area_check(
         sd_m1_arr.dymin = sd_con.dymin - (sd_con_m1.size[1] - sd_con.size[1]) / 2
 
 
-def poly_con_m1_check(poly_con_area, m1_area, c_pc, poly_con, c_pl_con):
+def poly_con_m1_check(poly_con_area, m1_area, c_pc, poly_con, c_pl_con) -> None:
     if poly_con_area < m1_area:
         m1_poly = c_pc.add_ref(
             gf.components.rectangle(
@@ -1221,7 +1215,7 @@ def poly_con_m1_check(poly_con_area, m1_area, c_pc, poly_con, c_pl_con):
 
 def inter_sd_m1_area_check(
     inter_sd_con_area, m1_area, inter_sd_con, c_inst, l_gate, nf, inter_sd_l, sd_con
-):
+) -> None:
     if inter_sd_con_area < m1_area:
         inter_sd_con_m1 = gf.components.rectangle(
             size=(inter_sd_con.size[0], m1_area / inter_sd_con.size[1]),
@@ -1239,7 +1233,7 @@ def inter_sd_m1_area_check(
         )
 
 
-def bulk_m1_check(bulk_con_area, m1_area, c_inst, bulk_con):
+def bulk_m1_check(bulk_con_area, m1_area, c_inst, bulk_con) -> None:
     if bulk_con_area < m1_area:
         bulk_m1 = c_inst.add_ref(
             gf.components.rectangle(
@@ -1274,8 +1268,7 @@ def draw_nfet(
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Retern nfet
+    """Retern nfet.
 
     Args:
         layout : layout object
@@ -1775,7 +1768,7 @@ def pfet_deep_nwell(
     nw_enc_pcmp: float = 0.1,
     grw: float = 0.36,
 ) -> gf.Component:
-    """Returns pfet well related polygons
+    """Returns pfet well related polygons.
 
     Args :
         deepnwell : boolaen of having deepnwell
@@ -1786,7 +1779,6 @@ def pfet_deep_nwell(
         nw_enc_pcmp : nwell enclosure of pcomp
         grw : guardring width
     """
-
     c = gf.Component()
 
     dnwell_enc_pcmp = 1.1
@@ -1893,8 +1885,7 @@ def draw_pfet(
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Retern pfet
+    """Retern pfet.
 
     Args:
         layout : layout object
@@ -2425,8 +2416,7 @@ def draw_nfet_06v0_nvt(
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Usage:-
+    """Usage:-
      used to draw Native NFET 6V transistor by specifying parameters
     Arguments:-
      layout : Object of layout
@@ -2435,9 +2425,8 @@ def draw_nfet_06v0_nvt(
      ld     : Float of diffusion length
      nf     : Integer of number of fingers
      grw    : Float of guard ring width [If enabled]
-     bulk   : String of bulk connection type [None, Bulk Tie, Guard Ring]
+     bulk   : String of bulk connection type [None, Bulk Tie, Guard Ring].
     """
-
     # used layers and dimensions
 
     end_cap: float = 0.22

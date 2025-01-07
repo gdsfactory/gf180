@@ -47,11 +47,9 @@ sc_w = 0.62
 
 
 class diode_nd2ps(pya.PCellDeclarationHelper):
-    """
-    N+/LVPWELL diode (Outside DNWELL) Generator for GF180MCU
-    """
+    """N+/LVPWELL diode (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -74,11 +72,11 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "diode_nd2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -93,7 +91,7 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -104,7 +102,7 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_diode_nd2ps(
             self.layout,
             la=self.la,
@@ -131,11 +129,9 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
 
 
 class diode_pd2nw(pya.PCellDeclarationHelper):
-    """
-    P+/Nwell diode (Outside DNWELL) Generator for GF180MCU
-    """
+    """P+/Nwell diode (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -158,11 +154,11 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "diode_pd2nw(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -176,7 +172,7 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -187,7 +183,7 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_diode_pd2nw(
             self.layout,
             la=self.la,
@@ -214,11 +210,9 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
 
 
 class diode_nw2ps(pya.PCellDeclarationHelper):
-    """
-    Nwell/Psub diode Generator for GF180MCU
-    """
+    """Nwell/Psub diode Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -239,11 +233,11 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "diode_nw2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -258,7 +252,7 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -269,7 +263,7 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         nwp_instance = draw_diode_nw2ps(
             self.layout,
             la=self.la,
@@ -294,11 +288,9 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
 
 
 class diode_pw2dw(pya.PCellDeclarationHelper):
-    """
-    LVPWELL/DNWELL diode Generator for GF180MCU
-    """
+    """LVPWELL/DNWELL diode Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -320,11 +312,11 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "diode_pw2dw(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -339,7 +331,7 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -350,7 +342,7 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         diode_pw2dw_instance = draw_diode_pw2dw(
             self.layout,
             la=self.la,
@@ -376,11 +368,9 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
 
 
 class diode_dw2ps(pya.PCellDeclarationHelper):
-    """
-    LVPWELL/DNWELL diode Generator for GF180MCU
-    """
+    """LVPWELL/DNWELL diode Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -402,11 +392,11 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "diode_dw2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -421,7 +411,7 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -432,7 +422,7 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         diode_dw2ps_instance = draw_diode_dw2ps(
             self.layout,
             la=self.la,
@@ -458,11 +448,9 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
 
 
 class sc_diode(pya.PCellDeclarationHelper):
-    """
-    N+/LVPWELL diode (Outside DNWELL) Generator for GF180MCU
-    """
+    """N+/LVPWELL diode (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -483,11 +471,11 @@ class sc_diode(pya.PCellDeclarationHelper):
 
         self.param("n_label", self.TypeString, "minus label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "sc_diode(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wa * self.la
@@ -502,7 +490,7 @@ class sc_diode(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -513,7 +501,7 @@ class sc_diode(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         sc_instance = draw_sc_diode(
             self.layout,
             la=self.la,

@@ -66,13 +66,17 @@ ignore = [
   'B006'
 ]
 select = [
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  # "D",  # pydocstyle
   "E",  # pycodestyle errors
-  "W",  # pycodestyle warnings
   "F",  # pyflakes
   "I",  # isort
-  "C",  # flake8-comprehensions
-  "B",  # flake8-bugbear
-  "UP"
+  "T10",  # flake8-debugger
+  "UP",  # pyupgrade
+  "W",  # pycodestyle warnings
+  "PERF",  # performance improvements
+  "RUF"  # ruff
 ]
 
 [tool.setuptools.package-data]

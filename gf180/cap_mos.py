@@ -20,7 +20,7 @@ def cap_mos_inst(
     label: bool = False,
     g_label: str = "",
 ) -> gf.Component:
-    """Returns mos cap simple instance
+    """Returns mos cap simple instance.
 
     Args:
         lc : length of mos_cap.
@@ -34,8 +34,8 @@ def cap_mos_inst(
         implant_enc : enclosure of implant_layer to comp.
         label : 1 to add labels.
         g_label : gate label.
-    """
 
+    """
     c_inst = gf.Component()
 
     cmp = c_inst.add_ref(gf.components.rectangle(size=(cmp_w, wc), layer=layer["comp"]))
@@ -128,14 +128,12 @@ def cap_mos(
     g_label: str = "",
     sd_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
+    """Usage:-
      used to draw NMOS capacitor (Outside DNWELL) by specifying parameters
     Arguments:-
      l      : Float of diff length
-     w      : Float of diff width
+     w      : Float of diff width.
     """
-
     c = gf.Component("cap_mos_dev")
 
     con_size = 0.22

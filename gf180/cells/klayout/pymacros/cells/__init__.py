@@ -48,11 +48,9 @@ from .res import (
 
 # It's a Python class that inherits from the pya.Library class
 class gf180mcu(pya.Library):
-    """
-    The library where we will put the PCell into
-    """
+    """The library where we will put the PCell into."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Set the description
         self.description = "GF180MCU Pcells"
 

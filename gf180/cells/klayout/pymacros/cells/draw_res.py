@@ -32,15 +32,13 @@ def draw_metal_res(
     r0_label: str = "",
     r1_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
+    """Usage:-
      used to draw 2-terminal Metal resistor by specifying parameters
     Arguments:-
      layout : Object of layout
      l      : Float of diff length
-     w      : Float of diff width
+     w      : Float of diff width.
     """
-
     c = gf.Component("res_dev")
 
     m_ext = 0.28
@@ -99,13 +97,12 @@ def draw_metal_res(
 
 @gf.cell
 def pcmpgr_gen(dn_rect, grw: float = 0.36) -> gf.Component:
-    """Return deepnwell guardring
+    """Return deepnwell guardring.
 
     Args :
         dn_rect : deepnwell polygon
         grw : guardring width
     """
-
     c = gf.Component()
 
     comp_pp_enc: float = 0.16

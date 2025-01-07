@@ -10,13 +10,13 @@ dn_rect = partial(gf.components.rectangle, layer=LAYER.dnwell)
 
 @gf.cell
 def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
-    """Return deepnwell guardring
+    """Return deepnwell guardring.
 
     Args:
         dn_rect : deepnwell polygon.
         grw : guardring width.
-    """
 
+    """
     c = gf.Component()
 
     dn_rect = gf.get_component(dn_rect)

@@ -36,11 +36,9 @@ poly_spacing = 0.24
 
 
 class cap_nmos(pya.PCellDeclarationHelper):
-    """
-    NMOS capacitor (Outside DNWELL) Generator for GF180MCU
-    """
+    """NMOS capacitor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -64,11 +62,11 @@ class cap_nmos(pya.PCellDeclarationHelper):
             "sd_label", self.TypeString, "Source/Drain terminal label", default=""
         )
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "cap_nmos(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wc * self.lc
@@ -82,7 +80,7 @@ class cap_nmos(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -93,7 +91,7 @@ class cap_nmos(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_cap_mos(
             self.layout,
             type="cap_nmos",
@@ -120,11 +118,9 @@ class cap_nmos(pya.PCellDeclarationHelper):
 
 
 class cap_pmos(pya.PCellDeclarationHelper):
-    """
-    3.3V PMOS capacitor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3.3V PMOS capacitor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -148,11 +144,11 @@ class cap_pmos(pya.PCellDeclarationHelper):
             "sd_label", self.TypeString, "Source/Drain terminal label", default=""
         )
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "cap_pmos(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wc * self.lc
@@ -166,7 +162,7 @@ class cap_pmos(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -177,7 +173,7 @@ class cap_pmos(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_cap_mos(
             self.layout,
             type="cap_pmos",
@@ -204,11 +200,9 @@ class cap_pmos(pya.PCellDeclarationHelper):
 
 
 class cap_nmos_b(pya.PCellDeclarationHelper):
-    """
-    3.3V NMOS capacitor (inside NWell) Generator for GF180MCU
-    """
+    """3.3V NMOS capacitor (inside NWell) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -230,11 +224,11 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
             "sd_label", self.TypeString, "Source/Drain terminal label", default=""
         )
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "cap_nmos_b(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wc * self.lc
@@ -248,7 +242,7 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -259,7 +253,7 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_cap_mos(
             self.layout,
             type="cap_nmos_b",
@@ -286,11 +280,9 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
 
 
 class cap_pmos_b(pya.PCellDeclarationHelper):
-    """
-    3.3V PMOS capacitor (inside Psub) Generator for GF180MCU
-    """
+    """3.3V PMOS capacitor (inside Psub) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -312,11 +304,11 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
             "sd_label", self.TypeString, "Source/Drain terminal label", default=""
         )
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "cap_pmos_b(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wc * self.lc
@@ -330,7 +322,7 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -341,7 +333,7 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         np_instance = draw_cap_mos(
             self.layout,
             type="cap_pmos_b",

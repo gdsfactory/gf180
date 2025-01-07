@@ -24,8 +24,8 @@ def res(
         label: label generation.
         r0_label: label for resistor.
         r1_label: label for resistor.
-    """
 
+    """
     c = gf.Component("res_dev")
 
     m_ext = 0.28

@@ -14,8 +14,7 @@ def draw_cap_mim(
     top_label: str = "",
     bot_label: str = "",
 ):
-    """
-    Retern mim cap
+    """Retern mim cap.
 
     Args:
         layout : layout object
@@ -24,7 +23,6 @@ def draw_cap_mim(
 
 
     """
-
     c = gf.Component("mim_cap_dev")
 
     # used dimensions and layers

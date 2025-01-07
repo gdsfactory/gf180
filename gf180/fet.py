@@ -2,7 +2,7 @@ from functools import partial
 from math import ceil, floor
 
 import gdsfactory as gf
-from gdsfactory.typings import Float2, LayerSpec, Optional, Strs
+from gdsfactory.typings import Float2, LayerSpec, Strs
 
 from gf180.guardring import pcmpgr_gen
 from gf180.layers import layer
@@ -18,11 +18,11 @@ def labels_gen(
     position: Float2 = (0.1, 0.1),
     layer: LayerSpec = layer["metal1_label"],
     label: bool = False,
-    labels: Optional[Strs] = None,
+    labels: Strs | None = None,
     label_valid_len: int = 1,
     index: int = 0,
 ) -> gf.Component:
-    """Returns labels at given position when label is enabled
+    """Returns labels at given position when label is enabled.
 
     Args :
         label_str : string of the label.
@@ -32,7 +32,6 @@ def labels_gen(
         labels : list of given labels.
         label_valid_len : valid length of labels.
     """
-
     c = gf.Component()
 
     if label == 1:
@@ -46,7 +45,7 @@ def labels_gen(
 
 
 def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
-    """Returns list of odd,even gate label patterns for alternating gate connection
+    """Returns list of odd,even gate label patterns for alternating gate connection.
 
     Args:
         nl_b : number of bottom connected gates transistors.
@@ -56,8 +55,8 @@ def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
         g_label : list of transistors gate label.
         nl_u :  number of upper connected gates transistors.
         nt_o : number of transistor with odd order.
-    """
 
+    """
     g_label_e = []
     g_label_o = []
 
@@ -65,12 +64,12 @@ def get_patt_label(nl_b, nl, nt, nt_e, g_label, nl_u, nt_o):
         for i in range(nl_b):
             for j in range(nl):
                 if nt[j] == nt_e[i]:
-                    g_label_e.append(g_label[j])
+                    g_label_e.extend(g_label[j])
 
         for i in range(nl_u):
             for j in range(nl):
                 if nt[j] == nt_o[i]:
-                    g_label_o.append(g_label[j])
+                    g_label_o.extend(g_label[j])
 
     return [g_label_e, g_label_o]
 
@@ -90,7 +89,7 @@ def alter_interdig(
     nl: int = 1,
     patt_label: bool = False,
 ) -> gf.Component:
-    """Returns interdigitation polygons of gate with alternating poly contacts
+    """Returns interdigitation polygons of gate with alternating poly contacts.
 
     Args :
         sd_diff : source/drain diffusion rectangle.
@@ -105,7 +104,6 @@ def alter_interdig(
         inter_sd_l : inter diffusion length.
         nf : number of fingers.
     """
-
     c_inst = gf.Component()
     sd_diff = gf.get_component(sd_diff)
     pc1 = gf.get_component(pc1)
@@ -364,7 +362,7 @@ def interdigit(
     g_label: Strs | None = None,
     patt_label: bool = False,
 ) -> gf.Component:
-    """Returns interdigitation related polygons
+    """Returns interdigitation related polygons.
 
     Args :
         sd_diff : source/drain diffusion rectangle.
@@ -568,8 +566,8 @@ def interdigit(
     return c_inst
 
 
-def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
-    """Returns high voltage related polygons
+def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1) -> None:
+    """Returns high voltage related polygons.
 
     Args :
         c_inst : dualgate enclosed component
@@ -577,7 +575,6 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1):
         dg_encx : dualgate enclosure in x_direction
         dg_ency : dualgate enclosure in y_direction
     """
-
     if volt == "5V" or volt == "6V":
         dg = c.add_ref(
             gf.components.rectangle(
@@ -617,8 +614,8 @@ def bulk_gr_gen(
     deepnwell: bool = False,
     pcmpgr: bool = False,
     nw_enc_pcmp: float = 0.1,
-):
-    """Returns guardring
+) -> None:
+    """Returns guardring.
 
     Args :
         c_inst : component enclosed by guardring
@@ -629,7 +626,6 @@ def bulk_gr_gen(
         l_d : total diffusion length
         implant_layer : layer of comp implant (nplus,pplus)
     """
-
     # c = gf.Component()
 
     comp_pp_enc: float = 0.16
@@ -838,7 +834,7 @@ def nfet_deep_nwell(
     inst_ymin: float = 0.1,
     grw: float = 0.36,
 ) -> gf.Component:
-    """Return nfet deepnwell
+    """Return nfet deepnwell.
 
     Args :
         deepnwell : boolean of having deepnwell
@@ -848,7 +844,6 @@ def nfet_deep_nwell(
         inst_ymin : deepnwell enclosed dymin
         grw : guardring width
     """
-
     c = gf.Component()
 
     dn_enc_lvpwell = 2.5
@@ -889,8 +884,8 @@ def nfet_deep_nwell(
 
 def add_inter_sd_labels(
     c, nf, sd_label, poly1, l_gate, inter_sd_l, sd_diff_intr, label, layer, con_bet_fin
-):
-    """Adds label to intermediate source/drain diffusion
+) -> None:
+    """Adds label to intermediate source/drain diffusion.
 
     Args :
         c : instance component of the device
@@ -904,7 +899,6 @@ def add_inter_sd_labels(
         layer : layer of label
         con_bet_fin : boolean of having contact between fingers
     """
-
     if con_bet_fin == 1:
         label_layer = layer["metal1_label"]
     else:
@@ -927,8 +921,10 @@ def add_inter_sd_labels(
         )
 
 
-def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf):
-    """Adds gate label when label is enabled
+def add_gate_labels(
+    c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
+) -> None:
+    """Adds gate label when label is enabled.
 
     Args :
         c : instance component of the device
@@ -943,7 +939,6 @@ def add_gate_labels(c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, lay
         layer : layer of labels
         nf : number of fingers
     """
-
     for i in range(nc1):
         c.add_ref(
             labels_gen(
@@ -994,13 +989,12 @@ def nfet(
     deepnwell: int = 0,
     pcmpgr: int = 0,
     label: bool = False,
-    sd_label: Optional[Strs] = [],
+    sd_label: Strs | None = [],
     g_label: str = [],
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Return nfet
+    """Return nfet.
 
     Args:
         l : Float of gate length
@@ -1058,7 +1052,7 @@ def nfet(
     rect_d_intr = gf.components.rectangle(size=(l_d, w_gate), layer=layer["comp"])
     sd_diff_intr = c_inst.add_ref(rect_d_intr)
 
-    #     # generatin sd contacts
+    #  generating sd contacts
 
     if w_gate <= con_size + 2 * con_comp_enc:
         cmpc_y = con_comp_enc + con_size + con_comp_enc
@@ -1446,7 +1440,7 @@ def pfet_deep_nwell(
     nw_enc_pcmp: float = 0.1,
     grw: float = 0.36,
 ) -> gf.Component:
-    """Returns pfet well related polygons
+    """Returns pfet well related polygons.
 
     Args :
         deepnwell : boolaen of having deepnwell
@@ -1457,7 +1451,6 @@ def pfet_deep_nwell(
         nw_enc_pcmp : nwell enclosure of pcomp
         grw : guardring width
     """
-
     c = gf.Component()
 
     dnwell_enc_pcmp = 1.1
@@ -1513,13 +1506,12 @@ def pfet(
     deepnwell: int = 0,
     pcmpgr: int = 0,
     label: bool = False,
-    sd_label: Optional[Strs] = [],
+    sd_label: Strs | None = [],
     g_label: str = [],
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
-    """
-    Return pfet
+    """Return pfet.
 
     Args:
         l : Float of gate length
@@ -1579,7 +1571,7 @@ def pfet(
     rect_d_intr = gf.components.rectangle(size=(l_d, w_gate), layer=layer["comp"])
     sd_diff_intr = c_inst.add_ref(rect_d_intr)
 
-    # generatin sd contacts
+    # generating sd contacts
 
     if w_gate <= con_size + 2 * con_comp_enc:
         cmpc_y = con_comp_enc + con_size + con_comp_enc
@@ -1991,7 +1983,7 @@ def nfet_06v0_nvt(
     interdig: int = 0,
     patt="",
     label: bool = False,
-    sd_label: Optional[Strs] = [],
+    sd_label: Strs | None = [],
     g_label: str = [],
     sub_label: str = "",
     patt_label: bool = False,
@@ -2006,7 +1998,6 @@ def nfet_06v0_nvt(
         grw    : Float of guard ring width [If enabled]
         bulk   : String of bulk connection type [None, Bulk Tie, Guard Ring]
     """
-
     # used layers and dimensions
     end_cap: float = 0.22
 

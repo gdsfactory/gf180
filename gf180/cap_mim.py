@@ -24,6 +24,7 @@ def cap_mim(
         label: 1 to add labels.
         top_label: top label.
         bot_label: bottom label.
+
     """
     c = gf.Component("mim_cap_dev")
     # used dimensions and layers

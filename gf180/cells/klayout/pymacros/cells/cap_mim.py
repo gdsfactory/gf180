@@ -27,11 +27,9 @@ mim_w = 1.02
 
 
 class cap_mim(pya.PCellDeclarationHelper):
-    """
-    MIM capacitor Generator for GF180MCU
-    """
+    """MIM capacitor Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -58,11 +56,11 @@ class cap_mim(pya.PCellDeclarationHelper):
 
         self.param("bot_label", self.TypeString, "Bottom plate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "cap_mim(L=" + (f"{self.lc:.3f}") + ",W=" + (f"{self.wc:.3f}") + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.wc * self.lc
@@ -78,7 +76,7 @@ class cap_mim(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
@@ -89,13 +87,10 @@ class cap_mim(pya.PCellDeclarationHelper):
         # bounding box to determine the transformation
         return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         option = os.environ["GF_PDK_OPTION"]
-        if (
-            option == "A"
-            and (self.mim_option) == "MIM-B"
-            or option != "A"
-            and (self.mim_option) == "MIM-A"
+        if (option == "A" and (self.mim_option) == "MIM-B") or (
+            option != "A" and (self.mim_option) == "MIM-A"
         ):
             raise TypeError(f"Current stack ({option}) doesn't allow this option")
         np_instance = draw_cap_mim(

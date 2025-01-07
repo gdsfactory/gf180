@@ -17,8 +17,7 @@ def diode_nd2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
+    """Draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters.
 
     Args::
         la: Float of diff length (anode).
@@ -29,7 +28,6 @@ def diode_nd2ps(
         pcmpgr : Boolean of using P+ Guard Ring for Deep NWELL devices only.
         label: Boolean of adding labels.
     """
-
     c = gf.Component("diode_nd2ps_dev")
 
     comp_spacing: float = 0.48
@@ -334,17 +332,15 @@ def diode_pd2nw(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
+    """Usage:-
      used to draw 3.3V P+/Nwell diode (Outside DNWELL) by specifying parameters
     Arguments:-
      la         : Float of diffusion length (anode)
      wa         : Float of diffusion width (anode)
      volt       : String of operating voltage of the diode [3.3V, 5V/6V]
      deepnwell  : Boolean of using Deep NWELL device
-     pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only
+     pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only.
     """
-
     c = gf.Component("diode_pd2nw_dev")
 
     comp_spacing: float = 0.48
@@ -648,15 +644,15 @@ def diode_nw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw 3.3V Nwell/Psub diode by specifying parameters
+    """Used to draw 3.3V Nwell/Psub diode by specifying parameters.
 
     Args:
         la: anode length.
         wa: anode width.
         cw: cathode width.
         volt: operating voltage of the diode [3.3V, 5V/6V]
-    """
 
+    """
     c = gf.Component()
 
     comp_spacing: float = 0.48
@@ -782,8 +778,7 @@ def diode_pw2dw(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    used to draw LVPWELL/DNWELL diode by specifying parameters
+    """Used to draw LVPWELL/DNWELL diode by specifying parameters.
 
     Args:
         la: anode length.
@@ -794,8 +789,8 @@ def diode_pw2dw(
         label: if True, labels will be added.
         p_label: p contact label.
         n_label: n contact label.
-    """
 
+    """
     c = gf.Component()
 
     comp_spacing: float = 0.48
@@ -1094,7 +1089,7 @@ def diode_dw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw LVPWELL/DNWELL diode by specifying parameters
+    """Used to draw LVPWELL/DNWELL diode by specifying parameters.
 
     Args:
         la: anode length.
@@ -1105,8 +1100,8 @@ def diode_dw2ps(
         label: True if labels are required.
         p_label: label for pwell.
         n_label: label for nwell.
-    """
 
+    """
     c = gf.Component()
 
     if volt == "5/6V":
@@ -1521,15 +1516,15 @@ def sc_diode(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
+    """Used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters.
 
     Args:
      la         : Float of diff length (anode)
      wa         : Float of diff width (anode)
      m          : Integer of number of fingers
      pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only
-    """
 
+    """
     c = gf.Component("sc_diode_dev")
 
     sc_enc_comp = 0.16
@@ -1547,12 +1542,11 @@ def sc_diode(
     # cathode draw
     @gf.cell
     def sc_cathode_strap(size: Float2 = (0.1, 0.1)) -> gf.Component:
-        """Returns sc_diode cathode array element
+        """Returns sc_diode cathode array element.
 
         Args :
             size : size of cathode array element
         """
-
         c = gf.Component()
 
         ncmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
@@ -1582,12 +1576,11 @@ def sc_diode(
 
     @gf.cell
     def sc_anode_strap(size: Float2 = (0.1, 0.1)) -> gf.Component:
-        """Returns sc_diode anode array element
+        """Returns sc_diode anode array element.
 
         Args :
             size : size of anode array element
         """
-
         c = gf.Component()
         cmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
         c.add_ref(

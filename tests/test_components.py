@@ -29,5 +29,5 @@ def test_pdk_settings(
     data_regression.check(component.to_dict())
 
 
-def test_assert_ports_on_grid(component: Component):
+def test_assert_ports_on_grid(component: Component) -> None:
     component.assert_ports_on_grid()
