@@ -106,7 +106,7 @@ class nfet(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "nfet(L=" + ("%.3f" % self.l_gate) + ",W=" + ("%.3f" % self.w_gate) + ")"
+        return "nfet(L=" + (f"{self.l_gate:.3f}") + ",W=" + (f"{self.w_gate:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the
@@ -245,7 +245,7 @@ class pfet(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "pfet(L=" + ("%.3f" % self.l_gate) + ",W=" + ("%.3f" % self.w_gate) + ")"
+        return "pfet(L=" + (f"{self.l_gate:.3f}") + ",W=" + (f"{self.w_gate:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the
@@ -380,9 +380,9 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "nfet_06v0_nvt(L="
-            + ("%.3f" % self.l_gate)
+            + (f"{self.l_gate:.3f}")
             + ",W="
-            + ("%.3f" % self.w_gate)
+            + (f"{self.w_gate:.3f}")
             + ")"
         )
 

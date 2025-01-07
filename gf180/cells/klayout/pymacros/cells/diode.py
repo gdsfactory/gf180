@@ -76,7 +76,7 @@ class diode_nd2ps(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "diode_nd2ps(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "diode_nd2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -160,7 +160,7 @@ class diode_pd2nw(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "diode_pd2nw(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "diode_pd2nw(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -241,7 +241,7 @@ class diode_nw2ps(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "diode_nw2ps(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "diode_nw2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -322,7 +322,7 @@ class diode_pw2dw(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "diode_pw2dw(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "diode_pw2dw(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -404,7 +404,7 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "diode_dw2ps(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "diode_dw2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -485,7 +485,7 @@ class sc_diode(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "sc_diode(L=" + ("%.3f" % self.la) + ",W=" + ("%.3f" % self.wa) + ")"
+        return "sc_diode(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.

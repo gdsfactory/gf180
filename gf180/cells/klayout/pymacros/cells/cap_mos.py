@@ -66,7 +66,7 @@ class cap_nmos(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "cap_nmos(LC=" + ("%.3f" % self.lc) + ",WC=" + ("%.3f" % self.wc) + ")"
+        return "cap_nmos(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -150,7 +150,7 @@ class cap_pmos(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "cap_pmos(LC=" + ("%.3f" % self.lc) + ",WC=" + ("%.3f" % self.wc) + ")"
+        return "cap_pmos(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -232,7 +232,7 @@ class cap_nmos_b(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "cap_nmos_b(LC=" + ("%.3f" % self.lc) + ",WC=" + ("%.3f" % self.wc) + ")"
+        return "cap_nmos_b(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
@@ -314,7 +314,7 @@ class cap_pmos_b(pya.PCellDeclarationHelper):
 
     def display_text_impl(self):
         # Provide a descriptive text for the cell
-        return "cap_pmos_b(LC=" + ("%.3f" % self.lc) + ",WC=" + ("%.3f" % self.wc) + ")"
+        return "cap_pmos_b(LC=" + (f"{self.lc:.3f}") + ",WC=" + (f"{self.wc:.3f}") + ")"
 
     def coerce_parameters_impl(self):
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.

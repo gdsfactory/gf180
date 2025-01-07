@@ -123,9 +123,9 @@ class metal_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "metal_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -242,9 +242,9 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "nplus_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -338,9 +338,9 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "pplus_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -434,9 +434,9 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "nplus_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -530,9 +530,9 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "pplus_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -623,9 +623,9 @@ class nwell_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "nwell_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -716,9 +716,9 @@ class pwell_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "pwell_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -810,9 +810,9 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "npolyf_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -905,9 +905,9 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "ppolyf_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -1000,9 +1000,9 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "npolyf_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -1095,9 +1095,9 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "ppolyf_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
@@ -1198,9 +1198,9 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return (
             "ppolyf_u_high_Rs_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
