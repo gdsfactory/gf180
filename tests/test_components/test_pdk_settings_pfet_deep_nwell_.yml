@@ -1,7 +1,5 @@
-function: pfet_deep_nwell
 info: {}
-module: gf180.fet
-name: pfet_deep_nwell
+name: pfet_deep_nwell_DFalse__eb04accb
 settings:
   deepnwell: false
   enc_size:

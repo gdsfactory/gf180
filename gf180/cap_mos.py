@@ -470,3 +470,8 @@ def cap_mos(
             )  # guardring metal1
 
     return c
+
+
+if __name__ == "__main__":
+    c = cap_mos()
+    c.show()
