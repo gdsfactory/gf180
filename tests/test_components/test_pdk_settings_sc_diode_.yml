@@ -1,7 +1,5 @@
-function: sc_diode
 info: {}
-module: gf180.diode
-name: sc_diode
+name: sc_diode_L0p1_W0p1_C0p1_875c3bf8
 settings:
   cw: 0.1
   la: 0.1

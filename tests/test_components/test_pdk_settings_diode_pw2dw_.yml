@@ -1,7 +1,5 @@
-function: diode_pw2dw
 info: {}
-module: gf180.diode
-name: diode_pw2dw
+name: diode_pw2dw_L0p1_W0p1_C_730bd675
 settings:
   cw: 0.1
   la: 0.1

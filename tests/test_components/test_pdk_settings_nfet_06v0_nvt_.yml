@@ -1,7 +1,5 @@
-function: nfet_06v0_nvt
 info: {}
-module: gf180.fet
-name: nfet_06v0_nvt
+name: nfet_06v0_nvt_LG1p8_WG0_a70c57c7
 settings:
   bulk: None
   con_bet_fin: 1

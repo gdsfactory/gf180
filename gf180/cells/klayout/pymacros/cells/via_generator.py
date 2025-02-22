@@ -60,7 +60,7 @@ def via_generator(
 
     rect_via = gf.components.rectangle(size=via_size, layer=via_layer)
 
-    via_arr = c.add_array(rect_via, rows=nr, columns=nc, spacing=via_sp)
+    via_arr = c.add_ref(rect_via, rows=nr, columns=nc, spacing=via_sp)
 
     via_arr.dmove((x_range[0], y_range[0]))
 
@@ -113,9 +113,9 @@ def via_stack(
         )
         con = c.add_ref(con_gen)
 
-        m1_x = con.size[0] + 2 * m_enc
+        m1_x = con.dxsize + 2 * m_enc
 
-        m1_y = con.size[1] + 2 * m_enc
+        m1_y = con.dysize + 2 * m_enc
 
         m1 = c.add_ref(
             gf.components.rectangle(size=(m1_x, m1_y), layer=layer["metal1"])

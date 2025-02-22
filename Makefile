@@ -2,7 +2,9 @@ install:
 	uv sync --extra docs --extra dev
 
 dev:
-	uv sync --extra docs --extra dev
+	uv sync --all-extras
+	uv pip install -e .
+	uv run pre-commit install
 
 tech:
 	python install_tech.py

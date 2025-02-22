@@ -1,7 +1,5 @@
-function: nplus_res
 info: {}
-module: gf180.res
-name: nplus_res
+name: nplus_res_LR0p1_WR0p1_R_fed35f17
 settings:
   deepnwell: false
   l_res: 0.1

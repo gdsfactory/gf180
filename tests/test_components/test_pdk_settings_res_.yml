@@ -1,7 +1,5 @@
-function: res
 info: {}
-module: gf180.res
-name: res
+name: res_LR0p1_WR0p1_RTrm1_L_555a9307
 settings:
   l_res: 0.1
   label: false

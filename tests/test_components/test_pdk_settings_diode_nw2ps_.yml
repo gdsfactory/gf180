@@ -1,7 +1,5 @@
-function: diode_nw2ps
 info: {}
-module: gf180.diode
-name: diode_nw2ps
+name: diode_nw2ps_L0p1_W0p1_C_62031ca3
 settings:
   cw: 0.1
   la: 0.1

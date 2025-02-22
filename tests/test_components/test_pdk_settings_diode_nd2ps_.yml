@@ -1,7 +1,5 @@
-function: diode_nd2ps
 info: {}
-module: gf180.diode
-name: diode_nd2ps
+name: diode_nd2ps_L0p1_W0p1_C_ac9acc71
 settings:
   cw: 0.1
   deepnwell: false
