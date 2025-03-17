@@ -1,7 +1,5 @@
-function: diode_pd2nw
 info: {}
-module: gf180.diode
-name: diode_pd2nw
+name: diode_pd2nw_L0p1_W0p1_C_36e50474
 settings:
   cw: 0.1
   deepnwell: false

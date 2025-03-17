@@ -5,23 +5,19 @@ build-backend = "flit_core.buildapi"
 requires = ["flit_core >=3.2,<4"]
 
 [project]
-authors = [
-  {name = "gdsfactory", email = "contact@gdsfactory.com"}
-]
+authors = [{name = "gdsfactory", email = "contact@gdsfactory.com"}]
 classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Operating System :: OS Independent"
 ]
-dependencies = [
-  "gdsfactory~=8.29.0"
-]
+dependencies = ["gdsfactory~=9.0.1"]
 description = "GlobalFoundries 180nm MCU"
 keywords = ["python"]
 license = {file = "LICENSE"}
 name = "gf180"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 version = "0.1.0"
 
 [project.optional-dependencies]
@@ -32,11 +28,7 @@ dev = [
   "pytest_regressions",
   "pytest-github-actions-annotate-failures"
 ]
-docs = [
-  "autodoc_pydantic",
-  "jupytext",
-  "jupyter-book>=0.15.1,<1.1"
-]
+docs = ["autodoc_pydantic", "jupytext", "jupyter-book>=0.15.1,<1.1"]
 tests = ["pytest", "pytest-cov"]
 
 [tool.mypy]

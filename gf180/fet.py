@@ -146,19 +146,19 @@ def alter_interdig(
         layer=layer["metal2"],
     )
 
-    m2_arrb = c_inst.add_array(
+    m2_arrb = c_inst.add_ref(
         component=m2,
         columns=1,
         rows=nl_b,
-        spacing=(0, -m2_y - m2_spacing),
+        row_pitch=-m2_y - m2_spacing,
     )
     m2_arrb.dmovey(pc1.dymin - m2_spacing - m2_y)
 
-    m2_arru = c_inst.add_array(
+    m2_arru = c_inst.add_ref(
         component=m2,
         columns=1,
         rows=nl_u,
-        spacing=(0, m2_y + m2_spacing),
+        row_pitch=m2_y + m2_spacing,
     )
     m2_arru.dmovey(pc2.dymax + m2_spacing)
 
@@ -210,8 +210,8 @@ def alter_interdig(
                     labels_gen(
                         label_str="None",
                         position=(
-                            m1.dxmin + (m1.size[0] / 2),
-                            pc2.dymin + (pc2.size[1] / 2),
+                            m1.dxmin + (m1.dxsize / 2),
+                            pc2.dymin + (pc2.dysize / 2),
                         ),
                         layer=layer["metal1_label"],
                         label=label,
@@ -269,8 +269,8 @@ def alter_interdig(
                     labels_gen(
                         label_str="None",
                         position=(
-                            m1.dxmin + (m1.size[0] / 2),
-                            pc1.dymin + (pc1.size[1] / 2),
+                            m1.dxmin + (m1.dxsize / 2),
+                            pc1.dymin + (pc1.dysize / 2),
                         ),
                         layer=layer["metal1_label"],
                         label=label,
@@ -334,14 +334,11 @@ def alter_interdig(
                     via_layer=layer["via1"],
                     via_spacing=via_spacing,
                 )
-                c_inst.add_array(
+                c_inst.add_ref(
                     component=via2_dr,
                     columns=1,
                     rows=2,
-                    spacing=(
-                        0,
-                        m2_join_u.dymin - m2_join_b.dymin,
-                    ),
+                    row_pitch=m2_join_u.dymin - m2_join_b.dymin,
                 )  # via2_draw
     return c_inst
 
@@ -418,11 +415,11 @@ def interdigit(
             )
 
         elif gate_con_pos == "top":
-            m2_arr = c_inst.add_array(
+            m2_arr = c_inst.add_ref(
                 component=m2,
                 columns=1,
                 rows=nl,
-                spacing=(0, m2.dymax - m2.dymin + m2_spacing),
+                row_pitch=m2.dymax - m2.dymin + m2_spacing,
             )
             m2_arr.dmovey(pc2.dymax + m2_spacing)
 
@@ -479,8 +476,8 @@ def interdigit(
                             labels_gen(
                                 label_str="None",
                                 position=(
-                                    m1.dxmin + (m1.size[0] / 2),
-                                    pc1.dymin + (pc1.size[1] / 2),
+                                    m1.dxmin + (m1.dxsize / 2),
+                                    pc1.dymin + (pc1.dysize / 2),
                                 ),
                                 layer=layer["metal1_label"],
                                 label=label,
@@ -491,11 +488,11 @@ def interdigit(
                         )
 
         elif gate_con_pos == "bottom":
-            m2_arr = c_inst.add_array(
+            m2_arr = c_inst.add_ref(
                 component=m2,
                 columns=1,
                 rows=nl,
-                spacing=(0, -m2_y - m2_spacing),
+                row_pitch=-m2_y - m2_spacing,
             )
             m2_arr.dmovey(pc2.dymin - m2_spacing - m2_y)
 
@@ -552,8 +549,8 @@ def interdigit(
                             labels_gen(
                                 label_str="None",
                                 position=(
-                                    m1.dxmin + (m1.size[0] / 2),
-                                    pc1.dymin + (pc1.size[1] / 2),
+                                    m1.dxmin + (m1.dxsize / 2),
+                                    pc1.dymin + (pc1.dysize / 2),
                                 ),
                                 layer=layer["metal1_label"],
                                 label=label,
@@ -579,8 +576,8 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1) -> None:
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    c_inst.size[0] + (2 * dg_encx),
-                    c_inst.size[1] + (2 * dg_ency),
+                    c_inst.dxsize + (2 * dg_encx),
+                    c_inst.dysize + (2 * dg_ency),
                 ),
                 layer=layer["dualgate"],
             )
@@ -591,7 +588,7 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1) -> None:
         if volt == "5V":
             v5x = c.add_ref(
                 gf.components.rectangle(
-                    size=(dg.size[0], dg.size[1]), layer=layer["v5_xtor"]
+                    size=(dg.dxsize, dg.dysize), layer=layer["v5_xtor"]
                 )
             )
             v5x.dxmin = dg.dxmin
@@ -601,8 +598,8 @@ def hv_gen(c, c_inst, volt, dg_encx: float = 0.1, dg_ency: float = 0.1) -> None:
 
 
 def bulk_gr_gen(
-    c,
-    c_inst,
+    c: gf.Component,
+    c_inst: gf.Component,
     comp_spacing: float = 0.1,
     poly2_comp_spacing: float = 0.1,
     volt: str = "3.3V",
@@ -657,7 +654,7 @@ def bulk_gr_gen(
     )
     rect_bulk_out.dmove((rect_bulk_in.dxmin - grw, rect_bulk_in.dymin - grw))
     B = c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_bulk_out,
             B=rect_bulk_in,
             operation="A-B",
@@ -691,7 +688,7 @@ def bulk_gr_gen(
         )
     )
     c.add_ref(
-        gf.geometry.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=implant_layer)
+        gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=implant_layer)
     )  # implant_draw(pplus or nplus)
 
     # generating contacts
@@ -773,7 +770,7 @@ def bulk_gr_gen(
     )
     comp_m1_out.dmove((rect_bulk_in.dxmin - grw, rect_bulk_in.dymin - grw))
     c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_bulk_out,
             B=rect_bulk_in,
             operation="A-B",
@@ -789,7 +786,7 @@ def bulk_gr_gen(
             label_str=sub_label,
             position=(
                 B.dxmin + (grw + 2 * (comp_pp_enc)) / 2,
-                B.dymin + (B.size[1] / 2),
+                B.dymin + (B.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -803,7 +800,7 @@ def bulk_gr_gen(
             nfet_deep_nwell(
                 deepnwell=deepnwell,
                 pcmpgr=pcmpgr,
-                inst_size=(B.size[0], B.size[1]),
+                inst_size=(B.dxsize, B.dysize),
                 inst_xmin=B.dxmin,
                 inst_ymin=B.dymin,
                 grw=grw,
@@ -814,7 +811,7 @@ def bulk_gr_gen(
             pfet_deep_nwell(
                 deepnwell=deepnwell,
                 pcmpgr=pcmpgr,
-                enc_size=(B.size[0], B.size[1]),
+                enc_size=(B.dxsize, B.dysize),
                 enc_xmin=B.dxmin,
                 enc_ymin=B.dymin,
                 nw_enc_pcmp=nw_enc_pcmp,
@@ -866,8 +863,8 @@ def nfet_deep_nwell(
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    lvp_rect.size[0] + (2 * dn_enc_lvpwell),
-                    lvp_rect.size[1] + (2 * dn_enc_lvpwell),
+                    lvp_rect.dxsize + (2 * dn_enc_lvpwell),
+                    lvp_rect.dysize + (2 * dn_enc_lvpwell),
                 ),
                 layer=layer["dnwell"],
             )
@@ -883,7 +880,16 @@ def nfet_deep_nwell(
 
 
 def add_inter_sd_labels(
-    c, nf, sd_label, poly1, l_gate, inter_sd_l, sd_diff_intr, label, layer, con_bet_fin
+    c: gf.Component,
+    nf: int,
+    sd_label: Strs | None,
+    poly1: gf.Component,
+    l_gate: float,
+    inter_sd_l: float,
+    sd_diff_intr: gf.Component,
+    label: bool,
+    layer: LayerSpec,
+    con_bet_fin: int,
 ) -> None:
     """Adds label to intermediate source/drain diffusion.
 
@@ -910,7 +916,7 @@ def add_inter_sd_labels(
                 label_str="None",
                 position=(
                     poly1.dxmin + l_gate + (inter_sd_l / 2) + i * (l_gate + inter_sd_l),
-                    sd_diff_intr.dymin + (sd_diff_intr.size[1] / 2),
+                    sd_diff_intr.dymin + (sd_diff_intr.dysize / 2),
                 ),
                 layer=label_layer,
                 label=label,
@@ -922,7 +928,17 @@ def add_inter_sd_labels(
 
 
 def add_gate_labels(
-    c, g_label, pc1, c_pc, pc_spacing, nc1, nc2, pc2, label, layer, nf
+    c: gf.Component,
+    g_label: Strs | None,
+    pc1: gf.Component,
+    c_pc: gf.Component,
+    pc_spacing: float,
+    nc1: int,
+    nc2: int,
+    pc2: gf.Component,
+    label: bool,
+    layer: LayerSpec,
+    nf: int,
 ) -> None:
     """Adds gate label when label is enabled.
 
@@ -944,8 +960,8 @@ def add_gate_labels(
             labels_gen(
                 label_str="None",
                 position=(
-                    pc1.dxmin + (c_pc.size[0] / 2) + i * (pc_spacing),
-                    pc1.dymin + (c_pc.size[1] / 2),
+                    pc1.dxmin + (c_pc.dxsize / 2) + i * (pc_spacing),
+                    pc1.dymin + (c_pc.dysize / 2),
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -960,8 +976,8 @@ def add_gate_labels(
             labels_gen(
                 label_str="None",
                 position=(
-                    pc2.dxmin + (c_pc.size[0] / 2) + i * (pc_spacing),
-                    pc2.dymin + (c_pc.size[1] / 2),
+                    pc2.dxmin + (c_pc.dxsize / 2) + i * (pc_spacing),
+                    pc2.dymin + (c_pc.dysize / 2),
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -981,16 +997,16 @@ def nfet(
     nf: int = 1,
     grw: float = 0.22,
     volt: str = "3.3V",
-    bulk="None",
+    bulk: str = "None",
     con_bet_fin: int = 1,
-    gate_con_pos="alternating",
+    gate_con_pos: str = "alternating",
     interdig: int = 0,
-    patt="",
+    patt: str = "",
     deepnwell: int = 0,
     pcmpgr: int = 0,
     label: bool = False,
     sd_label: Strs | None = [],
-    g_label: str = [],
+    g_label: Strs = (),
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
@@ -1037,9 +1053,9 @@ def nfet(
     sd_l = sd_l_con
 
     # gds components to store a single instance and the generated device
-    c = gf.Component("sky_nfet_dev")
+    c = gf.Component()
 
-    c_inst = gf.Component("dev_temp")
+    c_inst = gf.Component()
 
     # generating sd diffusion
 
@@ -1062,15 +1078,15 @@ def nfet(
 
     cmpc_size = (sd_l_con, cmpc_y)
 
-    sd_diff = c_inst.add_array(
+    sd_diff = c_inst.add_ref(
         component=gf.components.rectangle(size=cmpc_size, layer=layer["comp"]),
         rows=1,
         columns=2,
-        spacing=(cmpc_size[0] + sd_diff_intr.size[0], 0),
+        column_pitch=(cmpc_size[0] + sd_diff_intr.dxsize),
     )
 
     sd_diff.dxmin = sd_diff_intr.dxmin - cmpc_size[0]
-    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.size[1] - sd_diff_intr.size[1]) / 2
+    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.dysize - sd_diff_intr.dysize) / 2
 
     sd_con = via_stack(
         x_range=(sd_diff.dxmin, sd_diff_intr.dxmin),
@@ -1078,15 +1094,12 @@ def nfet(
         base_layer=layer["comp"],
         metal_level=1,
     )
-    c_inst.add_array(
-        component=sd_con,
-        columns=2,
-        rows=1,
-        spacing=(
-            sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc),
-            0,
-        ),
-    )
+    if (
+        column_pitch := sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc)
+    ) != 0:
+        c_inst.add_ref(component=sd_con, columns=2, column_pitch=column_pitch)
+    else:
+        c_inst.add_ref(component=sd_con)
 
     if con_bet_fin == 1 and nf > 1:
         inter_sd_con = via_stack(
@@ -1098,11 +1111,11 @@ def nfet(
             base_layer=layer["comp"],
             metal_level=1,
         )
-        c_inst.add_array(
+        c_inst.add_ref(
             component=inter_sd_con,
             columns=nf - 1,
             rows=1,
-            spacing=(l_gate + inter_sd_l, 0),
+            column_pitch=(l_gate + inter_sd_l),
         )
 
     ### adding source/drain labels
@@ -1111,7 +1124,7 @@ def nfet(
             label_str="None",
             position=(
                 sd_diff.dxmin + (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -1126,7 +1139,7 @@ def nfet(
             label_str="None",
             position=(
                 sd_diff.dxmax - (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -1146,7 +1159,7 @@ def nfet(
 
     pc_size = (pc_x, con_pl_enc + con_size + con_pl_enc)
 
-    c_pc = gf.Component("poly con")
+    c_pc = gf.Component()
 
     rect_pc = c_pc.add_ref(gf.components.rectangle(size=pc_size, layer=layer["poly2"]))
 
@@ -1178,11 +1191,8 @@ def nfet(
             mv = 0
             nr = 2
 
-        pc = c_inst.add_array(
-            component=c_pc,
-            rows=nr,
-            columns=1,
-            spacing=(0, pc_size[1] + w_gate + 2 * end_cap),
+        pc = c_inst.add_ref(
+            component=c_pc, rows=nr, row_pitch=pc_size[1] + w_gate + 2 * end_cap
         )
         pc.dmove((poly.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv))
 
@@ -1190,7 +1200,7 @@ def nfet(
         c.add_ref(
             labels_gen(
                 label_str="None",
-                position=(pc.dxmin + c_pc.size[0] / 2, pc.dymin + c_pc.size[1] / 2),
+                position=(pc.dxmin + c_pc.dxsize / 2, pc.dymin + c_pc.dysize / 2),
                 layer=layer["metal1_label"],
                 label=label,
                 labels=g_label,
@@ -1223,20 +1233,20 @@ def nfet(
 
         rect_p1 = gf.components.rectangle(size=(l_gate, w_p1), layer=layer["poly2"])
         rect_p2 = gf.components.rectangle(size=(l_gate, w_p2), layer=layer["poly2"])
-        poly1 = c_inst.add_array(
+        poly1 = c_inst.add_ref(
             rect_p1,
             rows=1,
             columns=ceil(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly1.dxmin = sd_diff_intr.dxmin + con_comp_enc
         poly1.dymin = sd_diff_intr.dymin - end_cap - e_c
 
-        poly2 = c_inst.add_array(
+        poly2 = c_inst.add_ref(
             rect_p2,
             rows=1,
             columns=floor(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly2.dxmin = poly1.dxmin + l_gate + inter_sd_l
         poly2.dymin = p_mv
@@ -1260,13 +1270,13 @@ def nfet(
 
         # generating poly contacts
 
-        pc1 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc1, spacing=(pc_spacing, 0)
+        pc1 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc1, column_pitch=pc_spacing
         )
         pc1.dmove((poly1.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv_1))
 
-        pc2 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc2, spacing=(pc_spacing, 0)
+        pc2 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc2, column_pitch=pc_spacing
         )
         pc2.dmove(
             (
@@ -1317,7 +1327,7 @@ def nfet(
     if bulk == "None":
         nplus = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
+                size=(sd_diff.dxsize + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
                 layer=layer["nplus"],
             )
         )
@@ -1327,7 +1337,7 @@ def nfet(
     elif bulk == "Bulk Tie":
         rect_bulk = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_l + con_sp, sd_diff.size[1]), layer=layer["comp"]
+                size=(sd_l + con_sp, sd_diff.dysize), layer=layer["comp"]
             )
         )
         rect_bulk.dxmin = sd_diff.dxmax
@@ -1366,8 +1376,8 @@ def nfet(
             labels_gen(
                 label_str=sub_label,
                 position=(
-                    bulk_con.dxmin + bulk_con.size[0] / 2,
-                    bulk_con.dymin + bulk_con.size[1] / 2,
+                    bulk_con.dxmin + bulk_con.dxsize / 2,
+                    bulk_con.dymin + bulk_con.dysize / 2,
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -1379,7 +1389,7 @@ def nfet(
     if bulk == "Guard Ring":
         nsdm = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
+                size=(sd_diff.dxsize + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
                 layer=layer["nplus"],
             )
         )
@@ -1407,7 +1417,7 @@ def nfet(
     else:
         c.add_ref(c_inst)
 
-        inst_size = (c_inst.size[0], c_inst.size[1])
+        inst_size = (c_inst.dxsize, c_inst.dysize)
         inst_xmin = c_inst.dxmin
         inst_ymin = c_inst.dymin
 
@@ -1498,16 +1508,16 @@ def pfet(
     nf: int = 1,
     grw: float = 0.22,
     volt: str = "3.3V",
-    bulk="None",
+    bulk: str = "None",
     con_bet_fin: int = 1,
-    gate_con_pos="alternating",
+    gate_con_pos: str = "alternating",
     interdig: int = 0,
-    patt="",
+    patt: str = "",
     deepnwell: int = 0,
     pcmpgr: int = 0,
     label: bool = False,
-    sd_label: Strs | None = [],
-    g_label: str = [],
+    sd_label: Strs | None = (),
+    g_label: Strs = (),
     sub_label: str = "",
     patt_label: bool = False,
 ) -> gf.Component:
@@ -1556,9 +1566,9 @@ def pfet(
     sd_l = sd_l_con
 
     # gds components to store a single instance and the generated device
-    c = gf.Component("sky_pfet_dev")
+    c = gf.Component()
 
-    c_inst = gf.Component("dev_temp")
+    c_inst = gf.Component()
 
     # generating sd diffusion
 
@@ -1581,15 +1591,14 @@ def pfet(
 
     cmpc_size = (sd_l_con, cmpc_y)
 
-    sd_diff = c_inst.add_array(
+    sd_diff = c_inst.add_ref(
         component=gf.components.rectangle(size=cmpc_size, layer=layer["comp"]),
         rows=1,
         columns=2,
-        spacing=(cmpc_size[0] + sd_diff_intr.size[0], 0),
+        column_pitch=(cmpc_size[0] + sd_diff_intr.dxsize),
     )
-
     sd_diff.dxmin = sd_diff_intr.dxmin - cmpc_size[0]
-    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.size[1] - sd_diff_intr.size[1]) / 2
+    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.dysize - sd_diff_intr.dysize) / 2
 
     sd_con = via_stack(
         x_range=(sd_diff.dxmin, sd_diff_intr.dxmin),
@@ -1597,14 +1606,11 @@ def pfet(
         base_layer=layer["comp"],
         metal_level=1,
     )
-    c_inst.add_array(
+    c_inst.add_ref(
         component=sd_con,
         columns=2,
         rows=1,
-        spacing=(
-            sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc),
-            0,
-        ),
+        column_pitch=sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc),
     )
 
     if con_bet_fin == 1 and nf > 1:
@@ -1617,11 +1623,11 @@ def pfet(
             base_layer=layer["comp"],
             metal_level=1,
         )
-        c_inst.add_array(
+        c_inst.add_ref(
             component=inter_sd_con,
             columns=nf - 1,
             rows=1,
-            spacing=(l_gate + inter_sd_l, 0),
+            column_pitch=l_gate + inter_sd_l,
         )
 
     ### adding source/drain labels
@@ -1630,7 +1636,7 @@ def pfet(
             label_str="None",
             position=(
                 sd_diff.dxmin + (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -1645,7 +1651,7 @@ def pfet(
             label_str="None",
             position=(
                 sd_diff.dxmax - (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -1665,7 +1671,7 @@ def pfet(
 
     pc_size = (pc_x, con_pl_enc + con_size + con_pl_enc)
 
-    c_pc = gf.Component("poly con")
+    c_pc = gf.Component()
 
     rect_pc = c_pc.add_ref(gf.components.rectangle(size=pc_size, layer=layer["poly2"]))
 
@@ -1697,11 +1703,11 @@ def pfet(
             mv = 0
             nr = 2
 
-        pc = c_inst.add_array(
+        pc = c_inst.add_ref(
             component=c_pc,
             rows=nr,
             columns=1,
-            spacing=(0, pc_size[1] + w_gate + 2 * end_cap),
+            row_pitch=pc_size[1] + w_gate + 2 * end_cap,
         )
         pc.dmove((poly.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv))
 
@@ -1709,7 +1715,7 @@ def pfet(
         c.add_ref(
             labels_gen(
                 label_str="None",
-                position=(pc.dxmin + c_pc.size[0] / 2, pc.dymin + c_pc.size[1] / 2),
+                position=(pc.dxmin + c_pc.dxsize / 2, pc.dymin + c_pc.dysize / 2),
                 layer=layer["metal1_label"],
                 label=label,
                 labels=g_label,
@@ -1742,20 +1748,19 @@ def pfet(
 
         rect_p1 = gf.components.rectangle(size=(l_gate, w_p1), layer=layer["poly2"])
         rect_p2 = gf.components.rectangle(size=(l_gate, w_p2), layer=layer["poly2"])
-        poly1 = c_inst.add_array(
+        poly1 = c_inst.add_ref(
             rect_p1,
             rows=1,
             columns=ceil(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly1.dxmin = sd_diff_intr.dxmin + con_comp_enc
-        poly1.dymin = sd_diff_intr.dymin - end_cap - e_c
 
-        poly2 = c_inst.add_array(
+        poly2 = c_inst.add_ref(
             rect_p2,
             rows=1,
             columns=floor(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly2.dxmin = poly1.dxmin + l_gate + inter_sd_l
         poly2.dymin = p_mv
@@ -1779,13 +1784,13 @@ def pfet(
 
         # generating poly contacts
 
-        pc1 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc1, spacing=(pc_spacing, 0)
+        pc1 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc1, column_pitch=pc_spacing
         )
         pc1.dmove((poly1.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv_1))
 
-        pc2 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc2, spacing=(pc_spacing, 0)
+        pc2 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc2, column_pitch=pc_spacing
         )
         pc2.dmove(
             (
@@ -1834,7 +1839,7 @@ def pfet(
     if bulk == "None":
         pplus = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_pp_enc, w_gate + 2 * gate_pp_enc),
+                size=(sd_diff.dxsize + 2 * comp_pp_enc, w_gate + 2 * gate_pp_enc),
                 layer=layer["pplus"],
             )
         )
@@ -1849,7 +1854,7 @@ def pfet(
             pfet_deep_nwell(
                 deepnwell=deepnwell,
                 pcmpgr=pcmpgr,
-                enc_size=(sd_diff.size[0], sd_diff.size[1]),
+                enc_size=(sd_diff.dxsize, sd_diff.dysize),
                 enc_xmin=sd_diff.dxmin,
                 enc_ymin=sd_diff.dymin,
                 nw_enc_pcmp=nw_enc_pcmp,
@@ -1867,7 +1872,7 @@ def pfet(
     elif bulk == "Bulk Tie":
         rect_bulk = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_l + con_sp, sd_diff.size[1]), layer=layer["comp"]
+                size=(sd_l + con_sp, sd_diff.dysize), layer=layer["comp"]
             )
         )
         rect_bulk.dxmin = sd_diff.dxmax
@@ -1908,8 +1913,8 @@ def pfet(
             labels_gen(
                 label_str=sub_label,
                 position=(
-                    bulk_con.dxmin + bulk_con.size[0] / 2,
-                    bulk_con.dymin + bulk_con.size[1] / 2,
+                    bulk_con.dxmin + bulk_con.dxsize / 2,
+                    bulk_con.dymin + bulk_con.dysize / 2,
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -1924,7 +1929,7 @@ def pfet(
             pfet_deep_nwell(
                 deepnwell=deepnwell,
                 pcmpgr=pcmpgr,
-                enc_size=(sd_diff.size[0] + rect_bulk.size[0], sd_diff.size[1]),
+                enc_size=(sd_diff.dxsize + rect_bulk.dxsize, sd_diff.dysize),
                 enc_xmin=sd_diff.dxmin,
                 enc_ymin=sd_diff.dymin,
                 nw_enc_pcmp=nw_enc_pcmp,
@@ -1941,7 +1946,7 @@ def pfet(
     elif bulk == "Guard Ring":
         psdm = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_np_enc, w_gate + 2 * gate_pp_enc),
+                size=(sd_diff.dxsize + 2 * comp_np_enc, w_gate + 2 * gate_pp_enc),
                 layer=layer["pplus"],
             )
         )
@@ -2048,15 +2053,15 @@ def nfet_06v0_nvt(
 
     cmpc_size = (sd_l_con, cmpc_y)
 
-    sd_diff = c_inst.add_array(
+    sd_diff = c_inst.add_ref(
         component=gf.components.rectangle(size=cmpc_size, layer=layer["comp"]),
         rows=1,
         columns=2,
-        spacing=(cmpc_size[0] + sd_diff_intr.size[0], 0),
+        column_pitch=cmpc_size[0] + sd_diff_intr.dxsize,
     )
 
     sd_diff.dxmin = sd_diff_intr.dxmin - cmpc_size[0]
-    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.size[1] - sd_diff_intr.size[1]) / 2
+    sd_diff.dymin = sd_diff_intr.dymin - (sd_diff.dysize - sd_diff_intr.dysize) / 2
 
     sd_con = via_stack(
         x_range=(sd_diff.dxmin, sd_diff_intr.dxmin),
@@ -2064,14 +2069,11 @@ def nfet_06v0_nvt(
         base_layer=layer["comp"],
         metal_level=1,
     )
-    c_inst.add_array(
+    c_inst.add_ref(
         component=sd_con,
         columns=2,
         rows=1,
-        spacing=(
-            sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc),
-            0,
-        ),
+        column_pitch=sd_l + nf * l_gate + (nf - 1) * inter_sd_l + 2 * (con_comp_enc),
     )
 
     if con_bet_fin == 1 and nf > 1:
@@ -2084,11 +2086,11 @@ def nfet_06v0_nvt(
             base_layer=layer["comp"],
             metal_level=1,
         )
-        c_inst.add_array(
+        c_inst.add_ref(
             component=inter_sd_con,
             columns=nf - 1,
             rows=1,
-            spacing=(l_gate + inter_sd_l, 0),
+            column_pitch=l_gate + inter_sd_l,
         )
 
     ### adding source/drain labels
@@ -2097,7 +2099,7 @@ def nfet_06v0_nvt(
             label_str="None",
             position=(
                 sd_diff.dxmin + (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -2112,7 +2114,7 @@ def nfet_06v0_nvt(
             label_str="None",
             position=(
                 sd_diff.dxmax - (sd_l / 2),
-                sd_diff.dymin + (sd_diff.size[1] / 2),
+                sd_diff.dymin + (sd_diff.dysize / 2),
             ),
             layer=layer["metal1_label"],
             label=label,
@@ -2164,11 +2166,11 @@ def nfet_06v0_nvt(
             mv = 0
             nr = 2
 
-        pc = c_inst.add_array(
+        pc = c_inst.add_ref(
             component=c_pc,
             rows=nr,
             columns=1,
-            spacing=(0, pc_size[1] + w_gate + 2 * end_cap),
+            row_pitch=pc_size[1] + w_gate + 2 * end_cap,
         )
         pc.dmove((poly.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv))
 
@@ -2176,7 +2178,7 @@ def nfet_06v0_nvt(
         c.add_ref(
             labels_gen(
                 label_str="None",
-                position=(pc.dxmin + c_pc.size[0] / 2, pc.dymin + c_pc.size[1] / 2),
+                position=(pc.dxmin + c_pc.dxsize / 2, pc.dymin + c_pc.dysize / 2),
                 layer=layer["metal1_label"],
                 label=label,
                 labels=g_label,
@@ -2209,20 +2211,20 @@ def nfet_06v0_nvt(
 
         rect_p1 = gf.components.rectangle(size=(l_gate, w_p1), layer=layer["poly2"])
         rect_p2 = gf.components.rectangle(size=(l_gate, w_p2), layer=layer["poly2"])
-        poly1 = c_inst.add_array(
+        poly1 = c_inst.add_ref(
             rect_p1,
             rows=1,
             columns=ceil(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly1.dxmin = sd_diff_intr.dxmin + con_comp_enc
         poly1.dymin = sd_diff_intr.dymin - end_cap - e_c
 
-        poly2 = c_inst.add_array(
+        poly2 = c_inst.add_ref(
             rect_p2,
             rows=1,
             columns=floor(nf / 2),
-            spacing=[2 * (inter_sd_l + l_gate), 0],
+            column_pitch=2 * (inter_sd_l + l_gate),
         )
         poly2.dxmin = poly1.dxmin + l_gate + inter_sd_l
         poly2.dymin = p_mv
@@ -2246,13 +2248,13 @@ def nfet_06v0_nvt(
 
         # generating poly contacts
 
-        pc1 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc1, spacing=(pc_spacing, 0)
+        pc1 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc1, column_pitch=pc_spacing
         )
         pc1.dmove((poly1.dxmin - ((pc_x - l_gate) / 2), -pc_size[1] - end_cap + mv_1))
 
-        pc2 = c_inst.add_array(
-            component=c_pc, rows=1, columns=nc2, spacing=(pc_spacing, 0)
+        pc2 = c_inst.add_ref(
+            component=c_pc, rows=1, columns=nc2, column_pitch=pc_spacing
         )
         pc2.dmove(
             (
@@ -2301,7 +2303,7 @@ def nfet_06v0_nvt(
     if bulk == "None":
         nplus = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
+                size=(sd_diff.dxsize + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
                 layer=layer["nplus"],
             )
         )
@@ -2311,7 +2313,7 @@ def nfet_06v0_nvt(
     elif bulk == "Bulk Tie":
         rect_bulk = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_l + con_sp, sd_diff.size[1]), layer=layer["comp"]
+                size=(sd_l + con_sp, sd_diff.dysize), layer=layer["comp"]
             )
         )
         rect_bulk.dxmin = sd_diff.dxmax
@@ -2350,8 +2352,8 @@ def nfet_06v0_nvt(
             labels_gen(
                 label_str=sub_label,
                 position=(
-                    bulk_con.dxmin + bulk_con.size[0] / 2,
-                    bulk_con.dymin + bulk_con.size[1] / 2,
+                    bulk_con.dxmin + bulk_con.dxsize / 2,
+                    bulk_con.dymin + bulk_con.dysize / 2,
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -2363,7 +2365,7 @@ def nfet_06v0_nvt(
     elif bulk == "Guard Ring":
         nsdm = c_inst.add_ref(
             gf.components.rectangle(
-                size=(sd_diff.size[0] + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
+                size=(sd_diff.dxsize + 2 * comp_np_enc, w_gate + 2 * gate_np_enc),
                 layer=layer["nplus"],
             )
         )
@@ -2395,7 +2397,7 @@ def nfet_06v0_nvt(
         )
         rect_bulk_out.dmove((rect_bulk_in.dxmin - grw, rect_bulk_in.dymin - grw))
         B = c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_bulk_out,
                 B=rect_bulk_in,
                 operation="A-B",
@@ -2431,9 +2433,7 @@ def nfet_06v0_nvt(
             )
         )
         psdm = c.add_ref(
-            gf.geometry.boolean(
-                A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-            )
+            gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
         )
 
         # generating contacts
@@ -2515,7 +2515,7 @@ def nfet_06v0_nvt(
         )
         comp_m1_out.dmove((rect_bulk_in.dxmin - grw, rect_bulk_in.dymin - grw))
         b_gr = c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_bulk_out,
                 B=rect_bulk_in,
                 operation="A-B",
@@ -2528,7 +2528,7 @@ def nfet_06v0_nvt(
                 label_str=sub_label,
                 position=(
                     b_gr.dxmin + (grw + 2 * (comp_pp_enc)) / 2,
-                    b_gr.dymin + (b_gr.size[1] / 2),
+                    b_gr.dymin + (b_gr.dysize / 2),
                 ),
                 layer=layer["metal1_label"],
                 label=label,
@@ -2540,8 +2540,8 @@ def nfet_06v0_nvt(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    B.size[0] + (2 * dg_enc_cmp),
-                    B.size[1] + (2 * dg_enc_cmp),
+                    B.dxsize + (2 * dg_enc_cmp),
+                    B.dysize + (2 * dg_enc_cmp),
                 ),
                 layer=layer["dualgate"],
             )
@@ -2555,8 +2555,8 @@ def nfet_06v0_nvt(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    c_inst.size[0] + (2 * dg_enc_cmp),
-                    c_inst.size[1] + (2 * dg_enc_poly),
+                    c_inst.dxsize + (2 * dg_enc_cmp),
+                    c_inst.dysize + (2 * dg_enc_poly),
                 ),
                 layer=layer["dualgate"],
             )
@@ -2566,7 +2566,7 @@ def nfet_06v0_nvt(
 
     # generating native layer
     nat = c.add_ref(
-        gf.components.rectangle(size=(dg.size[0], dg.size[1]), layer=layer["nat"])
+        gf.components.rectangle(size=(dg.dxsize, dg.dysize), layer=layer["nat"])
     )
 
     nat.dxmin = dg.dxmin

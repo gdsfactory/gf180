@@ -1,7 +1,5 @@
-function: cap_mim
 info: {}
-module: gf180.cap_mim
-name: cap_mim
+name: cap_mim_MOA_MLM4_L2_W2__149a1e77
 settings:
   bot_label: ''
   label: false

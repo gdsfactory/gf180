@@ -1,13 +1,5 @@
-function: pcmpgr_gen
 info: {}
-module: gf180.guardring
-name: pcmpgr_gen
+name: pcmpgr_gen_DRFrectangle_4acb6000
 settings:
-  dn_rect:
-    function: rectangle
-    module: gdsfactory.components.rectangle
-    settings:
-      layer:
-      - 12
-      - 0
+  dn_rect: Frectangle_Mgdsfactorypcomponentspshapesprectangle_SLdnwell
   grw: 0.36

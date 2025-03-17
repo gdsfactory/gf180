@@ -71,22 +71,20 @@ def draw_cap_mim(
     )
 
     fusetop = c.add_ref(
-        gf.components.rectangle(
-            size=(m_up.size[0], m_up.size[1]), layer=layer["fusetop"]
-        )
+        gf.components.rectangle(size=(m_up.dxsize, m_up.dysize), layer=layer["fusetop"])
     )
     fusetop.dxmin = m_up.dxmin
     fusetop.dymin = m_up.dymin
 
     mim_l_mk = c.add_ref(
-        gf.components.rectangle(size=(fusetop.size[0], l_mk_w), layer=layer["mim_l_mk"])
+        gf.components.rectangle(size=(fusetop.dxsize, l_mk_w), layer=layer["mim_l_mk"])
     )
     mim_l_mk.dxmin = fusetop.dxmin
     mim_l_mk.dymin = fusetop.dymin
 
     m_dn = c.add_ref(
         gf.components.rectangle(
-            size=(m_up.size[0] + (2 * bot_enc_top), m_up.size[1] + (2 * bot_enc_top)),
+            size=(m_up.dxsize + (2 * bot_enc_top), m_up.dysize + (2 * bot_enc_top)),
             layer=bottom_layer,
         )
     )
@@ -94,9 +92,7 @@ def draw_cap_mim(
     m_dn.dymin = m_up.dymin - bot_enc_top
 
     cap_mk = c.add_ref(
-        gf.components.rectangle(
-            size=(m_dn.size[0], m_dn.size[1]), layer=layer["cap_mk"]
-        )
+        gf.components.rectangle(size=(m_dn.dxsize, m_dn.dysize), layer=layer["cap_mk"])
     )
     cap_mk.dxmin = m_dn.dxmin
     cap_mk.dymin = m_dn.dymin
@@ -105,14 +101,14 @@ def draw_cap_mim(
     if label == 1:
         c.add_label(
             top_label,
-            position=(m_up.dxmin + (m_up.size[0] / 2), m_dn.dxmin + (m_dn.size[1] / 2)),
+            position=(m_up.dxmin + (m_up.dxsize / 2), m_dn.dxmin + (m_dn.dysize / 2)),
             layer=up_label_layer,
         )
 
         c.add_label(
             bot_label,
             position=(
-                m_dn.dxmin + (m_dn.size[0] / 2),
+                m_dn.dxmin + (m_dn.dxsize / 2),
                 m_dn.dymin + (m_up.dymin - m_dn.dymin) / 2,
             ),
             layer=bot_label_layer,

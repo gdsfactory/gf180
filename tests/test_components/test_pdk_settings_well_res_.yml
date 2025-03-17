@@ -1,7 +1,5 @@
-function: well_res
 info: {}
-module: gf180.res
-name: well_res
+name: well_res_LR0p42_WR0p42__60029b03
 settings:
   l_res: 0.42
   label: false

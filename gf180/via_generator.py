@@ -1,7 +1,8 @@
 from math import ceil, floor
+from typing import Any
 
 import gdsfactory as gf
-from gdsfactory.typings import Float2, LayerSpec
+from gdsfactory.typings import Float2, LayerSpec, Size, Spacing
 
 from gf180.layers import layer
 
@@ -48,7 +49,9 @@ def via_generator(
 
     rect_via = gf.components.rectangle(size=via_size, layer=via_layer)
 
-    via_arr = c.add_array(rect_via, rows=nr, columns=nc, spacing=via_sp)
+    via_arr = c.add_ref(
+        rect_via, rows=nr, columns=nc, column_pitch=via_sp[0], row_pitch=via_sp[1]
+    )
 
     via_arr.dmove((x_range[0], y_range[0]))
 
@@ -62,15 +65,15 @@ def via_stack(
     x_range: Float2 = (0, 1),
     y_range: Float2 = (0, 1),
     metal_level: int = 1,
-    con_size=(0.22, 0.22),
-    con_enc=0.07,
-    m_enc=0.06,
-    con_spacing=(0.28, 0.28),
-    via_size=(0.22, 0.22),
-    via_spacing=(0.28, 0.28),
-    via_enc=(0.06, 0.06),
-    base_layer=layer["metal1"],
-    **kwargs,
+    con_size: Size = (0.22, 0.22),
+    con_enc: float = 0.07,
+    m_enc: float = 0.06,
+    con_spacing: Spacing = (0.28, 0.28),
+    via_size: Size = (0.22, 0.22),
+    via_spacing: Spacing = (0.28, 0.28),
+    via_enc: Float2 = (0.06, 0.06),
+    base_layer: LayerSpec = layer["metal1"],
+    **kwargs: Any,
 ) -> gf.Component:
     """Returns a via stack withen the range xrange and yrange and expecting the base_layer to be drawen.
 
@@ -107,8 +110,8 @@ def via_stack(
             via_spacing=con_spacing,
         )
         con = c.add_ref(con_gen)
-        m1_x = con.size[0] + 2 * m_enc
-        m1_y = con.size[1] + 2 * m_enc
+        m1_x = con.dxsize + 2 * m_enc
+        m1_y = con.dysize + 2 * m_enc
         m1 = c.add_ref(gf.components.rectangle(size=(m1_x, m1_y), layer=base_layer))
         m1.dxmin = con.dxmin - m_enc
         m1.dymin = con.dymin - m_enc

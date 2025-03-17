@@ -49,7 +49,7 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     )
     rect_pcmpgr_out.dmove((rect_pcmpgr_in.dxmin - grw, rect_pcmpgr_in.dymin - grw))
     c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_pcmpgr_out,
             B=rect_pcmpgr_in,
             operation="A-B",
@@ -88,9 +88,7 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
         )
     )
     c.add_ref(
-        gf.geometry.boolean(
-            A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-        )
+        gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
     )  # pplus_draw
 
     # generating contacts
@@ -153,7 +151,7 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
 
     comp_m1_in = c_temp_gr.add_ref(
         gf.components.rectangle(
-            size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+            size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
             layer=layer["metal1"],
         )
     )
@@ -161,15 +159,15 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     comp_m1_out = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (comp_m1_in.size[0]) + 2 * grw,
-                (comp_m1_in.size[1]) + 2 * grw,
+                (comp_m1_in.dxsize) + 2 * grw,
+                (comp_m1_in.dysize) + 2 * grw,
             ),
             layer=layer["metal1"],
         )
     )
     comp_m1_out.dmove((rect_pcmpgr_in.dxmin - grw, rect_pcmpgr_in.dymin - grw))
     c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_pcmpgr_out,
             B=rect_pcmpgr_in,
             operation="A-B",

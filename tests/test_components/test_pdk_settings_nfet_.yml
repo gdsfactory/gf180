@@ -1,7 +1,5 @@
-function: nfet
 info: {}
-module: gf180.fet
-name: nfet
+name: nfet_LG0p28_WG0p22_SCC1_e6fc714d
 settings:
   bulk: None
   con_bet_fin: 1

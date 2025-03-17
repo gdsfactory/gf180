@@ -1,7 +1,5 @@
-function: npolyf_res
 info: {}
-module: gf180.res
-name: npolyf_res
+name: npolyf_res_LR0p1_WR0p1__12c687f1
 settings:
   deepnwell: false
   l_res: 0.1

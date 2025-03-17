@@ -1,51 +1,16 @@
-function: interdigit
 info: {}
-module: gf180.fet
-name: interdigit
+name: interdigit_SDFrectangle_a64e025e
 settings:
-  g_label: null
   gate_con_pos: top
   label: false
   nf: 1
   patt:
   - ''
   patt_label: false
-  pc1:
-    function: array
-    module: gdsfactory.components.array_component
-    settings:
-      component:
-        function: rectangle
-        module: gdsfactory.components.rectangle
-        settings:
-          layer:
-          - 22
-          - 0
-  pc2:
-    function: array
-    module: gdsfactory.components.array_component
-    settings:
-      component:
-        function: rectangle
-        module: gdsfactory.components.rectangle
-        settings:
-          layer:
-          - 22
-          - 0
+  pc1: Farray_Mgdsfactorypcomponentspcontainersparray_component_SCFrectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
+  pc2: Farray_Mgdsfactorypcomponentspcontainersparray_component_SCFrectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
   pc_spacing: 0.1
   pc_x: 0.1
-  poly_con:
-    function: rectangle
-    module: gdsfactory.components.rectangle
-    settings:
-      layer:
-      - 22
-      - 0
-  sd_diff:
-    function: rectangle
-    module: gdsfactory.components.rectangle
-    settings:
-      layer:
-      - 22
-      - 0
+  poly_con: Frectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
+  sd_diff: Frectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
   sd_l: 0.15
