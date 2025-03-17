@@ -241,7 +241,7 @@ class pfet(pya.PCellDeclarationHelper):
 
     def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
-        return "pfet(L=" + (f"{self.l_gate:.3f}") + ",W=" + (f"{self.w_gate:.3f}") + ")"
+        return f"pfet(L={self.l_gate:.3f},W=" + f"{self.w_gate:.3f}" + ")"
 
     def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
