@@ -394,7 +394,7 @@ class diode_dw2ps(pya.PCellDeclarationHelper):
 
     def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
-        return "diode_dw2ps(L=" + (f"{self.la:.3f}") + ",W=" + (f"{self.wa:.3f}") + ")"
+        return f"diode_dw2ps(L={self.la:.3f},W=" + f"{self.wa:.3f}" + ")"
 
     def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
