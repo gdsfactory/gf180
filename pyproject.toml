@@ -11,7 +11,9 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Operating System :: OS Independent"
 ]
-dependencies = ["gdsfactory~=9.0.1"]
+dependencies = [
+  "gdsfactory~=9.2.0"
+]
 description = "GlobalFoundries 180nm MCU"
 keywords = ["python"]
 license = {file = "LICENSE"}
