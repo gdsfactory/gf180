@@ -387,7 +387,7 @@ def interdigit(
         pat = list(patt)
         nt = []  # list to store the symbols of transistors and their number nt(number of transistors)
         [nt.append(dx) for dx in pat if dx not in nt]
-        nl = int(len(nt))
+        nl = len(nt)
 
         m2_spacing = 0.28
         via_size = (0.26, 0.26)
