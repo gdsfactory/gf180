@@ -1,27 +1,23 @@
 install:
-	pip install -e .[dev,docs]
+	uv sync --extra docs --extra dev
 
 dev:
-	pip install -e .[dev,docs]
-	pre-commit install
+	uv sync --all-extras
+	uv pip install -e .
+	uv run pre-commit install
 
 tech:
 	python install_tech.py
 
 test:
-	pytest -s
+	uv run pytest -s
+
+test-force:
+	uv run pytest -s --force-regen
 
 cov:
-	pytest --cov=gf180
+	uv run pytest --cov=gf180
 
-mypy:
-	mypy . --ignore-missing-imports
-
-pylint:
-	pylint gf180
-
-ruff:
-	ruff --fix gf180/*.py
 
 git-rm-merged:
 	git branch -D `git branch --merged | grep -v \* | xargs`
@@ -52,6 +48,7 @@ notebooks:
 
 
 docs:
-	jb build docs
+	uv run python docs/write_cells.py
+	uv run jb build docs
 
 .PHONY: drc doc docs

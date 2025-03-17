@@ -17,8 +17,7 @@ def diode_nd2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
+    """Draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters.
 
     Args::
         la: Float of diff length (anode).
@@ -29,7 +28,6 @@ def diode_nd2ps(
         pcmpgr : Boolean of using P+ Guard Ring for Deep NWELL devices only.
         label: Boolean of adding labels.
     """
-
     c = gf.Component("diode_nd2ps_dev")
 
     comp_spacing: float = 0.48
@@ -51,26 +49,26 @@ def diode_nd2ps(
     nplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * np_enc_comp),
-                ncmp.size[1] + (2 * np_enc_comp),
+                ncmp.dxsize + (2 * np_enc_comp),
+                ncmp.dysize + (2 * np_enc_comp),
             ),
             layer=layer["nplus"],
         )
     )
-    nplus.xmin = ncmp.xmin - np_enc_comp
-    nplus.ymin = ncmp.ymin - np_enc_comp
+    nplus.dxmin = ncmp.dxmin - np_enc_comp
+    nplus.dymin = ncmp.dymin - np_enc_comp
     diode_mk = c.add_ref(
         gf.components.rectangle(
-            size=(ncmp.size[0], ncmp.size[1]), layer=layer["diode_mk"]
+            size=(ncmp.dxsize, ncmp.dysize), layer=layer["diode_mk"]
         )
     )
-    diode_mk.xmin = ncmp.xmin
-    diode_mk.ymin = ncmp.ymin
+    diode_mk.dxmin = ncmp.dxmin
+    diode_mk.dymin = ncmp.dymin
 
     ncmp_con = c.add_ref(
         via_stack(
-            x_range=(ncmp.xmin, ncmp.xmax),
-            y_range=(ncmp.ymin, ncmp.ymax),
+            x_range=(ncmp.dxmin, ncmp.dxmax),
+            y_range=(ncmp.dymin, ncmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -78,23 +76,23 @@ def diode_nd2ps(
 
     # p generation
     pcmp = c.add_ref(gf.components.rectangle(size=(cw, la), layer=layer["comp"]))
-    pcmp.xmax = ncmp.xmin - comp_spacing
+    pcmp.dxmax = ncmp.dxmin - comp_spacing
     pplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.size[0] + (2 * pp_enc_comp),
-                pcmp.size[1] + (2 * pp_enc_comp),
+                pcmp.dxsize + (2 * pp_enc_comp),
+                pcmp.dysize + (2 * pp_enc_comp),
             ),
             layer=layer["pplus"],
         )
     )
-    pplus.xmin = pcmp.xmin - pp_enc_comp
-    pplus.ymin = pcmp.ymin - pp_enc_comp
+    pplus.dxmin = pcmp.dxmin - pp_enc_comp
+    pplus.dymin = pcmp.dymin - pp_enc_comp
 
     pcmp_con = c.add_ref(
         via_stack(
-            x_range=(pcmp.xmin, pcmp.xmax),
-            y_range=(pcmp.ymin, pcmp.ymax),
+            x_range=(pcmp.dxmin, pcmp.dxmax),
+            y_range=(pcmp.dymin, pcmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -106,8 +104,8 @@ def diode_nd2ps(
         c.add_label(
             n_label,
             position=(
-                ncmp_con.xmin + (ncmp_con.size[0] / 2),
-                ncmp_con.ymin + (ncmp_con.size[1] / 2),
+                ncmp_con.dxmin + (ncmp_con.dxsize / 2),
+                ncmp_con.dymin + (ncmp_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -116,8 +114,8 @@ def diode_nd2ps(
         c.add_label(
             p_label,
             position=(
-                pcmp_con.xmin + (pcmp_con.size[0] / 2),
-                pcmp_con.ymin + (pcmp_con.size[1] / 2),
+                pcmp_con.dxmin + (pcmp_con.dxsize / 2),
+                pcmp_con.dymin + (pcmp_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -126,68 +124,70 @@ def diode_nd2ps(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    ncmp.xmax - pcmp.xmin + (2 * dg_enc_cmp),
-                    ncmp.size[1] + (2 * dg_enc_cmp),
+                    ncmp.dxmax - pcmp.dxmin + (2 * dg_enc_cmp),
+                    ncmp.dysize + (2 * dg_enc_cmp),
                 ),
                 layer=layer["dualgate"],
             )
         )
-        dg.xmin = pcmp.xmin - dg_enc_cmp
-        dg.ymin = pcmp.ymin - dg_enc_cmp
+        dg.dxmin = pcmp.dxmin - dg_enc_cmp
+        dg.dymin = pcmp.dymin - dg_enc_cmp
 
     if deepnwell == 1:
         lvpwell = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    ncmp.xmax - pcmp.xmin + (lvpwell_enc_ncmp + lvpwell_enc_pcmp),
-                    ncmp.size[1] + (2 * lvpwell_enc_ncmp),
+                    ncmp.dxmax - pcmp.dxmin + (lvpwell_enc_ncmp + lvpwell_enc_pcmp),
+                    ncmp.dysize + (2 * lvpwell_enc_ncmp),
                 ),
                 layer=layer["lvpwell"],
             )
         )
 
-        lvpwell.xmin = pcmp.xmin - lvpwell_enc_pcmp
-        lvpwell.ymin = ncmp.ymin - lvpwell_enc_ncmp
+        lvpwell.dxmin = pcmp.dxmin - lvpwell_enc_pcmp
+        lvpwell.dymin = ncmp.dymin - lvpwell_enc_ncmp
 
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    lvpwell.size[0] + (2 * dn_enc_lvpwell),
-                    lvpwell.size[1] + (2 * dn_enc_lvpwell),
+                    lvpwell.dxsize + (2 * dn_enc_lvpwell),
+                    lvpwell.dysize + (2 * dn_enc_lvpwell),
                 ),
                 layer=layer["dnwell"],
             )
         )
 
-        dn_rect.xmin = lvpwell.xmin - dn_enc_lvpwell
-        dn_rect.ymin = lvpwell.ymin - dn_enc_lvpwell
+        dn_rect.dxmin = lvpwell.dxmin - dn_enc_lvpwell
+        dn_rect.dymin = lvpwell.dymin - dn_enc_lvpwell
 
         if pcmpgr == 1:
             c_temp_gr = gf.Component("temp_store guard ring")
             rect_pcmpgr_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                        (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                        (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                        (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
                     ),
                     layer=layer["comp"],
                 )
             )
-            rect_pcmpgr_in.move(
-                (dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn)
+            rect_pcmpgr_in.dmove(
+                (dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn)
             )
             rect_pcmpgr_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                        (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                        (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                        (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                     ),
                     layer=layer["comp"],
                 )
             )
-            rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+            rect_pcmpgr_out.dmove(
+                (rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw)
+            )
             c.add_ref(
-                gf.geometry.boolean(
+                gf.boolean(
                     A=rect_pcmpgr_out,
                     B=rect_pcmpgr_in,
                     operation="A-B",
@@ -198,37 +198,37 @@ def diode_nd2ps(
             psdm_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * pp_enc_comp,
-                        (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * pp_enc_comp,
+                        (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * pp_enc_comp,
+                        (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * pp_enc_comp,
                     ),
                     layer=layer["pplus"],
                 )
             )
-            psdm_in.move(
+            psdm_in.dmove(
                 (
-                    rect_pcmpgr_in.xmin + pp_enc_comp,
-                    rect_pcmpgr_in.ymin + pp_enc_comp,
+                    rect_pcmpgr_in.dxmin + pp_enc_comp,
+                    rect_pcmpgr_in.dymin + pp_enc_comp,
                 )
             )
             psdm_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * pp_enc_comp,
-                        (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * pp_enc_comp,
+                        (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin)
+                        + 2 * pp_enc_comp,
+                        (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin)
+                        + 2 * pp_enc_comp,
                     ),
                     layer=layer["pplus"],
                 )
             )
-            psdm_out.move(
+            psdm_out.dmove(
                 (
-                    rect_pcmpgr_out.xmin - pp_enc_comp,
-                    rect_pcmpgr_out.ymin - pp_enc_comp,
+                    rect_pcmpgr_out.dxmin - pp_enc_comp,
+                    rect_pcmpgr_out.dymin - pp_enc_comp,
                 )
             )
             c.add_ref(
-                gf.geometry.boolean(
-                    A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-                )
+                gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
             )  # psdm draw
 
             # generating contacts
@@ -236,10 +236,10 @@ def diode_nd2ps(
             c.add_ref(
                 via_generator(
                     x_range=(
-                        rect_pcmpgr_in.xmin + con_size,
-                        rect_pcmpgr_in.xmax - con_size,
+                        rect_pcmpgr_in.dxmin + con_size,
+                        rect_pcmpgr_in.dxmax - con_size,
                     ),
-                    y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+                    y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
                     via_size=(con_size, con_size),
@@ -250,10 +250,10 @@ def diode_nd2ps(
             c.add_ref(
                 via_generator(
                     x_range=(
-                        rect_pcmpgr_in.xmin + con_size,
-                        rect_pcmpgr_in.xmax - con_size,
+                        rect_pcmpgr_in.dxmin + con_size,
+                        rect_pcmpgr_in.dxmax - con_size,
                     ),
-                    y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+                    y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
                     via_size=(con_size, con_size),
@@ -263,10 +263,10 @@ def diode_nd2ps(
 
             c.add_ref(
                 via_generator(
-                    x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+                    x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
                     y_range=(
-                        rect_pcmpgr_in.ymin + con_size,
-                        rect_pcmpgr_in.ymax - con_size,
+                        rect_pcmpgr_in.dymin + con_size,
+                        rect_pcmpgr_in.dymax - con_size,
                     ),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
@@ -277,10 +277,10 @@ def diode_nd2ps(
 
             c.add_ref(
                 via_generator(
-                    x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+                    x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
                     y_range=(
-                        rect_pcmpgr_in.ymin + con_size,
-                        rect_pcmpgr_in.ymax - con_size,
+                        rect_pcmpgr_in.dymin + con_size,
+                        rect_pcmpgr_in.dymax - con_size,
                     ),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
@@ -291,7 +291,7 @@ def diode_nd2ps(
 
             comp_m1_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
-                    size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+                    size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
                     layer=layer["metal1"],
                 )
             )
@@ -299,15 +299,15 @@ def diode_nd2ps(
             comp_m1_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (comp_m1_in.size[0]) + 2 * cw,
-                        (comp_m1_in.size[1]) + 2 * cw,
+                        (comp_m1_in.dxsize) + 2 * cw,
+                        (comp_m1_in.dysize) + 2 * cw,
                     ),
                     layer=layer["metal1"],
                 )
             )
-            comp_m1_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+            comp_m1_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
             c.add_ref(
-                gf.geometry.boolean(
+                gf.boolean(
                     A=rect_pcmpgr_out,
                     B=rect_pcmpgr_in,
                     operation="A-B",
@@ -330,17 +330,15 @@ def diode_pd2nw(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    Usage:-
+    """Usage:-
      used to draw 3.3V P+/Nwell diode (Outside DNWELL) by specifying parameters
     Arguments:-
      la         : Float of diffusion length (anode)
      wa         : Float of diffusion width (anode)
      volt       : String of operating voltage of the diode [3.3V, 5V/6V]
      deepnwell  : Boolean of using Deep NWELL device
-     pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only
+     pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only.
     """
-
     c = gf.Component("diode_pd2nw_dev")
 
     comp_spacing: float = 0.48
@@ -362,26 +360,26 @@ def diode_pd2nw(
     pplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.size[0] + (2 * pp_enc_comp),
-                pcmp.size[1] + (2 * pp_enc_comp),
+                pcmp.dxsize + (2 * pp_enc_comp),
+                pcmp.dysize + (2 * pp_enc_comp),
             ),
             layer=layer["pplus"],
         )
     )
-    pplus.xmin = pcmp.xmin - pp_enc_comp
-    pplus.ymin = pcmp.ymin - pp_enc_comp
+    pplus.dxmin = pcmp.dxmin - pp_enc_comp
+    pplus.dymin = pcmp.dymin - pp_enc_comp
     diode_mk = c.add_ref(
         gf.components.rectangle(
-            size=(pcmp.size[0], pcmp.size[1]), layer=layer["diode_mk"]
+            size=(pcmp.dxsize, pcmp.dysize), layer=layer["diode_mk"]
         )
     )
-    diode_mk.xmin = pcmp.xmin
-    diode_mk.ymin = pcmp.ymin
+    diode_mk.dxmin = pcmp.dxmin
+    diode_mk.dymin = pcmp.dymin
 
     pcmp_con = c.add_ref(
         via_stack(
-            x_range=(pcmp.xmin, pcmp.xmax),
-            y_range=(pcmp.ymin, pcmp.ymax),
+            x_range=(pcmp.dxmin, pcmp.dxmax),
+            y_range=(pcmp.dymin, pcmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -389,23 +387,23 @@ def diode_pd2nw(
 
     # n generation
     ncmp = c.add_ref(gf.components.rectangle(size=(cw, la), layer=layer["comp"]))
-    ncmp.xmax = pcmp.xmin - comp_spacing
+    ncmp.dxmax = pcmp.dxmin - comp_spacing
     nplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * np_enc_comp),
-                ncmp.size[1] + (2 * np_enc_comp),
+                ncmp.dxsize + (2 * np_enc_comp),
+                ncmp.dysize + (2 * np_enc_comp),
             ),
             layer=layer["nplus"],
         )
     )
-    nplus.xmin = ncmp.xmin - np_enc_comp
-    nplus.ymin = ncmp.ymin - np_enc_comp
+    nplus.dxmin = ncmp.dxmin - np_enc_comp
+    nplus.dymin = ncmp.dymin - np_enc_comp
 
     ncmp_con = c.add_ref(
         via_stack(
-            x_range=(ncmp.xmin, ncmp.xmax),
-            y_range=(ncmp.ymin, ncmp.ymax),
+            x_range=(ncmp.dxmin, ncmp.dxmax),
+            y_range=(ncmp.dymin, ncmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -417,8 +415,8 @@ def diode_pd2nw(
         c.add_label(
             n_label,
             position=(
-                ncmp_con.xmin + (ncmp_con.size[0] / 2),
-                ncmp_con.ymin + (ncmp_con.size[1] / 2),
+                ncmp_con.dxmin + (ncmp_con.dxsize / 2),
+                ncmp_con.dymin + (ncmp_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -427,8 +425,8 @@ def diode_pd2nw(
         c.add_label(
             p_label,
             position=(
-                pcmp_con.xmin + (pcmp_con.size[0] / 2),
-                pcmp_con.ymin + (pcmp_con.size[1] / 2),
+                pcmp_con.dxmin + (pcmp_con.dxsize / 2),
+                pcmp_con.dymin + (pcmp_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -437,69 +435,71 @@ def diode_pd2nw(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    pcmp.xmax - ncmp.xmin + (2 * dg_enc_cmp),
-                    ncmp.size[1] + (2 * dg_enc_cmp),
+                    pcmp.dxmax - ncmp.dxmin + (2 * dg_enc_cmp),
+                    ncmp.dysize + (2 * dg_enc_cmp),
                 ),
                 layer=layer["dualgate"],
             )
         )
-        dg.xmin = ncmp.xmin - dg_enc_cmp
-        dg.ymin = ncmp.ymin - dg_enc_cmp
+        dg.dxmin = ncmp.dxmin - dg_enc_cmp
+        dg.dymin = ncmp.dymin - dg_enc_cmp
 
     # nwell generation
     nwell = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.xmax - ncmp.xmin + (nwell_ncmp_enc + nwell_pcmp_enc),
-                pcmp.size[1] + (2 * nwell_pcmp_enc),
+                pcmp.dxmax - ncmp.dxmin + (nwell_ncmp_enc + nwell_pcmp_enc),
+                pcmp.dysize + (2 * nwell_pcmp_enc),
             ),
             layer=layer["nwell"],
         )
     )
 
-    nwell.xmin = ncmp.xmin - nwell_ncmp_enc
-    nwell.ymin = pcmp.ymin - nwell_pcmp_enc
+    nwell.dxmin = ncmp.dxmin - nwell_ncmp_enc
+    nwell.dymin = pcmp.dymin - nwell_pcmp_enc
 
     if deepnwell == 1:
         dn_rect = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    nwell.size[0] + (2 * dn_enc_nwell),
-                    nwell.size[1] + (2 * dn_enc_nwell),
+                    nwell.dxsize + (2 * dn_enc_nwell),
+                    nwell.dysize + (2 * dn_enc_nwell),
                 ),
                 layer=layer["dnwell"],
             )
         )
 
-        dn_rect.xmin = nwell.xmin - dn_enc_nwell
-        dn_rect.ymin = nwell.ymin - dn_enc_nwell
+        dn_rect.dxmin = nwell.dxmin - dn_enc_nwell
+        dn_rect.dymin = nwell.dymin - dn_enc_nwell
 
         if pcmpgr == 1:
             c_temp_gr = gf.Component("temp_store guard ring")
             rect_pcmpgr_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                        (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                        (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                        (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
                     ),
                     layer=layer["comp"],
                 )
             )
-            rect_pcmpgr_in.move(
-                (dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn)
+            rect_pcmpgr_in.dmove(
+                (dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn)
             )
             rect_pcmpgr_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                        (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                        (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                        (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                     ),
                     layer=layer["comp"],
                 )
             )
-            rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+            rect_pcmpgr_out.dmove(
+                (rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw)
+            )
             c.add_ref(
-                gf.geometry.boolean(
+                gf.boolean(
                     A=rect_pcmpgr_out,
                     B=rect_pcmpgr_in,
                     operation="A-B",
@@ -510,37 +510,37 @@ def diode_pd2nw(
             psdm_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * pp_enc_comp,
-                        (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * pp_enc_comp,
+                        (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * pp_enc_comp,
+                        (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * pp_enc_comp,
                     ),
                     layer=layer["pplus"],
                 )
             )
-            psdm_in.move(
+            psdm_in.dmove(
                 (
-                    rect_pcmpgr_in.xmin + pp_enc_comp,
-                    rect_pcmpgr_in.ymin + pp_enc_comp,
+                    rect_pcmpgr_in.dxmin + pp_enc_comp,
+                    rect_pcmpgr_in.dymin + pp_enc_comp,
                 )
             )
             psdm_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * pp_enc_comp,
-                        (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * pp_enc_comp,
+                        (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin)
+                        + 2 * pp_enc_comp,
+                        (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin)
+                        + 2 * pp_enc_comp,
                     ),
                     layer=layer["pplus"],
                 )
             )
-            psdm_out.move(
+            psdm_out.dmove(
                 (
-                    rect_pcmpgr_out.xmin - pp_enc_comp,
-                    rect_pcmpgr_out.ymin - pp_enc_comp,
+                    rect_pcmpgr_out.dxmin - pp_enc_comp,
+                    rect_pcmpgr_out.dymin - pp_enc_comp,
                 )
             )
             c.add_ref(
-                gf.geometry.boolean(
-                    A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-                )
+                gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
             )  # psdm guardring
 
             # generating contacts
@@ -548,10 +548,10 @@ def diode_pd2nw(
             c.add_ref(
                 via_generator(
                     x_range=(
-                        rect_pcmpgr_in.xmin + con_size,
-                        rect_pcmpgr_in.xmax - con_size,
+                        rect_pcmpgr_in.dxmin + con_size,
+                        rect_pcmpgr_in.dxmax - con_size,
                     ),
-                    y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+                    y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
                     via_size=(con_size, con_size),
@@ -562,10 +562,10 @@ def diode_pd2nw(
             c.add_ref(
                 via_generator(
                     x_range=(
-                        rect_pcmpgr_in.xmin + con_size,
-                        rect_pcmpgr_in.xmax - con_size,
+                        rect_pcmpgr_in.dxmin + con_size,
+                        rect_pcmpgr_in.dxmax - con_size,
                     ),
-                    y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+                    y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
                     via_size=(con_size, con_size),
@@ -575,10 +575,10 @@ def diode_pd2nw(
 
             c.add_ref(
                 via_generator(
-                    x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+                    x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
                     y_range=(
-                        rect_pcmpgr_in.ymin + con_size,
-                        rect_pcmpgr_in.ymax - con_size,
+                        rect_pcmpgr_in.dymin + con_size,
+                        rect_pcmpgr_in.dymax - con_size,
                     ),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
@@ -589,10 +589,10 @@ def diode_pd2nw(
 
             c.add_ref(
                 via_generator(
-                    x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+                    x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
                     y_range=(
-                        rect_pcmpgr_in.ymin + con_size,
-                        rect_pcmpgr_in.ymax - con_size,
+                        rect_pcmpgr_in.dymin + con_size,
+                        rect_pcmpgr_in.dymax - con_size,
                     ),
                     via_enclosure=(con_comp_enc, con_comp_enc),
                     via_layer=layer["contact"],
@@ -603,7 +603,7 @@ def diode_pd2nw(
 
             comp_m1_in = c_temp_gr.add_ref(
                 gf.components.rectangle(
-                    size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+                    size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
                     layer=layer["metal1"],
                 )
             )
@@ -611,15 +611,15 @@ def diode_pd2nw(
             comp_m1_out = c_temp_gr.add_ref(
                 gf.components.rectangle(
                     size=(
-                        (comp_m1_in.size[0]) + 2 * cw,
-                        (comp_m1_in.size[1]) + 2 * cw,
+                        (comp_m1_in.dxsize) + 2 * cw,
+                        (comp_m1_in.dysize) + 2 * cw,
                     ),
                     layer=layer["metal1"],
                 )
             )
-            comp_m1_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+            comp_m1_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
             c.add_ref(
-                gf.geometry.boolean(
+                gf.boolean(
                     A=rect_pcmpgr_out,
                     B=rect_pcmpgr_in,
                     operation="A-B",
@@ -640,15 +640,15 @@ def diode_nw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw 3.3V Nwell/Psub diode by specifying parameters
+    """Used to draw 3.3V Nwell/Psub diode by specifying parameters.
 
     Args:
         la: anode length.
         wa: anode width.
         cw: cathode width.
         volt: operating voltage of the diode [3.3V, 5V/6V]
-    """
 
+    """
     c = gf.Component()
 
     comp_spacing: float = 0.48
@@ -664,38 +664,38 @@ def diode_nw2ps(
     nplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * np_enc_comp),
-                ncmp.size[1] + (2 * np_enc_comp),
+                ncmp.dxsize + (2 * np_enc_comp),
+                ncmp.dysize + (2 * np_enc_comp),
             ),
             layer=layer["nplus"],
         )
     )
-    nplus.xmin = ncmp.xmin - np_enc_comp
-    nplus.ymin = ncmp.ymin - np_enc_comp
+    nplus.dxmin = ncmp.dxmin - np_enc_comp
+    nplus.dymin = ncmp.dymin - np_enc_comp
     diode_mk = c.add_ref(
         gf.components.rectangle(
-            size=(ncmp.size[0], ncmp.size[1]), layer=layer["diode_mk"]
+            size=(ncmp.dxsize, ncmp.dysize), layer=layer["diode_mk"]
         )
     )
-    diode_mk.xmin = ncmp.xmin
-    diode_mk.ymin = ncmp.ymin
+    diode_mk.dxmin = ncmp.dxmin
+    diode_mk.dymin = ncmp.dymin
 
     nwell = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * nwell_ncmp_enc),
-                ncmp.size[1] + (2 * nwell_ncmp_enc),
+                ncmp.dxsize + (2 * nwell_ncmp_enc),
+                ncmp.dysize + (2 * nwell_ncmp_enc),
             ),
             layer=layer["nwell"],
         )
     )
-    nwell.xmin = ncmp.xmin - nwell_ncmp_enc
-    nwell.ymin = ncmp.ymin - nwell_ncmp_enc
+    nwell.dxmin = ncmp.dxmin - nwell_ncmp_enc
+    nwell.dymin = ncmp.dymin - nwell_ncmp_enc
 
     n_con = c.add_ref(
         via_stack(
-            x_range=(ncmp.xmin, ncmp.xmax),
-            y_range=(ncmp.ymin, ncmp.ymax),
+            x_range=(ncmp.dxmin, ncmp.dxmax),
+            y_range=(ncmp.dymin, ncmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -703,23 +703,23 @@ def diode_nw2ps(
 
     # p generation
     pcmp = c.add_ref(gf.components.rectangle(size=(cw, la), layer=layer["comp"]))
-    pcmp.xmax = ncmp.xmin - comp_spacing
+    pcmp.dxmax = ncmp.dxmin - comp_spacing
     pplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.size[0] + (2 * pp_enc_comp),
-                pcmp.size[1] + (2 * pp_enc_comp),
+                pcmp.dxsize + (2 * pp_enc_comp),
+                pcmp.dysize + (2 * pp_enc_comp),
             ),
             layer=layer["pplus"],
         )
     )
-    pplus.xmin = pcmp.xmin - pp_enc_comp
-    pplus.ymin = pcmp.ymin - pp_enc_comp
+    pplus.dxmin = pcmp.dxmin - pp_enc_comp
+    pplus.dymin = pcmp.dymin - pp_enc_comp
 
     p_con = c.add_ref(
         via_stack(
-            x_range=(pcmp.xmin, pcmp.xmax),
-            y_range=(pcmp.ymin, pcmp.ymax),
+            x_range=(pcmp.dxmin, pcmp.dxmax),
+            y_range=(pcmp.dymin, pcmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -731,8 +731,8 @@ def diode_nw2ps(
         c.add_label(
             n_label,
             position=(
-                n_con.xmin + (n_con.size[0] / 2),
-                n_con.ymin + (n_con.size[1] / 2),
+                n_con.dxmin + (n_con.dxsize / 2),
+                n_con.dymin + (n_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -741,8 +741,8 @@ def diode_nw2ps(
         c.add_label(
             p_label,
             position=(
-                p_con.xmin + (p_con.size[0] / 2),
-                p_con.ymin + (p_con.size[1] / 2),
+                p_con.dxmin + (p_con.dxsize / 2),
+                p_con.dymin + (p_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -751,14 +751,14 @@ def diode_nw2ps(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    ncmp.xmax - pcmp.xmin + (2 * dg_enc_cmp),
-                    ncmp.size[1] + (2 * dg_enc_cmp),
+                    ncmp.dxmax - pcmp.dxmin + (2 * dg_enc_cmp),
+                    ncmp.dysize + (2 * dg_enc_cmp),
                 ),
                 layer=layer["dualgate"],
             )
         )
-        dg.xmin = pcmp.xmin - dg_enc_cmp
-        dg.ymin = pcmp.ymin - dg_enc_cmp
+        dg.dxmin = pcmp.dxmin - dg_enc_cmp
+        dg.dymin = pcmp.dymin - dg_enc_cmp
 
     return c
 
@@ -774,8 +774,7 @@ def diode_pw2dw(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """
-    used to draw LVPWELL/DNWELL diode by specifying parameters
+    """Used to draw LVPWELL/DNWELL diode by specifying parameters.
 
     Args:
         la: anode length.
@@ -786,8 +785,8 @@ def diode_pw2dw(
         label: if True, labels will be added.
         p_label: p contact label.
         n_label: n contact label.
-    """
 
+    """
     c = gf.Component()
 
     comp_spacing: float = 0.48
@@ -810,38 +809,38 @@ def diode_pw2dw(
     pplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.size[0] + (2 * pp_enc_comp),
-                pcmp.size[1] + (2 * pp_enc_comp),
+                pcmp.dxsize + (2 * pp_enc_comp),
+                pcmp.dysize + (2 * pp_enc_comp),
             ),
             layer=layer["pplus"],
         )
     )
-    pplus.xmin = pcmp.xmin - pp_enc_comp
-    pplus.ymin = pcmp.ymin - pp_enc_comp
+    pplus.dxmin = pcmp.dxmin - pp_enc_comp
+    pplus.dymin = pcmp.dymin - pp_enc_comp
     diode_mk = c.add_ref(
         gf.components.rectangle(
-            size=(pcmp.size[0], pcmp.size[1]), layer=layer["diode_mk"]
+            size=(pcmp.dxsize, pcmp.dysize), layer=layer["diode_mk"]
         )
     )
-    diode_mk.xmin = pcmp.xmin
-    diode_mk.ymin = pcmp.ymin
+    diode_mk.dxmin = pcmp.dxmin
+    diode_mk.dymin = pcmp.dymin
 
     lvpwell = c.add_ref(
         gf.components.rectangle(
             size=(
-                pcmp.size[0] + (2 * lvpwell_enc_pcmp),
-                pcmp.size[1] + (2 * lvpwell_enc_pcmp),
+                pcmp.dxsize + (2 * lvpwell_enc_pcmp),
+                pcmp.dysize + (2 * lvpwell_enc_pcmp),
             ),
             layer=layer["lvpwell"],
         )
     )
-    lvpwell.xmin = pcmp.xmin - lvpwell_enc_pcmp
-    lvpwell.ymin = pcmp.ymin - lvpwell_enc_pcmp
+    lvpwell.dxmin = pcmp.dxmin - lvpwell_enc_pcmp
+    lvpwell.dymin = pcmp.dymin - lvpwell_enc_pcmp
 
     p_con = c.add_ref(
         via_stack(
-            x_range=(pcmp.xmin, pcmp.xmax),
-            y_range=(pcmp.ymin, pcmp.ymax),
+            x_range=(pcmp.dxmin, pcmp.dxmax),
+            y_range=(pcmp.dymin, pcmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -849,23 +848,23 @@ def diode_pw2dw(
 
     # n generation
     ncmp = c.add_ref(gf.components.rectangle(size=(cw, la), layer=layer["comp"]))
-    ncmp.xmax = pcmp.xmin - comp_spacing
+    ncmp.dxmax = pcmp.dxmin - comp_spacing
     nplus = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * np_enc_comp),
-                ncmp.size[1] + (2 * np_enc_comp),
+                ncmp.dxsize + (2 * np_enc_comp),
+                ncmp.dysize + (2 * np_enc_comp),
             ),
             layer=layer["nplus"],
         )
     )
-    nplus.xmin = ncmp.xmin - np_enc_comp
-    nplus.ymin = ncmp.ymin - np_enc_comp
+    nplus.dxmin = ncmp.dxmin - np_enc_comp
+    nplus.dymin = ncmp.dymin - np_enc_comp
 
     n_con = c.add_ref(
         via_stack(
-            x_range=(ncmp.xmin, ncmp.xmax),
-            y_range=(ncmp.ymin, ncmp.ymax),
+            x_range=(ncmp.dxmin, ncmp.dxmax),
+            y_range=(ncmp.dymin, ncmp.dymax),
             base_layer=layer["comp"],
             metal_level=1,
         )
@@ -877,8 +876,8 @@ def diode_pw2dw(
         c.add_label(
             n_label,
             position=(
-                n_con.xmin + (n_con.size[0] / 2),
-                n_con.ymin + (n_con.size[1] / 2),
+                n_con.dxmin + (n_con.dxsize / 2),
+                n_con.dymin + (n_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -887,8 +886,8 @@ def diode_pw2dw(
         c.add_label(
             p_label,
             position=(
-                p_con.xmin + (p_con.size[0] / 2),
-                p_con.ymin + (p_con.size[1] / 2),
+                p_con.dxmin + (p_con.dxsize / 2),
+                p_con.dymin + (p_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -896,42 +895,42 @@ def diode_pw2dw(
     dn_rect = c.add_ref(
         gf.components.rectangle(
             size=(
-                lvpwell.size[0] + (2 * dn_enc_lvpwell),
-                lvpwell.size[1] + (2 * dn_enc_lvpwell),
+                lvpwell.dxsize + (2 * dn_enc_lvpwell),
+                lvpwell.dysize + (2 * dn_enc_lvpwell),
             ),
             layer=layer["dnwell"],
         )
     )
 
-    dn_rect.xmin = lvpwell.xmin - dn_enc_lvpwell
-    dn_rect.ymin = lvpwell.ymin - dn_enc_lvpwell
+    dn_rect.dxmin = lvpwell.dxmin - dn_enc_lvpwell
+    dn_rect.dymin = lvpwell.dymin - dn_enc_lvpwell
 
     if pcmpgr == 1:
         c_temp_gr = gf.Component("temp_store guard ring")
         rect_pcmpgr_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                    (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_in.move(
-            (dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn)
+        rect_pcmpgr_in.dmove(
+            (dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn)
         )
         rect_pcmpgr_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        rect_pcmpgr_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",
@@ -942,37 +941,35 @@ def diode_pw2dw(
         psdm_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * pp_enc_comp,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_in.move(
+        psdm_in.dmove(
             (
-                rect_pcmpgr_in.xmin + pp_enc_comp,
-                rect_pcmpgr_in.ymin + pp_enc_comp,
+                rect_pcmpgr_in.dxmin + pp_enc_comp,
+                rect_pcmpgr_in.dymin + pp_enc_comp,
             )
         )
         psdm_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * pp_enc_comp,
-                    (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin) + 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_out.move(
+        psdm_out.dmove(
             (
-                rect_pcmpgr_out.xmin - pp_enc_comp,
-                rect_pcmpgr_out.ymin - pp_enc_comp,
+                rect_pcmpgr_out.dxmin - pp_enc_comp,
+                rect_pcmpgr_out.dymin - pp_enc_comp,
             )
         )
         c.add_ref(
-            gf.geometry.boolean(
-                A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-            )
+            gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
         )  # guardring psdm
 
         # generating contacts
@@ -980,10 +977,10 @@ def diode_pw2dw(
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+                y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -994,10 +991,10 @@ def diode_pw2dw(
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+                y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1007,10 +1004,10 @@ def diode_pw2dw(
 
         c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+                x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1021,10 +1018,10 @@ def diode_pw2dw(
 
         c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+                x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1035,7 +1032,7 @@ def diode_pw2dw(
 
         comp_m1_in = c_temp_gr.add_ref(
             gf.components.rectangle(
-                size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+                size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
                 layer=layer["metal1"],
             )
         )
@@ -1043,15 +1040,15 @@ def diode_pw2dw(
         comp_m1_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (comp_m1_in.size[0]) + 2 * cw,
-                    (comp_m1_in.size[1]) + 2 * cw,
+                    (comp_m1_in.dxsize) + 2 * cw,
+                    (comp_m1_in.dysize) + 2 * cw,
                 ),
                 layer=layer["metal1"],
             )
         )
-        comp_m1_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        comp_m1_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",
@@ -1063,14 +1060,14 @@ def diode_pw2dw(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    dn_rect.size[0] + (2 * dg_enc_dn),
-                    dn_rect.size[1] + (2 * dg_enc_dn),
+                    dn_rect.dxsize + (2 * dg_enc_dn),
+                    dn_rect.dysize + (2 * dg_enc_dn),
                 ),
                 layer=layer["dualgate"],
             )
         )
-        dg.xmin = dn_rect.xmin - dg_enc_dn
-        dg.ymin = dn_rect.ymin - dg_enc_dn
+        dg.dxmin = dn_rect.dxmin - dg_enc_dn
+        dg.dymin = dn_rect.dymin - dg_enc_dn
 
     return c
 
@@ -1086,7 +1083,7 @@ def diode_dw2ps(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw LVPWELL/DNWELL diode by specifying parameters
+    """Used to draw LVPWELL/DNWELL diode by specifying parameters.
 
     Args:
         la: anode length.
@@ -1097,8 +1094,8 @@ def diode_dw2ps(
         label: True if labels are required.
         p_label: label for pwell.
         n_label: label for nwell.
-    """
 
+    """
     c = gf.Component()
 
     if volt == "5/6V":
@@ -1123,8 +1120,8 @@ def diode_dw2ps(
 
         n_con = c.add_ref(
             via_stack(
-                x_range=(ncmp.xmin, ncmp.xmax),
-                y_range=(ncmp.ymin, ncmp.ymax),
+                x_range=(ncmp.dxmin, ncmp.dxmax),
+                y_range=(ncmp.dymin, ncmp.dymax),
                 base_layer=layer["comp"],
                 metal_level=1,
             )
@@ -1133,14 +1130,14 @@ def diode_dw2ps(
         nplus = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    ncmp.size[0] + (2 * np_enc_comp),
-                    ncmp.size[1] + (2 * np_enc_comp),
+                    ncmp.dxsize + (2 * np_enc_comp),
+                    ncmp.dysize + (2 * np_enc_comp),
                 ),
                 layer=layer["nplus"],
             )
         )
-        nplus.xmin = ncmp.xmin - np_enc_comp
-        nplus.ymin = ncmp.ymin - np_enc_comp
+        nplus.dxmin = ncmp.dxmin - np_enc_comp
+        nplus.dymin = ncmp.dymin - np_enc_comp
     else:
         c_temp = gf.Component("temp_store guard ring")
         ncmp_in = c_temp.add_ref(
@@ -1155,9 +1152,9 @@ def diode_dw2ps(
                 layer=layer["comp"],
             )
         )
-        ncmp_out.move((ncmp_in.xmin - cw, ncmp_in.ymin - cw))
+        ncmp_out.dmove((ncmp_in.dxmin - cw, ncmp_in.dymin - cw))
         ncmp = c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=ncmp_out,
                 B=ncmp_in,
                 operation="A-B",
@@ -1168,37 +1165,35 @@ def diode_dw2ps(
         pplus_in = c_temp.add_ref(
             gf.components.rectangle(
                 size=(
-                    (ncmp_in.xmax - ncmp_in.xmin) - 2 * pp_enc_comp,
-                    (ncmp_in.ymax - ncmp_in.ymin) - 2 * pp_enc_comp,
+                    (ncmp_in.dxmax - ncmp_in.dxmin) - 2 * pp_enc_comp,
+                    (ncmp_in.dymax - ncmp_in.dymin) - 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        pplus_in.move(
+        pplus_in.dmove(
             (
-                ncmp_in.xmin + pp_enc_comp,
-                ncmp_in.ymin + pp_enc_comp,
+                ncmp_in.dxmin + pp_enc_comp,
+                ncmp_in.dymin + pp_enc_comp,
             )
         )
         pplus_out = c_temp.add_ref(
             gf.components.rectangle(
                 size=(
-                    (ncmp_out.xmax - ncmp_out.xmin) + 2 * pp_enc_comp,
-                    (ncmp_out.ymax - ncmp_out.ymin) + 2 * pp_enc_comp,
+                    (ncmp_out.dxmax - ncmp_out.dxmin) + 2 * pp_enc_comp,
+                    (ncmp_out.dymax - ncmp_out.dymin) + 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        pplus_out.move(
+        pplus_out.dmove(
             (
-                ncmp_out.xmin - pp_enc_comp,
-                ncmp_out.ymin - pp_enc_comp,
+                ncmp_out.dxmin - pp_enc_comp,
+                ncmp_out.dymin - pp_enc_comp,
             )
         )
         c.add_ref(
-            gf.geometry.boolean(
-                A=pplus_out, B=pplus_in, operation="A-B", layer=layer["nplus"]
-            )
+            gf.boolean(A=pplus_out, B=pplus_in, operation="A-B", layer=layer["nplus"])
         )  # nplus
 
         # generating contacts
@@ -1206,10 +1201,10 @@ def diode_dw2ps(
         c.add_ref(
             via_generator(
                 x_range=(
-                    ncmp_in.xmin + con_size,
-                    ncmp_in.xmax - con_size,
+                    ncmp_in.dxmin + con_size,
+                    ncmp_in.dxmax - con_size,
                 ),
-                y_range=(ncmp_out.ymin, ncmp_in.ymin),
+                y_range=(ncmp_out.dymin, ncmp_in.dymin),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1220,10 +1215,10 @@ def diode_dw2ps(
         c.add_ref(
             via_generator(
                 x_range=(
-                    ncmp_in.xmin + con_size,
-                    ncmp_in.xmax - con_size,
+                    ncmp_in.dxmin + con_size,
+                    ncmp_in.dxmax - con_size,
                 ),
-                y_range=(ncmp_in.ymax, ncmp_out.ymax),
+                y_range=(ncmp_in.dymax, ncmp_out.dymax),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1233,10 +1228,10 @@ def diode_dw2ps(
 
         n_con = c.add_ref(
             via_generator(
-                x_range=(ncmp_out.xmin, ncmp_in.xmin),
+                x_range=(ncmp_out.dxmin, ncmp_in.dxmin),
                 y_range=(
-                    ncmp_in.ymin + con_size,
-                    ncmp_in.ymax - con_size,
+                    ncmp_in.dymin + con_size,
+                    ncmp_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1247,10 +1242,10 @@ def diode_dw2ps(
 
         c.add_ref(
             via_generator(
-                x_range=(ncmp_in.xmax, ncmp_out.xmax),
+                x_range=(ncmp_in.dxmax, ncmp_out.dxmax),
                 y_range=(
-                    ncmp_in.ymin + con_size,
-                    ncmp_in.ymax - con_size,
+                    ncmp_in.dymin + con_size,
+                    ncmp_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1261,7 +1256,7 @@ def diode_dw2ps(
 
         comp_m1_in = c_temp.add_ref(
             gf.components.rectangle(
-                size=(ncmp_in.size[0], ncmp_in.size[1]),
+                size=(ncmp_in.dxsize, ncmp_in.dysize),
                 layer=layer["metal1"],
             )
         )
@@ -1269,15 +1264,15 @@ def diode_dw2ps(
         comp_m1_out = c_temp.add_ref(
             gf.components.rectangle(
                 size=(
-                    (comp_m1_in.size[0]) + 2 * cw,
-                    (comp_m1_in.size[0]) + 2 * cw,
+                    (comp_m1_in.dxsize) + 2 * cw,
+                    (comp_m1_in.dxsize) + 2 * cw,
                 ),
                 layer=layer["metal1"],
             )
         )
-        comp_m1_out.move((ncmp_in.xmin - cw, ncmp_in.ymin - cw))
+        comp_m1_out.dmove((ncmp_in.dxmin - cw, ncmp_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=ncmp_out,
                 B=ncmp_in,
                 operation="A-B",
@@ -1291,8 +1286,8 @@ def diode_dw2ps(
         c.add_label(
             n_label,
             position=(
-                n_con.xmin + (n_con.size[0] / 2),
-                n_con.ymin + (n_con.size[1] / 2),
+                n_con.dxmin + (n_con.dxsize / 2),
+                n_con.dymin + (n_con.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
@@ -1302,49 +1297,49 @@ def diode_dw2ps(
     dn_rect = c.add_ref(
         gf.components.rectangle(
             size=(
-                ncmp.size[0] + (2 * dn_enc_ncmp),
-                ncmp.size[1] + (2 * dn_enc_ncmp),
+                ncmp.dxsize + (2 * dn_enc_ncmp),
+                ncmp.dysize + (2 * dn_enc_ncmp),
             ),
             layer=layer["dnwell"],
         )
     )
-    dn_rect.xmin = ncmp.xmin - dn_enc_ncmp
-    dn_rect.ymin = ncmp.ymin - dn_enc_ncmp
+    dn_rect.dxmin = ncmp.dxmin - dn_enc_ncmp
+    dn_rect.dymin = ncmp.dymin - dn_enc_ncmp
 
     diode_mk = c.add_ref(
         gf.components.rectangle(
-            size=(dn_rect.size[0], dn_rect.size[1]), layer=layer["diode_mk"]
+            size=(dn_rect.dxsize, dn_rect.dysize), layer=layer["diode_mk"]
         )
     )
-    diode_mk.xmin = dn_rect.xmin
-    diode_mk.ymin = dn_rect.ymin
+    diode_mk.dxmin = dn_rect.dxmin
+    diode_mk.dymin = dn_rect.dymin
 
     if pcmpgr == 1:
         c_temp_gr = gf.Component("temp_store guard ring")
         rect_pcmpgr_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                    (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_in.move(
-            (dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn)
+        rect_pcmpgr_in.dmove(
+            (dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn)
         )
         rect_pcmpgr_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        rect_pcmpgr_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",
@@ -1355,37 +1350,35 @@ def diode_dw2ps(
         psdm_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * pp_enc_comp,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_in.move(
+        psdm_in.dmove(
             (
-                rect_pcmpgr_in.xmin + pp_enc_comp,
-                rect_pcmpgr_in.ymin + pp_enc_comp,
+                rect_pcmpgr_in.dxmin + pp_enc_comp,
+                rect_pcmpgr_in.dymin + pp_enc_comp,
             )
         )
         psdm_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * pp_enc_comp,
-                    (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin) + 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_out.move(
+        psdm_out.dmove(
             (
-                rect_pcmpgr_out.xmin - pp_enc_comp,
-                rect_pcmpgr_out.ymin - pp_enc_comp,
+                rect_pcmpgr_out.dxmin - pp_enc_comp,
+                rect_pcmpgr_out.dymin - pp_enc_comp,
             )
         )
         c.add_ref(
-            gf.geometry.boolean(
-                A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-            )
+            gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
         )  # psdm
 
         # generating contacts
@@ -1393,10 +1386,10 @@ def diode_dw2ps(
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+                y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1407,10 +1400,10 @@ def diode_dw2ps(
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+                y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1420,10 +1413,10 @@ def diode_dw2ps(
 
         p_con = c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+                x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1434,10 +1427,10 @@ def diode_dw2ps(
 
         c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+                x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1452,15 +1445,15 @@ def diode_dw2ps(
             c.add_label(
                 p_label,
                 position=(
-                    p_con.xmin + (p_con.size[0] / 2),
-                    p_con.ymin + (p_con.size[1] / 2),
+                    p_con.dxmin + (p_con.dxsize / 2),
+                    p_con.dymin + (p_con.dysize / 2),
                 ),
                 layer=layer["metal1_label"],
             )
 
         comp_m1_in = c_temp_gr.add_ref(
             gf.components.rectangle(
-                size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+                size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
                 layer=layer["metal1"],
             )
         )
@@ -1468,15 +1461,15 @@ def diode_dw2ps(
         comp_m1_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                 ),
                 layer=layer["metal1"],
             )
         )
-        comp_m1_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        comp_m1_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",
@@ -1490,14 +1483,14 @@ def diode_dw2ps(
         dg = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    dn_rect.size[0] + (2 * dg_enc_dn),
-                    dn_rect.size[1] + (2 * dg_enc_dn),
+                    dn_rect.dxsize + (2 * dg_enc_dn),
+                    dn_rect.dysize + (2 * dg_enc_dn),
                 ),
                 layer=layer["dualgate"],
             )
         )
-        dg.xmin = dn_rect.xmin - dg_enc_dn
-        dg.ymin = dn_rect.ymin - dg_enc_dn
+        dg.dxmin = dn_rect.dxmin - dg_enc_dn
+        dg.dymin = dn_rect.dymin - dg_enc_dn
 
     return c
 
@@ -1513,15 +1506,15 @@ def sc_diode(
     p_label: str = "",
     n_label: str = "",
 ) -> gf.Component:
-    """used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters
+    """Used to draw N+/LVPWELL diode (Outside DNWELL) by specifying parameters.
 
     Args:
      la         : Float of diff length (anode)
      wa         : Float of diff width (anode)
      m          : Integer of number of fingers
      pcmpgr     : Boolean of using P+ Guard Ring for Deep NWELL devices only
-    """
 
+    """
     c = gf.Component("sc_diode_dev")
 
     sc_enc_comp = 0.16
@@ -1539,12 +1532,11 @@ def sc_diode(
     # cathode draw
     @gf.cell
     def sc_cathode_strap(size: Float2 = (0.1, 0.1)) -> gf.Component:
-        """Returns sc_diode cathode array element
+        """Returns sc_diode cathode array element.
 
         Args :
             size : size of cathode array element
         """
-
         c = gf.Component()
 
         ncmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
@@ -1552,19 +1544,19 @@ def sc_diode(
         nplus = c.add_ref(
             gf.components.rectangle(
                 size=(
-                    ncmp.size[0] + (2 * np_enc_comp),
-                    ncmp.size[1] + (2 * np_enc_comp),
+                    ncmp.dxsize + (2 * np_enc_comp),
+                    ncmp.dysize + (2 * np_enc_comp),
                 ),
                 layer=layer["nplus"],
             )
         )
-        nplus.xmin = ncmp.xmin - np_enc_comp
-        nplus.ymin = ncmp.ymin - np_enc_comp
+        nplus.dxmin = ncmp.dxmin - np_enc_comp
+        nplus.dymin = ncmp.dymin - np_enc_comp
 
         c.add_ref(
             via_stack(
-                x_range=(ncmp.xmin, ncmp.xmax),
-                y_range=(ncmp.ymin, ncmp.ymax),
+                x_range=(ncmp.dxmin, ncmp.dxmax),
+                y_range=(ncmp.dymin, ncmp.dymax),
                 base_layer=layer["comp"],
                 metal_level=1,
             )
@@ -1574,18 +1566,17 @@ def sc_diode(
 
     @gf.cell
     def sc_anode_strap(size: Float2 = (0.1, 0.1)) -> gf.Component:
-        """Returns sc_diode anode array element
+        """Returns sc_diode anode array element.
 
         Args :
             size : size of anode array element
         """
-
         c = gf.Component()
         cmp = c.add_ref(gf.components.rectangle(size=size, layer=layer["comp"]))
         c.add_ref(
             via_stack(
-                x_range=(cmp.xmin, cmp.xmax),
-                y_range=(cmp.ymin, cmp.ymax),
+                x_range=(cmp.dxmin, cmp.dxmax),
+                y_range=(cmp.dymin, cmp.dymax),
                 base_layer=layer["comp"],
                 metal_level=1,
             )
@@ -1595,68 +1586,67 @@ def sc_diode(
     sc_an = sc_anode_strap(size=(wa, la))
     sc_cath = sc_cathode_strap(size=(cw, la))
 
-    sc_cathode = c.add_array(
+    sc_cathode = c.add_ref(
         component=sc_cath,
         rows=1,
         columns=(m + 1),
-        spacing=((cw + wa + (2 * sc_comp_spacing)), 0),
+        column_pitch=cw + wa + (2 * sc_comp_spacing),
     )
 
-    cath_m1_xmin = sc_cathode.xmin
-    cath_m1_ymin = sc_cathode.ymin
-    cath_m1_xmax = sc_cathode.xmax
+    cath_m1_xmin = sc_cathode.dxmin
+    cath_m1_ymin = sc_cathode.dymin
+    cath_m1_xmax = sc_cathode.dxmax
 
-    cath_m1_v = c.add_array(
+    cath_m1_v = c.add_ref(
         component=gf.components.rectangle(
             size=(
                 cath_m1_xmax - cath_m1_xmin,
-                cath_m1_ymin - sc_cathode.ymin + m1_w,
+                cath_m1_ymin - sc_cathode.dymin + m1_w,
             ),
             layer=layer["metal1"],
         ),
         rows=1,
         columns=(m + 1),
-        spacing=((cw + wa + (2 * sc_comp_spacing)), 0),
+        column_pitch=(cw + wa + (2 * sc_comp_spacing)),
     )
 
-    cath_m1_v.xmin = cath_m1_xmin
-    cath_m1_v.ymax = cath_m1_ymin
+    cath_m1_v.dxmin = cath_m1_xmin
+    cath_m1_v.dymax = cath_m1_ymin
     cath_m1_h = c.add_ref(
-        gf.components.rectangle(size=(cath_m1_v.size[0], m1_w), layer=layer["metal1"])
+        gf.components.rectangle(size=(cath_m1_v.dxsize, m1_w), layer=layer["metal1"])
     )
-    cath_m1_h.xmin = cath_m1_v.xmin
-    cath_m1_h.ymax = cath_m1_v.ymin
+    cath_m1_h.dxmin = cath_m1_v.dxmin
+    cath_m1_h.dymax = cath_m1_v.dymin
 
     # cathode label generation
     if label == 1:
         c.add_label(
             n_label,
             position=(
-                cath_m1_h.xmin + (cath_m1_h.size[0] / 2),
-                cath_m1_h.ymin + (cath_m1_h.size[1] / 2),
+                cath_m1_h.dxmin + (cath_m1_h.dxsize / 2),
+                cath_m1_h.dymin + (cath_m1_h.dysize / 2),
             ),
             layer=layer["metal1_label"],
         )
 
-    sc_anode = c.add_array(
+    sc_anode = c.add_ref(
         component=sc_an,
         rows=1,
         columns=m,
-        spacing=(wa + cw + (2 * sc_comp_spacing), 0),
+        column_pitch=(wa + cw + (2 * sc_comp_spacing)),
     )
-
-    sc_anode.xmin = sc_cathode.xmin + (cw + sc_comp_spacing)
-    an_m1_xmin = sc_anode.xmin
-    an_m1_ymin = sc_anode.ymin
-    an_m1_xmax = sc_anode.xmax
-    an_m1_ymax = sc_anode.ymax
+    sc_anode.dxmin = sc_cathode.dxmin + (cw + sc_comp_spacing)
+    an_m1_xmin = sc_anode.dxmin
+    an_m1_ymin = sc_anode.dymin
+    an_m1_xmax = sc_anode.dxmax
+    an_m1_ymax = sc_anode.dymax
 
     if m > 1:
-        an_m1_v = c.add_array(
+        an_m1_v = c.add_ref(
             component=gf.components.rectangle(
                 size=(
                     an_m1_xmax - an_m1_xmin,
-                    cath_m1_ymin - sc_an.ymin + m1_w,
+                    cath_m1_ymin - sc_an.dymin + m1_w,
                 ),
                 layer=layer["metal1"],
             ),
@@ -1665,22 +1655,22 @@ def sc_diode(
             spacing=((cw + wa + (2 * sc_comp_spacing)), 0),
         )
 
-        an_m1_v.xmin = an_m1_xmin
-        an_m1_v.ymin = an_m1_ymax
+        an_m1_v.dxmin = an_m1_xmin
+        an_m1_v.dymin = an_m1_ymax
 
         an_m1_h = c.add_ref(
-            gf.components.rectangle(size=(an_m1_v.size[0], m1_w), layer=layer["metal1"])
+            gf.components.rectangle(size=(an_m1_v.dxsize, m1_w), layer=layer["metal1"])
         )
-        an_m1_h.xmin = an_m1_v.xmin
-        an_m1_h.ymin = an_m1_v.ymax
+        an_m1_h.dxmin = an_m1_v.dxmin
+        an_m1_h.dymin = an_m1_v.dymax
 
         # anode label generation
         if label == 1:
             c.add_label(
                 p_label,
                 position=(
-                    an_m1_h.xmin + (an_m1_h.size[0] / 2),
-                    an_m1_h.ymin + (an_m1_h.size[1] / 2),
+                    an_m1_h.dxmin + (an_m1_h.dxsize / 2),
+                    an_m1_h.dymin + (an_m1_h.dysize / 2),
                 ),
                 layer=layer["metal1_label"],
             )
@@ -1701,54 +1691,54 @@ def sc_diode(
     diode_mk = c.add_ref(
         gf.components.rectangle(
             size=(
-                sc_cathode.size[0] + (2 * sc_enc_comp),
-                sc_cathode.size[1] + (2 * sc_enc_comp),
+                sc_cathode.dxsize + (2 * sc_enc_comp),
+                sc_cathode.dysize + (2 * sc_enc_comp),
             ),
             layer=layer["schottky_diode"],
         )
     )
-    diode_mk.xmin = sc_cathode.xmin - sc_enc_comp
-    diode_mk.ymin = sc_cathode.ymin - sc_enc_comp
+    diode_mk.dxmin = sc_cathode.dxmin - sc_enc_comp
+    diode_mk.dymin = sc_cathode.dymin - sc_enc_comp
 
     # dnwell
     dn_rect = c.add_ref(
         gf.components.rectangle(
             size=(
-                sc_anode.size[0] + (2 * dn_enc_sc_an),
-                sc_anode.size[1] + (2 * dn_enc_sc_an),
+                sc_anode.dxsize + (2 * dn_enc_sc_an),
+                sc_anode.dysize + (2 * dn_enc_sc_an),
             ),
             layer=layer["dnwell"],
         )
     )
-    dn_rect.xmin = sc_anode.xmin - dn_enc_sc_an
-    dn_rect.ymin = sc_anode.ymin - dn_enc_sc_an
+    dn_rect.dxmin = sc_anode.dxmin - dn_enc_sc_an
+    dn_rect.dymin = sc_anode.dymin - dn_enc_sc_an
 
     if pcmpgr == 1:
         c_temp_gr = gf.Component("temp_store guard ring")
         rect_pcmpgr_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                    (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                    (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_in.move(
-            (dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn)
+        rect_pcmpgr_in.dmove(
+            (dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn)
         )
         rect_pcmpgr_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * cw,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * cw,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * cw,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * cw,
                 ),
                 layer=layer["comp"],
             )
         )
-        rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        rect_pcmpgr_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",
@@ -1759,47 +1749,45 @@ def sc_diode(
         psdm_in = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * pp_enc_comp,
-                    (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * pp_enc_comp,
+                    (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_in.move(
+        psdm_in.dmove(
             (
-                rect_pcmpgr_in.xmin + pp_enc_comp,
-                rect_pcmpgr_in.ymin + pp_enc_comp,
+                rect_pcmpgr_in.dxmin + pp_enc_comp,
+                rect_pcmpgr_in.dymin + pp_enc_comp,
             )
         )
         psdm_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * pp_enc_comp,
-                    (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin) + 2 * pp_enc_comp,
+                    (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin) + 2 * pp_enc_comp,
                 ),
                 layer=layer["pplus"],
             )
         )
-        psdm_out.move(
+        psdm_out.dmove(
             (
-                rect_pcmpgr_out.xmin - pp_enc_comp,
-                rect_pcmpgr_out.ymin - pp_enc_comp,
+                rect_pcmpgr_out.dxmin - pp_enc_comp,
+                rect_pcmpgr_out.dymin - pp_enc_comp,
             )
         )
         c.add_ref(
-            gf.geometry.boolean(
-                A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-            )
+            gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
         )  # psdm
 
         # generating contacts
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+                y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1810,10 +1798,10 @@ def sc_diode(
         c.add_ref(
             via_generator(
                 x_range=(
-                    rect_pcmpgr_in.xmin + con_size,
-                    rect_pcmpgr_in.xmax - con_size,
+                    rect_pcmpgr_in.dxmin + con_size,
+                    rect_pcmpgr_in.dxmax - con_size,
                 ),
-                y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+                y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
                 via_size=(con_size, con_size),
@@ -1823,10 +1811,10 @@ def sc_diode(
 
         c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+                x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1837,10 +1825,10 @@ def sc_diode(
 
         c.add_ref(
             via_generator(
-                x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+                x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
                 y_range=(
-                    rect_pcmpgr_in.ymin + con_size,
-                    rect_pcmpgr_in.ymax - con_size,
+                    rect_pcmpgr_in.dymin + con_size,
+                    rect_pcmpgr_in.dymax - con_size,
                 ),
                 via_enclosure=(con_comp_enc, con_comp_enc),
                 via_layer=layer["contact"],
@@ -1851,7 +1839,7 @@ def sc_diode(
 
         comp_m1_in = c_temp_gr.add_ref(
             gf.components.rectangle(
-                size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+                size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
                 layer=layer["metal1"],
             )
         )
@@ -1859,15 +1847,15 @@ def sc_diode(
         comp_m1_out = c_temp_gr.add_ref(
             gf.components.rectangle(
                 size=(
-                    (comp_m1_in.size[0]) + 2 * cw,
-                    (comp_m1_in.size[1]) + 2 * cw,
+                    (comp_m1_in.dxsize) + 2 * cw,
+                    (comp_m1_in.dysize) + 2 * cw,
                 ),
                 layer=layer["metal1"],
             )
         )
-        comp_m1_out.move((rect_pcmpgr_in.xmin - cw, rect_pcmpgr_in.ymin - cw))
+        comp_m1_out.dmove((rect_pcmpgr_in.dxmin - cw, rect_pcmpgr_in.dymin - cw))
         c.add_ref(
-            gf.geometry.boolean(
+            gf.boolean(
                 A=rect_pcmpgr_out,
                 B=rect_pcmpgr_in,
                 operation="A-B",

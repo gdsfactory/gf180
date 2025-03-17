@@ -1,43 +1,14 @@
-function: alter_interdig
 info: {}
-module: gf180.fet
-name: alter_interdig
+name: alter_interdig_SDFrecta_91096da8
 settings:
-  g_label: null
   label: false
   nf: 1
   nl: 1
   pat: ''
   patt_label: false
-  pc1:
-    function: array
-    module: gdsfactory.components.array_component
-    settings:
-      component:
-        function: rectangle
-        module: gdsfactory.components.rectangle
-        settings:
-          layer:
-          - 22
-          - 0
-  pc2:
-    function: array
-    module: gdsfactory.components.array_component
-    settings:
-      component:
-        function: rectangle
-        module: gdsfactory.components.rectangle
-        settings:
-          layer:
-          - 22
-          - 0
+  pc1: Farray_Mgdsfactorypcomponentspcontainersparray_component_SCFrectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
+  pc2: Farray_Mgdsfactorypcomponentspcontainersparray_component_SCFrectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
   pc_spacing: 0.1
   pc_x: 0.1
-  sd_diff:
-    function: rectangle
-    module: gdsfactory.components.rectangle
-    settings:
-      layer:
-      - 22
-      - 0
+  sd_diff: Frectangle_Mgdsfactorypcomponentspshapesprectangle_SLcomp
   sd_l: 0.36

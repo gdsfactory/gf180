@@ -10,13 +10,13 @@ dn_rect = partial(gf.components.rectangle, layer=LAYER.dnwell)
 
 @gf.cell
 def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
-    """Return deepnwell guardring
+    """Return deepnwell guardring.
 
     Args:
         dn_rect : deepnwell polygon.
         grw : guardring width.
-    """
 
+    """
     c = gf.Component()
 
     dn_rect = gf.get_component(dn_rect)
@@ -31,25 +31,25 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     rect_pcmpgr_in = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (dn_rect.xmax - dn_rect.xmin) + 2 * pcmpgr_enc_dn,
-                (dn_rect.ymax - dn_rect.ymin) + 2 * pcmpgr_enc_dn,
+                (dn_rect.dxmax - dn_rect.dxmin) + 2 * pcmpgr_enc_dn,
+                (dn_rect.dymax - dn_rect.dymin) + 2 * pcmpgr_enc_dn,
             ),
             layer=layer["comp"],
         )
     )
-    rect_pcmpgr_in.move((dn_rect.xmin - pcmpgr_enc_dn, dn_rect.ymin - pcmpgr_enc_dn))
+    rect_pcmpgr_in.dmove((dn_rect.dxmin - pcmpgr_enc_dn, dn_rect.dymin - pcmpgr_enc_dn))
     rect_pcmpgr_out = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) + 2 * grw,
-                (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) + 2 * grw,
+                (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) + 2 * grw,
+                (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) + 2 * grw,
             ),
             layer=layer["comp"],
         )
     )
-    rect_pcmpgr_out.move((rect_pcmpgr_in.xmin - grw, rect_pcmpgr_in.ymin - grw))
+    rect_pcmpgr_out.dmove((rect_pcmpgr_in.dxmin - grw, rect_pcmpgr_in.dymin - grw))
     c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_pcmpgr_out,
             B=rect_pcmpgr_in,
             operation="A-B",
@@ -60,37 +60,35 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     psdm_in = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (rect_pcmpgr_in.xmax - rect_pcmpgr_in.xmin) - 2 * comp_pp_enc,
-                (rect_pcmpgr_in.ymax - rect_pcmpgr_in.ymin) - 2 * comp_pp_enc,
+                (rect_pcmpgr_in.dxmax - rect_pcmpgr_in.dxmin) - 2 * comp_pp_enc,
+                (rect_pcmpgr_in.dymax - rect_pcmpgr_in.dymin) - 2 * comp_pp_enc,
             ),
             layer=layer["pplus"],
         )
     )
-    psdm_in.move(
+    psdm_in.dmove(
         (
-            rect_pcmpgr_in.xmin + comp_pp_enc,
-            rect_pcmpgr_in.ymin + comp_pp_enc,
+            rect_pcmpgr_in.dxmin + comp_pp_enc,
+            rect_pcmpgr_in.dymin + comp_pp_enc,
         )
     )
     psdm_out = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (rect_pcmpgr_out.xmax - rect_pcmpgr_out.xmin) + 2 * comp_pp_enc,
-                (rect_pcmpgr_out.ymax - rect_pcmpgr_out.ymin) + 2 * comp_pp_enc,
+                (rect_pcmpgr_out.dxmax - rect_pcmpgr_out.dxmin) + 2 * comp_pp_enc,
+                (rect_pcmpgr_out.dymax - rect_pcmpgr_out.dymin) + 2 * comp_pp_enc,
             ),
             layer=layer["pplus"],
         )
     )
-    psdm_out.move(
+    psdm_out.dmove(
         (
-            rect_pcmpgr_out.xmin - comp_pp_enc,
-            rect_pcmpgr_out.ymin - comp_pp_enc,
+            rect_pcmpgr_out.dxmin - comp_pp_enc,
+            rect_pcmpgr_out.dymin - comp_pp_enc,
         )
     )
     c.add_ref(
-        gf.geometry.boolean(
-            A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"]
-        )
+        gf.boolean(A=psdm_out, B=psdm_in, operation="A-B", layer=layer["pplus"])
     )  # pplus_draw
 
     # generating contacts
@@ -98,10 +96,10 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     c.add_ref(
         via_generator(
             x_range=(
-                rect_pcmpgr_in.xmin + con_size,
-                rect_pcmpgr_in.xmax - con_size,
+                rect_pcmpgr_in.dxmin + con_size,
+                rect_pcmpgr_in.dxmax - con_size,
             ),
-            y_range=(rect_pcmpgr_out.ymin, rect_pcmpgr_in.ymin),
+            y_range=(rect_pcmpgr_out.dymin, rect_pcmpgr_in.dymin),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
             via_size=(con_size, con_size),
@@ -112,10 +110,10 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     c.add_ref(
         via_generator(
             x_range=(
-                rect_pcmpgr_in.xmin + con_size,
-                rect_pcmpgr_in.xmax - con_size,
+                rect_pcmpgr_in.dxmin + con_size,
+                rect_pcmpgr_in.dxmax - con_size,
             ),
-            y_range=(rect_pcmpgr_in.ymax, rect_pcmpgr_out.ymax),
+            y_range=(rect_pcmpgr_in.dymax, rect_pcmpgr_out.dymax),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
             via_size=(con_size, con_size),
@@ -125,10 +123,10 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
 
     c.add_ref(
         via_generator(
-            x_range=(rect_pcmpgr_out.xmin, rect_pcmpgr_in.xmin),
+            x_range=(rect_pcmpgr_out.dxmin, rect_pcmpgr_in.dxmin),
             y_range=(
-                rect_pcmpgr_in.ymin + con_size,
-                rect_pcmpgr_in.ymax - con_size,
+                rect_pcmpgr_in.dymin + con_size,
+                rect_pcmpgr_in.dymax - con_size,
             ),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
@@ -139,10 +137,10 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
 
     c.add_ref(
         via_generator(
-            x_range=(rect_pcmpgr_in.xmax, rect_pcmpgr_out.xmax),
+            x_range=(rect_pcmpgr_in.dxmax, rect_pcmpgr_out.dxmax),
             y_range=(
-                rect_pcmpgr_in.ymin + con_size,
-                rect_pcmpgr_in.ymax - con_size,
+                rect_pcmpgr_in.dymin + con_size,
+                rect_pcmpgr_in.dymax - con_size,
             ),
             via_enclosure=(con_comp_enc, con_comp_enc),
             via_layer=layer["contact"],
@@ -153,7 +151,7 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
 
     comp_m1_in = c_temp_gr.add_ref(
         gf.components.rectangle(
-            size=(rect_pcmpgr_in.size[0], rect_pcmpgr_in.size[1]),
+            size=(rect_pcmpgr_in.dxsize, rect_pcmpgr_in.dysize),
             layer=layer["metal1"],
         )
     )
@@ -161,15 +159,15 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     comp_m1_out = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
-                (comp_m1_in.size[0]) + 2 * grw,
-                (comp_m1_in.size[1]) + 2 * grw,
+                (comp_m1_in.dxsize) + 2 * grw,
+                (comp_m1_in.dysize) + 2 * grw,
             ),
             layer=layer["metal1"],
         )
     )
-    comp_m1_out.move((rect_pcmpgr_in.xmin - grw, rect_pcmpgr_in.ymin - grw))
+    comp_m1_out.dmove((rect_pcmpgr_in.dxmin - grw, rect_pcmpgr_in.dymin - grw))
     c.add_ref(
-        gf.geometry.boolean(
+        gf.boolean(
             A=rect_pcmpgr_out,
             B=rect_pcmpgr_in,
             operation="A-B",

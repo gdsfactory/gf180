@@ -43,11 +43,9 @@ ldfet_w_max = 50
 
 
 class nfet(pya.PCellDeclarationHelper):
-    """
-    NFET Generator for GF180MCU
-    """
+    """NFET Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initialize super class.
         super().__init__()
 
@@ -104,11 +102,11 @@ class nfet(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
-        return "nfet(L=" + ("%.3f" % self.l_gate) + ",W=" + ("%.3f" % self.w_gate) + ")"
+        return f"nfet(L={self.l_gate:.3f},W=" + f"{self.w_gate:.3f}" + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed (by comparing against the effective
         # radius ru) and set ru to the effective radius. We also update the
@@ -135,18 +133,18 @@ class nfet(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.l_gateayout.dbu / 2
         self.l_gate = self.l_gateayout.get_info(self.l_gateayer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         instance = draw_nfet(
             layout=self.layout,
             l_gate=self.l_gate,
@@ -182,11 +180,9 @@ class nfet(pya.PCellDeclarationHelper):
 
 
 class pfet(pya.PCellDeclarationHelper):
-    """
-    PFET Generator for GF180MCU
-    """
+    """PFET Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initialize super class.
         super().__init__()
 
@@ -243,11 +239,11 @@ class pfet(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
-        return "pfet(L=" + ("%.3f" % self.l_gate) + ",W=" + ("%.3f" % self.w_gate) + ")"
+        return f"pfet(L={self.l_gate:.3f},W=" + f"{self.w_gate:.3f}" + ")"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed (by comparing against the effective
         # radius ru) and set ru to the effective radius. We also update the
@@ -274,18 +270,18 @@ class pfet(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.l_gateayout.dbu / 2
         self.l_gate = self.l_gateayout.get_info(self.l_gateayer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         instance = draw_pfet(
             self.layout,
             l_gate=self.l_gate,
@@ -321,11 +317,9 @@ class pfet(pya.PCellDeclarationHelper):
 
 
 class nfet_06v0_nvt(pya.PCellDeclarationHelper):
-    """
-    6V Native NFET Generator for GF180MCU
-    """
+    """6V Native NFET Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initialize super class.
         super().__init__()
 
@@ -376,17 +370,17 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate Label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "nfet_06v0_nvt(L="
-            + ("%.3f" % self.l_gate)
+            + (f"{self.l_gate:.3f}")
             + ",W="
-            + ("%.3f" % self.w_gate)
+            + (f"{self.w_gate:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed (by comparing against the effective
         # radius ru) and set ru to the effective radius. We also update the
@@ -404,18 +398,18 @@ class nfet_06v0_nvt(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.l_gateayout.dbu / 2
         self.l_gate = self.l_gateayout.get_info(self.l_gateayer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         instance = draw_nfet_06v0_nvt(
             self.layout,
             l_gate=self.l_gate,

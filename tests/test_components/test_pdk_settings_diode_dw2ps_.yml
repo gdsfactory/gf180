@@ -1,7 +1,5 @@
-function: diode_dw2ps
 info: {}
-module: gf180.diode
-name: diode_dw2ps
+name: diode_dw2ps_L0p1_W0p1_C_3ef72f59
 settings:
   cw: 0.1
   la: 0.1

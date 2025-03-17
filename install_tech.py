@@ -6,7 +6,7 @@ import shutil
 import sys
 
 
-def remove_path_or_dir(dest: pathlib.Path):
+def remove_path_or_dir(dest: pathlib.Path) -> None:
     if dest.is_dir():
         os.unlink(dest)
     else:

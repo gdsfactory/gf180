@@ -1,7 +1,5 @@
-function: pfet
 info: {}
-module: gf180.fet
-name: pfet
+name: pfet_LG0p28_WG0p22_SCC1_3cff6ea1
 settings:
   bulk: None
   con_bet_fin: 1

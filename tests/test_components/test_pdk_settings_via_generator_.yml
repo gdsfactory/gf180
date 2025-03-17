@@ -1,7 +1,5 @@
-function: via_generator
 info: {}
-module: gf180.via_generator
-name: via_generator
+name: via_generator_XR0_1_YR0_209e59ae
 settings:
   via_enclosure:
   - 0.06

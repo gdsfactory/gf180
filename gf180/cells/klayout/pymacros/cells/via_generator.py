@@ -35,12 +35,10 @@ def via_generator(
     via_enclosure: Float2 = (0.06, 0.06),
     via_spacing: Float2 = (0.17, 0.17),
 ) -> gf.Component:
-    """
-    return only vias withen the range xrange and yrange while enclosing by via_enclosure
-    and set number of rows and number of columns according to ranges and via size and spacing
+    """Return only vias withen the range xrange and yrange while enclosing by via_enclosure
+    and set number of rows and number of columns according to ranges and via size and spacing.
 
     """
-
     c = gf.Component()
 
     width = x_range[1] - x_range[0]
@@ -62,12 +60,12 @@ def via_generator(
 
     rect_via = gf.components.rectangle(size=via_size, layer=via_layer)
 
-    via_arr = c.add_array(rect_via, rows=nr, columns=nc, spacing=via_sp)
+    via_arr = c.add_ref(rect_via, rows=nr, columns=nc, spacing=via_sp)
 
-    via_arr.move((x_range[0], y_range[0]))
+    via_arr.dmove((x_range[0], y_range[0]))
 
-    via_arr.movex((width - nc * via_size[0] - (nc - 1) * via_spacing[0]) / 2)
-    via_arr.movey((length - nr * via_size[1] - (nr - 1) * via_spacing[1]) / 2)
+    via_arr.dmovex((width - nc * via_size[0] - (nc - 1) * via_spacing[0]) / 2)
+    via_arr.dmovey((length - nr * via_size[1] - (nr - 1) * via_spacing[1]) / 2)
 
     return c
 
@@ -81,17 +79,15 @@ def via_stack(
     metal_level: int = 1,
     li_enc_dir="V",
 ) -> gf.Component:
-    """
-    return via stack till the metal level indicated where :
+    """Return via stack till the metal level indicated where :
     metal_level 1 : till m1
     metal_level 2 : till m2
     metal_level 3 : till m3
     metal_level 4 : till m4
     metal_level 5 : till m5
-    withen the range xrange and yrange and expecting the base_layer to be drawen
+    withen the range xrange and yrange and expecting the base_layer to be drawen.
 
     """
-
     c = gf.Component()
 
     # vias dimensions
@@ -117,20 +113,20 @@ def via_stack(
         )
         con = c.add_ref(con_gen)
 
-        m1_x = con.size[0] + 2 * m_enc
+        m1_x = con.dxsize + 2 * m_enc
 
-        m1_y = con.size[1] + 2 * m_enc
+        m1_y = con.dysize + 2 * m_enc
 
         m1 = c.add_ref(
             gf.components.rectangle(size=(m1_x, m1_y), layer=layer["metal1"])
         )
-        m1.xmin = con.xmin - m_enc
-        m1.ymin = con.ymin - m_enc
+        m1.dxmin = con.dxmin - m_enc
+        m1.dymin = con.dymin - m_enc
 
     if metal_level >= 2:
         via1_gen = via_generator(
-            x_range=(m1.xmin, m1.xmax),
-            y_range=(m1.ymin, m1.ymax),
+            x_range=(m1.dxmin, m1.dxmax),
+            y_range=(m1.dymin, m1.dymax),
             via_size=via_size,
             via_enclosure=via_enc,
             via_layer=layer["via1"],
@@ -138,29 +134,29 @@ def via_stack(
         )
         via1 = c.add_ref(via1_gen)
 
-        if (via1.xmax - via1.xmin + 2 * m_enc[0]) < (
+        if (via1.dxmax - via1.dxmin + 2 * m_enc[0]) < (
             via_size[0] + 2 * via_enc[0]
         ) and metal_level >= 3:
             m2_x = via_size[0] + 2 * via_enc[0]
 
         else:
-            m2_x = via1.xmax - via1.xmin + 2 * m_enc[0]
+            m2_x = via1.dxmax - via1.dxmin + 2 * m_enc[0]
 
-        if (via1.ymax - via1.ymin + 2 * m_enc[1]) < (
+        if (via1.dymax - via1.dymin + 2 * m_enc[1]) < (
             via_size[1] + 2 * via_enc[1]
         ) and metal_level >= 3:
             m2_y = via_size[1] + 2 * via_enc[1]
 
         else:
-            m2_y = via1.ymax - via1.ymin + 2 * m_enc[1]
+            m2_y = via1.dymax - via1.dymin + 2 * m_enc[1]
 
-        m2_mx = (m2_x - (via1.xmax - via1.xmin)) / 2
-        m2_my = (m2_y - (via1.ymax - via1.ymin)) / 2
+        m2_mx = (m2_x - (via1.dxmax - via1.dxmin)) / 2
+        m2_my = (m2_y - (via1.dymax - via1.dymin)) / 2
 
         m2 = c.add_ref(
             gf.components.rectangle(size=(m2_x, m2_y), layer=layer["metal2"])
         )
-        m2.move((via1.xmin - m2_mx, via1.ymin - m2_my))
+        m2.dmove((via1.dxmin - m2_mx, via1.dymin - m2_my))
 
     return c
 

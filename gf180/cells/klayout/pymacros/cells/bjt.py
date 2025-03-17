@@ -22,11 +22,9 @@ from .draw_bjt import draw_bjt
 
 
 class npn_bjt(pya.PCellDeclarationHelper):
-    """
-    NPN BJT Generator for GF180MCU
-    """
+    """NPN BJT Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Important: initialize the super class
         super().__init__()
         self.Type_handle = self.param(
@@ -50,28 +48,28 @@ class npn_bjt(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return str(self.Type)
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed. We also update the numerical value
         # or the shape, depending on which on has not changed.
         pass
 
-    def can_create_from_shape_impl(self):
+    def can_create_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we can use any shape which
         # has a finite bounding box
         pass
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         pass
 
-    def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+    def transformation_from_shape_impl(self) -> None:
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
         pass
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         # This is the main part of the implementation: create the layout
 
         self.precision = 1 / self.layout.dbu
@@ -91,11 +89,9 @@ class npn_bjt(pya.PCellDeclarationHelper):
 
 
 class pnp_bjt(pya.PCellDeclarationHelper):
-    """
-    PNP BJT Generator for GF180MCU
-    """
+    """PNP BJT Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Important: initialize the super class
         super().__init__()
         self.Type_handle = self.param(
@@ -117,28 +113,28 @@ class pnp_bjt(pya.PCellDeclarationHelper):
         # Provide a descriptive text for the cell
         return str(self.Type)
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed. We also update the numerical value
         # or the shape, depending on which on has not changed.
         pass
 
-    def can_create_from_shape_impl(self):
+    def can_create_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we can use any shape which
         # has a finite bounding box
         pass
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         pass
 
-    def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+    def transformation_from_shape_impl(self) -> None:
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
         pass
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         # This is the main part of the implementation: create the layout
 
         self.precision = 1 / self.layout.dbu

@@ -80,11 +80,9 @@ ppolyf_u_h_res_w = 0.42
 
 
 class metal_resistor(pya.PCellDeclarationHelper):
-    """
-    2-terminal Metal resistor Generator for GF180MCU
-    """
+    """2-terminal Metal resistor Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -119,17 +117,17 @@ class metal_resistor(pya.PCellDeclarationHelper):
 
         self.param("r1_label", self.TypeString, "R1 label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "metal_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -160,18 +158,18 @@ class metal_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         option = os.environ["GF_PDK_OPTION"]
         if option == "A":
@@ -205,11 +203,9 @@ class metal_resistor(pya.PCellDeclarationHelper):
 
 
 class nplus_s_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal salicided n+ diffusion resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal salicided n+ diffusion resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -238,17 +234,17 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "nplus_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -262,18 +258,18 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_nplus_res(
             layout=self.layout,
@@ -302,11 +298,9 @@ class nplus_s_resistor(pya.PCellDeclarationHelper):
 
 
 class pplus_s_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal salicided P+ diffusion resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal salicided P+ diffusion resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -334,17 +328,17 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "pplus_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -358,18 +352,18 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_pplus_res(
             layout=self.layout,
@@ -397,11 +391,9 @@ class pplus_s_resistor(pya.PCellDeclarationHelper):
 
 
 class nplus_u_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal unsalicided n+ diffusion resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal unsalicided n+ diffusion resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -430,17 +422,17 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "nplus_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -454,18 +446,18 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_nplus_res(
             layout=self.layout,
@@ -494,11 +486,9 @@ class nplus_u_resistor(pya.PCellDeclarationHelper):
 
 
 class pplus_u_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal salicided P+ diffusion resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal salicided P+ diffusion resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -526,17 +516,17 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "pplus_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -550,18 +540,18 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_pplus_res(
             layout=self.layout,
@@ -589,11 +579,9 @@ class pplus_u_resistor(pya.PCellDeclarationHelper):
 
 
 class nwell_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal Nwell resistor under STI (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal Nwell resistor under STI (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -619,17 +607,17 @@ class nwell_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "nwell_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -643,18 +631,18 @@ class nwell_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_well_res(
             layout=self.layout,
@@ -681,11 +669,9 @@ class nwell_resistor(pya.PCellDeclarationHelper):
 
 
 class pwell_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal Pwell resistor under STI (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal Pwell resistor under STI (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -712,17 +698,17 @@ class pwell_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "pwell_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -736,18 +722,18 @@ class pwell_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_well_res(
             layout=self.layout,
@@ -774,11 +760,9 @@ class pwell_resistor(pya.PCellDeclarationHelper):
 
 
 class npolyf_s_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal salicided n+ poly resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal salicided n+ poly resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -806,17 +790,17 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "npolyf_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -830,18 +814,18 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_npolyf_res(
             layout=self.layout,
@@ -869,11 +853,9 @@ class npolyf_s_resistor(pya.PCellDeclarationHelper):
 
 
 class ppolyf_s_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal salicided p+ poly resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal salicided p+ poly resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -901,17 +883,17 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "ppolyf_s_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -925,18 +907,18 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_ppolyf_res(
             layout=self.layout,
@@ -964,11 +946,9 @@ class ppolyf_s_resistor(pya.PCellDeclarationHelper):
 
 
 class npolyf_u_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal unsalicided n+ poly resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal unsalicided n+ poly resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -996,17 +976,17 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "npolyf_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -1020,18 +1000,18 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_npolyf_res(
             layout=self.layout,
@@ -1059,11 +1039,9 @@ class npolyf_u_resistor(pya.PCellDeclarationHelper):
 
 
 class ppolyf_u_resistor(pya.PCellDeclarationHelper):
-    """
-    3-terminal unsalicided p+ poly resistor (Outside DNWELL) Generator for GF180MCU
-    """
+    """3-terminal unsalicided p+ poly resistor (Outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -1091,17 +1069,17 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "ppolyf_u_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -1115,18 +1093,18 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         #     # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         #     # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_ppolyf_res(
             layout=self.layout,
@@ -1154,11 +1132,9 @@ class ppolyf_u_resistor(pya.PCellDeclarationHelper):
 
 
 class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
-    """
-    high-Rs p+ poly resistor (outside DNWELL) Generator for GF180MCU
-    """
+    """high-Rs p+ poly resistor (outside DNWELL) Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Initializing super class.
         super().__init__()
 
@@ -1194,17 +1170,17 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
 
         self.param("sub_label", self.TypeString, "Substrate label", default="")
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return (
             "ppolyf_u_high_Rs_resistor(L="
-            + ("%.3f" % self.l_res)
+            + (f"{self.l_res:.3f}")
             + ",W="
-            + ("%.3f" % self.w_res)
+            + (f"{self.w_res:.3f}")
             + ")"
         )
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the numeric parameter has changed.
         #  We also update the numerical value or the shape, depending on which on has not changed.
         self.area = self.w_res * self.l_res
@@ -1218,18 +1194,18 @@ class ppolyf_u_high_Rs_resistor(pya.PCellDeclarationHelper):
         # has a finite bounding box
         return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         self.r = self.shape.bbox().width() * self.layout.dbu / 2
         self.l_res = self.layout.get_info(self.layer)
 
     def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        return pya.Trans(self.shape.bbox().center())
+        return pya.Trans(self.shape.bbox().dcenter())
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         dbu_PERCISION = 1 / self.layout.dbu
         np_instance = draw_ppolyf_u_high_Rs_res(
             layout=self.layout,

@@ -1,6 +1,8 @@
 import inspect
 import pathlib
 
+from gdsfactory.serialization import clean_value_json
+
 from gf180 import cells
 
 filepath = pathlib.Path(__file__).parent.absolute() / "cells.rst"
@@ -42,7 +44,7 @@ Cells
         sig = inspect.signature(cells[name])
         kwargs = ", ".join(
             [
-                f"{p}={repr(sig.parameters[p].default)}"
+                f"{p}={clean_value_json(sig.parameters[p].default)!r}"
                 for p in sig.parameters
                 if isinstance(sig.parameters[p].default, int | float | str | tuple)
                 and p not in skip_settings
@@ -74,6 +76,8 @@ Cells
   import gf180
 
   c = gf180.{name}({kwargs})
+  c = c.copy()
+  c.draw_ports()
   c.plot()
 
 """

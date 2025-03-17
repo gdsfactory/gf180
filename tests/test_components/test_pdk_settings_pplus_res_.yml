@@ -1,7 +1,5 @@
-function: pplus_res
 info: {}
-module: gf180.res
-name: pplus_res
+name: pplus_res_LR0p1_WR0p1_R_b0e04186
 settings:
   deepnwell: false
   l_res: 0.1

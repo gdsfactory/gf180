@@ -22,11 +22,9 @@ from .draw_efuse import draw_efuse
 
 
 class efuse(pya.PCellDeclarationHelper):
-    """
-    eFuse Generator for GF180MCU
-    """
+    """eFuse Generator for GF180MCU."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Important: initialize the super class
         super().__init__()
         self.param(
@@ -45,37 +43,37 @@ class efuse(pya.PCellDeclarationHelper):
             "y_spacing", self.TypeDouble, "Spacing in y_direction", default=1, unit="um"
         )
 
-    def display_text_impl(self):
+    def display_text_impl(self) -> str:
         # Provide a descriptive text for the cell
         return "efuse"
 
-    def coerce_parameters_impl(self):
+    def coerce_parameters_impl(self) -> None:
         # We employ coerce_parameters_impl to decide whether the handle or the
         # numeric parameter has changed (by comparing against the effective
         # radius ru) and set ru to the effective radius. We also update the
         # numerical value or the shape, depending on which on has not changed.
         pass
 
-    def can_create_from_shape_impl(self):
+    def can_create_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we can use any shape which
         # has a finite bounding box
         # return self.shape.is_box() or self.shape.is_polygon() or self.shape.is_path()
         pass
 
-    def parameters_from_shape_impl(self):
+    def parameters_from_shape_impl(self) -> None:
         # Implement the "Create PCell from shape" protocol: we set r and l from the shape's
         # bounding box width and layer
         # self.r = self.shape.bbox().width() * self.layout.dbu / 2
         # self.l = self.layout.get_info(self.layer)
         pass
 
-    def transformation_from_shape_impl(self):
-        # Implement the "Create PCell from shape" protocol: we use the center of the shape's
+    def transformation_from_shape_impl(self) -> None:
+        # Implement the "Create PCell from shape" protocol: we use the dcenter of the shape's
         # bounding box to determine the transformation
-        # return pya.Trans(self.shape.bbox().center())
+        # return pya.Trans(self.shape.bbox().dcenter())
         pass
 
-    def produce_impl(self):
+    def produce_impl(self) -> None:
         # This is the main part of the implementation: create the layout
 
         self.precision = 1 / self.layout.dbu

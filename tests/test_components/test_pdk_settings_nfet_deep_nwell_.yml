@@ -1,7 +1,5 @@
-function: nfet_deep_nwell
 info: {}
-module: gf180.fet
-name: nfet_deep_nwell
+name: nfet_deep_nwell_DFalse__1f9b92a1
 settings:
   deepnwell: false
   grw: 0.36

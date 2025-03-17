@@ -1,11 +1,7 @@
-function: via_stack
 info: {}
-module: gf180.via_generator
-name: via_stack
+name: via_stack_XR0_1_YR0_1_M_50a43cf3
 settings:
-  base_layer:
-  - 34
-  - 0
+  base_layer: metal1
   con_enc: 0.07
   con_size:
   - 0.22

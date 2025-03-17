@@ -1,7 +1,5 @@
-function: ppolyf_u_high_Rs_res
 info: {}
-module: gf180.res
-name: ppolyf_u_high_Rs_res
+name: ppolyf_u_high_Rs_res_LR_bce160cb
 settings:
   deepnwell: false
   l_res: 0.42

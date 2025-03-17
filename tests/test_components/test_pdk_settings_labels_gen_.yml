@@ -1,16 +1,11 @@
-function: labels_gen
 info: {}
-module: gf180.fet
-name: labels_gen
+name: labels_gen_LS_P0p1_0p1__17f5f007
 settings:
   index: 0
   label: false
   label_str: ''
   label_valid_len: 1
-  labels: null
-  layer:
-  - 34
-  - 10
+  layer: metal1_label
   position:
   - 0.1
   - 0.1
