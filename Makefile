@@ -18,10 +18,6 @@ test-force:
 cov:
 	uv run pytest --cov=gf180
 
-
-git-rm-merged:
-	git branch -D `git branch --merged | grep -v \* | xargs`
-
 update:
 	pur
 
