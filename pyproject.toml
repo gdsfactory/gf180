@@ -12,7 +12,8 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.2.0"
+  "gdsfactory~=9.2.0",
+  "gf180mcu"
 ]
 description = "GlobalFoundries 180nm MCU"
 keywords = ["python"]
@@ -108,4 +109,4 @@ regex = '''
   '''
 
 [tool.uv.sources]
-gf180mcu = { path = "../gf180mcu" }
+gf180mcu = {path = "../gf180mcu"}

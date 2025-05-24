@@ -1,6 +1,16 @@
+.. warning::
+   **DEPRECATION NOTICE**: The ``gf180`` package is deprecated and will be removed in a future version. Please use the ``gf180mcu`` package instead. All cells and functionality shown here are available in the ``gf180mcu`` package.
 
+.. danger::
+   This cell documentation is outdated. Please see the up-to-date cell documentation in the `gf180mcu documentation <https://gdsfactory.github.io/gf180mcu/cells.html>`_.
 
-Here are the parametric cells available in the PDK
+**This page has been replaced by the equivalent page in the gf180mcu documentation:**
+
+`gf180mcu Cell Documentation <https://gdsfactory.github.io/gf180mcu/cells.html>`_
+
+Please update your bookmarks and references to point to the new cell documentation page.
+
+Here are the parametric cells available in the PDK (via the gf180mcu package)
 
 
 Cells
@@ -10,417 +20,403 @@ Cells
 alter_interdig
 ----------------------------------------------------
 
-.. autofunction:: gf180.alter_interdig
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.alter_interdig <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#alter_interdig>`_
 
-  c = gf180.alter_interdig(l_gate=0.15, inter_sd_l=0.15, sd_l=0.36, nf=1, pat='', pc_x=0.1, pc_spacing=0.1, label=0, nl=1, patt_label=0)
-  c.plot()
+
+
+cap_mim
+----------------------------------------------------
+
+.. admonition:: DEPRECATED
+   :class: danger
+
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
+
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.cap_mim <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#cap_mim>`_
 
 
 
 cap_mos
 ----------------------------------------------------
 
-.. autofunction:: gf180.cap_mos
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.cap_mos(type='cap_nmos', lc=0.1, wc=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, g_label='', sd_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.cap_mos <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#cap_mos>`_
 
 
 
 cap_mos_inst
 ----------------------------------------------------
 
-.. autofunction:: gf180.cap_mos_inst
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.cap_mos_inst(lc=0.1, wc=0.1, cmp_w=0.1, con_w=0.1, pl_l=0.1, cmp_ext=0.1, pl_ext=0.1, implant_layer=(32, 0), implant_enc=(0.1, 0.1), label=0, g_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.cap_mos_inst <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#cap_mos_inst>`_
 
 
 
 diode_dw2ps
 ----------------------------------------------------
 
-.. autofunction:: gf180.diode_dw2ps
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.diode_dw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.diode_dw2ps <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#diode_dw2ps>`_
 
 
 
 diode_nd2ps
 ----------------------------------------------------
 
-.. autofunction:: gf180.diode_nd2ps
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.diode_nd2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.diode_nd2ps <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#diode_nd2ps>`_
 
 
 
 diode_nw2ps
 ----------------------------------------------------
 
-.. autofunction:: gf180.diode_nw2ps
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.diode_nw2ps(la=0.1, wa=0.1, cw=0.1, volt='3.3V', label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.diode_nw2ps <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#diode_nw2ps>`_
 
 
 
 diode_pd2nw
 ----------------------------------------------------
 
-.. autofunction:: gf180.diode_pd2nw
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.diode_pd2nw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.diode_pd2nw <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#diode_pd2nw>`_
 
 
 
 diode_pw2dw
 ----------------------------------------------------
 
-.. autofunction:: gf180.diode_pw2dw
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.diode_pw2dw(la=0.1, wa=0.1, cw=0.1, volt='3.3V', pcmpgr=0, label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.diode_pw2dw <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#diode_pw2dw>`_
 
 
 
 interdigit
 ----------------------------------------------------
 
-.. autofunction:: gf180.interdigit
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.interdigit(l_gate=0.15, inter_sd_l=0.23, sd_l=0.15, nf=1, gate_con_pos='top', pc_x=0.1, pc_spacing=0.1, label=0, patt_label=0)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.interdigit <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#interdigit>`_
 
 
 
 labels_gen
 ----------------------------------------------------
 
-.. autofunction:: gf180.labels_gen
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.labels_gen(label_str='', position=(0.1, 0.1), layer=(34, 10), label=0, label_valid_len=1, index=0)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.labels_gen <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#labels_gen>`_
 
 
 
 nfet
 ----------------------------------------------------
 
-.. autofunction:: gf180.nfet
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.nfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, label=0, sub_label='', patt_label=0)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.nfet <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#nfet>`_
 
 
 
 nfet_06v0_nvt
 ----------------------------------------------------
 
-.. autofunction:: gf180.nfet_06v0_nvt
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.nfet_06v0_nvt(l_gate=1.8, w_gate=0.8, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', label=0, sub_label='', patt_label=0)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.nfet_06v0_nvt <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#nfet_06v0_nvt>`_
 
 
 
 nfet_deep_nwell
 ----------------------------------------------------
 
-.. autofunction:: gf180.nfet_deep_nwell
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.nfet_deep_nwell(deepnwell=0, pcmpgr=0, inst_size=(0.1, 0.1), inst_xmin=0.1, inst_ymin=0.1, grw=0.36)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.nfet_deep_nwell <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#nfet_deep_nwell>`_
 
 
 
 nplus_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.nplus_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.nplus_res(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.nplus_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#nplus_res>`_
 
 
 
 npolyf_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.npolyf_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.npolyf_res(l_res=0.1, w_res=0.1, res_type='npolyf_s', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.npolyf_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#npolyf_res>`_
 
 
 
 pcmpgr_gen
 ----------------------------------------------------
 
-.. autofunction:: gf180.pcmpgr_gen
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.pcmpgr_gen(grw=0.36)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.pcmpgr_gen <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#pcmpgr_gen>`_
 
 
 
 pfet
 ----------------------------------------------------
 
-.. autofunction:: gf180.pfet
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.pfet(l_gate=0.28, w_gate=0.22, sd_con_col=1, inter_sd_l=0.24, nf=1, grw=0.22, volt='3.3V', bulk='None', con_bet_fin=1, gate_con_pos='alternating', interdig=0, patt='', deepnwell=0, pcmpgr=0, label=0, sub_label='', patt_label=0)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.pfet <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#pfet>`_
 
 
 
 pfet_deep_nwell
 ----------------------------------------------------
 
-.. autofunction:: gf180.pfet_deep_nwell
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.pfet_deep_nwell(deepnwell=0, pcmpgr=0, enc_size=(0.1, 0.1), enc_xmin=0.1, enc_ymin=0.1, nw_enc_pcmp=0.1, grw=0.36)
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.pfet_deep_nwell <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#pfet_deep_nwell>`_
 
 
 
 plus_res_inst
 ----------------------------------------------------
 
-.. autofunction:: gf180.plus_res_inst
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.plus_res_inst(l_res=0.1, w_res=0.1, res_type='nplus_s', sub=0, cmp_res_ext=0.1, con_enc=0.1, cmp_imp_layer=(32, 0), sub_imp_layer=(31, 0), label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.plus_res_inst <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#plus_res_inst>`_
 
 
 
 polyf_res_inst
 ----------------------------------------------------
 
-.. autofunction:: gf180.polyf_res_inst
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.polyf_res_inst(l_res=0.1, w_res=0.1, res_type='npolyf_s', pl_res_ext=0.1, con_enc=0.1, pl_imp_layer=(32, 0), sub_imp_layer=(31, 0), label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.polyf_res_inst <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#polyf_res_inst>`_
 
 
 
 pplus_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.pplus_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.pplus_res(l_res=0.1, w_res=0.1, res_type='pplus_s', sub=0, deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.pplus_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#pplus_res>`_
 
 
 
 ppolyf_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.ppolyf_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.ppolyf_res(l_res=0.1, w_res=0.1, res_type='ppolyf_s', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.ppolyf_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#ppolyf_res>`_
 
 
 
 ppolyf_u_high_Rs_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.ppolyf_u_high_Rs_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.ppolyf_u_high_Rs_res(l_res=0.42, w_res=0.42, volt='3.3V', deepnwell=0, pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.ppolyf_u_high_Rs_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#ppolyf_u_high_Rs_res>`_
 
 
 
 res
 ----------------------------------------------------
 
-.. autofunction:: gf180.res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.res(l_res=0.1, w_res=0.1, res_type='rm1', label=0, r0_label='', r1_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#res>`_
 
 
 
 sc_diode
 ----------------------------------------------------
 
-.. autofunction:: gf180.sc_diode
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.sc_diode(la=0.1, wa=0.1, cw=0.1, m=1, pcmpgr=0, label=0, p_label='', n_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.sc_diode <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#sc_diode>`_
 
 
 
 via_generator
 ----------------------------------------------------
 
-.. autofunction:: gf180.via_generator
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.via_generator(x_range=(0, 1), y_range=(0, 1), via_size=(0.17, 0.17), via_layer=(66, 44), via_enclosure=(0.06, 0.06), via_spacing=(0.17, 0.17))
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.via_generator <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#via_generator>`_
 
 
 
 via_stack
 ----------------------------------------------------
 
-.. autofunction:: gf180.via_stack
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.via_stack(x_range=(0, 1), y_range=(0, 1), base_layer=(22, 0), slotted_licon=0, metal_level=1, li_enc_dir='V')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.via_stack <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#via_stack>`_
 
 
 
 well_res
 ----------------------------------------------------
 
-.. autofunction:: gf180.well_res
+.. admonition:: DEPRECATED
+   :class: danger
 
-.. plot::
-  :include-source:
+   This component documentation is deprecated.
+   Please use the equivalent component in the gf180mcu package.
 
-  import gf180
-
-  c = gf180.well_res(l_res=0.42, w_res=0.42, res_type='nwell', pcmpgr=0, label=0, r0_label='', r1_label='', sub_label='')
-  c.plot()
+   See the equivalent component in gf180mcu documentation:
+   `gf180mcu.well_res <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#well_res>`_
