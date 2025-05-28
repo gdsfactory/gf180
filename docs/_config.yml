@@ -1,8 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: gf180
+title: gf180 (DEPRECATED)
 author: gdsfactory
+description: "DEPRECATED: This package is deprecated and will be removed in a future version. Please use gf180mcu instead."
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
