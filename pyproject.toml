@@ -21,7 +21,7 @@ license = {file = "LICENSE"}
 name = "gf180"
 readme = "README.md"
 requires-python = ">=3.11"
-version = "0.1.1"
+version = "0.2.0"
 
 [project.optional-dependencies]
 dev = [
@@ -93,7 +93,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "0.1.1"
+current = "0.2.0"
 regex = '''
   (?P<major>\d+)
   \.
