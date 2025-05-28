@@ -12,7 +12,6 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.2.0",
   "gf180mcu"
 ]
 description = "GlobalFoundries 180nm MCU"
