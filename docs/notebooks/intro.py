@@ -17,11 +17,11 @@
 # # Layout (DEPRECATED)
 #
 # > **DEPRECATION NOTICE**: The `gf180` package is deprecated and will be removed in a future version. Please use the `gf180mcu` package instead.
-# > 
+# >
 # > This notebook is kept for reference only and may contain outdated information.
 # >
 # > **Please visit the [gf180mcu documentation](https://gdsfactory.github.io/gf180mcu/) for up-to-date notebooks.**
-# 
+#
 # ## Layout driven flow using gf180mcu (recommended)
 #
 # You should import the PDK from gf180mcu and layout any of the standard cells
@@ -41,7 +41,7 @@ c.plot()
 
 # %%
 # Legacy/deprecated approach (generates deprecation warning)
-import gf180
+import gf180  # noqa
 
 # This still works but is redirected to gf180mcu internally
 c = gf180.diode_dw2ps()

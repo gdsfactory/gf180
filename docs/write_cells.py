@@ -1,10 +1,8 @@
 import inspect
 import pathlib
 
-from gdsfactory.serialization import clean_value_json
-
 # Import directly from gf180mcu since gf180 is now just a wrapper
-import gf180mcu
+from gdsfactory.serialization import clean_value_json
 from gf180mcu import cells
 
 filepath = pathlib.Path(__file__).parent.absolute() / "cells.rst"
@@ -74,7 +72,7 @@ Cells
 
    This component documentation is deprecated.
    Please use the equivalent component in the gf180mcu package.
-   
+
    See the equivalent component in gf180mcu documentation:
    `gf180mcu.{name} <https://gdsfactory.github.io/gf180mcu/autoapi/gf180mcu/index.html#{name}>`_
 

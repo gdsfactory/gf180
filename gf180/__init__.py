@@ -4,9 +4,7 @@ This module is a legacy/deprecated alias for the gf180mcu library.
 Please use gf180mcu directly in new code.
 """
 
-import sys
 import warnings
-import os
 
 # Show a deprecation warning when the module is imported
 warnings.warn(
@@ -16,10 +14,10 @@ warnings.warn(
     stacklevel=2,
 )
 
-import gf180mcu
+import gf180mcu  # noqa
 
 # Re-export everything from gf180mcu
-from gf180mcu import *
+from gf180mcu import *  # noqa
 
 # Re-export specific items to ensure compatibility
 __version__ = gf180mcu.__version__
