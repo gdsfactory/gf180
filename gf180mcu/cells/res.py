@@ -9,6 +9,7 @@ from __future__ import annotations
 from math import floor
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.typings import LayerSpec
 
 from gf180mcu.layers import layer
@@ -1337,4 +1338,5 @@ def res(
 
     # VLSIR Simulation Metadata
 
+    add_electrical_pins(out, port_pin_mapping={"r0": ["r0"], "r1": ["r1"]})
     return out

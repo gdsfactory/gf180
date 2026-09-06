@@ -19,6 +19,7 @@ Contact rules:
 """
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.typings import Float2
 
 from gf180mcu.cells.via_generator import via_generator, via_stack
@@ -441,6 +442,9 @@ def diode_nd2ps(
         port_type="electrical",
     )
 
+    add_electrical_pins(
+        c, port_pin_mapping={"anode": ["anode"], "cathode": ["cathode"]}
+    )
     return c
 
 
@@ -633,6 +637,9 @@ def diode_pd2nw(
         port_type="electrical",
     )
 
+    add_electrical_pins(
+        c, port_pin_mapping={"anode": ["anode"], "cathode": ["cathode"]}
+    )
     return c
 
 
@@ -771,6 +778,32 @@ def diode_nw2ps(
         dg.dxmin = pcmp.dxmin - dg_enc_cmp
         dg.dymin = pcmp.dymin - dg_enc_cmp
 
+    c.add_port(
+        name="cathode",
+        center=(
+            n_con.dx + n_con.dxsize / 2,
+            n_con.dy + n_con.dysize / 2,
+        ),
+        width=wa,
+        orientation=0,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+    c.add_port(
+        name="anode",
+        center=(
+            p_con.dx + p_con.dxsize / 2,
+            p_con.dy + p_con.dysize / 2,
+        ),
+        width=cw,
+        orientation=0,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+
+    add_electrical_pins(
+        c, port_pin_mapping={"cathode": ["cathode"], "anode": ["anode"]}
+    )
     return c
 
 
@@ -1080,6 +1113,32 @@ def diode_pw2dw(
         dg.dxmin = dn_rect.dxmin - dg_enc_dn
         dg.dymin = dn_rect.dymin - dg_enc_dn
 
+    c.add_port(
+        name="anode",
+        center=(
+            p_con.dx + p_con.dxsize / 2,
+            p_con.dy + p_con.dysize / 2,
+        ),
+        width=wa,
+        orientation=0,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+    c.add_port(
+        name="cathode",
+        center=(
+            n_con.dx + n_con.dxsize / 2,
+            n_con.dy + n_con.dysize / 2,
+        ),
+        width=cw,
+        orientation=0,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+
+    add_electrical_pins(
+        c, port_pin_mapping={"anode": ["anode"], "cathode": ["cathode"]}
+    )
     return c
 
 
@@ -1501,6 +1560,34 @@ def diode_dw2ps(
         dg.dxmin = dn_rect.dxmin - dg_enc_dn
         dg.dymin = dn_rect.dymin - dg_enc_dn
 
+    c.add_port(
+        name="cathode",
+        center=(
+            n_con.dx + n_con.dxsize / 2,
+            n_con.dy + n_con.dysize / 2,
+        ),
+        width=wa,
+        orientation=0,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+
+    pin_mapping: dict[str, list[str]] = {"cathode": ["cathode"]}
+    if pcmpgr == 1:
+        c.add_port(
+            name="anode",
+            center=(
+                p_con.dx + p_con.dxsize / 2,
+                p_con.dy + p_con.dysize / 2,
+            ),
+            width=cw,
+            orientation=0,
+            layer=layer["metal1"],
+            port_type="electrical",
+        )
+        pin_mapping["anode"] = ["anode"]
+
+    add_electrical_pins(c, port_pin_mapping=pin_mapping)
     return c
 
 
@@ -1884,4 +1971,43 @@ def sc_diode(
             )
         )  # guardring metal1
 
+    c.add_port(
+        name="cathode",
+        center=(
+            cath_m1_h.dx + cath_m1_h.dxsize / 2,
+            cath_m1_h.dy + cath_m1_h.dysize / 2,
+        ),
+        width=cath_m1_h.dxsize,
+        orientation=270,
+        layer=layer["metal1"],
+        port_type="electrical",
+    )
+    if m > 1:
+        c.add_port(
+            name="anode",
+            center=(
+                an_m1_h.dx + an_m1_h.dxsize / 2,
+                an_m1_h.dy + an_m1_h.dysize / 2,
+            ),
+            width=an_m1_h.dxsize,
+            orientation=90,
+            layer=layer["metal1"],
+            port_type="electrical",
+        )
+    else:
+        c.add_port(
+            name="anode",
+            center=(
+                an_m1_xmin + (an_m1_xmax - an_m1_xmin) / 2,
+                an_m1_ymin + (an_m1_ymax - an_m1_ymin) / 2,
+            ),
+            width=an_m1_xmax - an_m1_xmin,
+            orientation=90,
+            layer=layer["metal1"],
+            port_type="electrical",
+        )
+
+    add_electrical_pins(
+        c, port_pin_mapping={"cathode": ["cathode"], "anode": ["anode"]}
+    )
     return c

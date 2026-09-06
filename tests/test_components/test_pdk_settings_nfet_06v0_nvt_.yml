@@ -1,6 +1,87 @@
 info: {}
 name: nfet_06v0_nvt_LG1p8_WG0p8_SCC1_ISL0p24_N1_G0p22_BNone_C_a70c57c7
-ports: {}
+ports:
+  Bulk_0:
+    center:
+    - 0
+    - 1.15
+    layer: metal1
+    name: Bulk_0
+    orientation: 90
+    port_type: electrical
+    width: 0.36
+  Bulk_1:
+    center:
+    - 0
+    - -1.15
+    layer: metal1
+    name: Bulk_1
+    orientation: 90
+    port_type: electrical
+    width: 0.36
+  Bulk_2:
+    center:
+    - -1.85
+    - 0
+    layer: metal1
+    name: Bulk_2
+    orientation: 90
+    port_type: electrical
+    width: 0.36
+  Bulk_3:
+    center:
+    - 1.85
+    - 0
+    layer: metal1
+    name: Bulk_3
+    orientation: 90
+    port_type: electrical
+    width: 0.36
+  Drain_0:
+    center:
+    - -1.16
+    - 0
+    layer: metal1
+    name: Drain_0
+    orientation: 90
+    port_type: electrical
+    width: 0.67
+  Gate_0:
+    center:
+    - 0
+    - 0
+    layer: poly2
+    name: Gate_0
+    orientation: 90
+    port_type: electrical
+    width: 1.8
+  Gate_1:
+    center:
+    - 0
+    - 0.68
+    layer: metal1
+    name: Gate_1
+    orientation: 90
+    port_type: electrical
+    width: 1.67
+  Gate_2:
+    center:
+    - 0
+    - -0.68
+    layer: metal1
+    name: Gate_2
+    orientation: 90
+    port_type: electrical
+    width: 1.67
+  Source_0:
+    center:
+    - 1.16
+    - 0
+    layer: metal1
+    name: Source_0
+    orientation: 90
+    port_type: electrical
+    width: 0.67
 settings:
   bulk: None
   con_bet_fin: 1

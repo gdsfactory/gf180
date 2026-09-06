@@ -1,6 +1,15 @@
 info: {}
 name: diode_dw2ps_L0p1_W0p1_C0p1_V3p3V_PFalse_LFalse_PL_NL
-ports: {}
+ports:
+  cathode:
+    center:
+    - 0.22
+    - 0.22
+    layer: metal1
+    name: cathode
+    orientation: 0
+    port_type: electrical
+    width: 0.1
 settings:
   cw: 0.1
   la: 0.1

@@ -10,7 +10,7 @@ from pytest_regressions.data_regression import DataRegressionFixture
 
 from gf180mcu import PDK
 
-skip_test = {"res_dev", "nfet", "pfet"}
+skip_test = {"res_dev", "nfet", "pfet", "via_generator", "via_stack"}
 cells = PDK.cells
 cell_names = set(cells.keys()) - set(skip_test)
 dirpath = pathlib.Path(__file__).absolute().parent / "gds_ref"

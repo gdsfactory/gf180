@@ -2,6 +2,7 @@ from math import ceil, floor
 from typing import Any
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.typings import Float2, LayerSpec, Size, Spacing
 
 from gf180mcu.layers import layer
@@ -80,6 +81,7 @@ def via_generator(
         port_type="electrical",
     )
 
+    add_electrical_pins(c, port_pin_mapping={"e": ["e1", "e2"]})
     return c
 
 
@@ -205,4 +207,5 @@ def via_stack(
             port_type="electrical",
         )
 
+    add_electrical_pins(c, port_pin_mapping={"e": ["e1", "e2"]})
     return c

@@ -1,6 +1,7 @@
 from functools import partial
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 
 from gf180mcu.cells.via_generator import via_generator
 from gf180mcu.layers import LAYER, layer
@@ -188,4 +189,5 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
         port_type="electrical",
     )
 
+    add_electrical_pins(c, port_pin_mapping={"guardring": ["guardring"]})
     return c

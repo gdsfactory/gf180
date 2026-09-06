@@ -20,11 +20,14 @@ are converted to physical GDS dimensions:
 The total envelope is conserved (0.23/2 + 0.065 = 0.22/2 + 0.07 = 0.18).
 """
 
+# TODO: Replace hard coded DRC rules by proper DRC rule dictionaries to build the components.
+
 from __future__ import annotations
 
 from math import floor
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.typings import Strs
 
 from gf180mcu.layers import layer
@@ -1243,6 +1246,137 @@ def _mos_draw(
 
     # prBoundary removed — Magic's 10x FIXED_BBOX is unnecessarily large
 
+    # -----------------------------------------------------------------
+    # Collect port metadata for Source, Drain, Gate, Bulk
+    # -----------------------------------------------------------------
+    drain_xs = sorted({r["drain_cx"] for r in all_finger_results})
+    source_xs = sorted({r["source_cx"] for r in all_finger_results})
+
+    sd_port_width = max(geom["cdw"], contact_size)
+
+    gate_poly_centers = []
+    gate_contacts = []
+    gate_to_polycont = geom["gate_to_polycont"]
+    hw = geom["hw"]
+    for i in range(nf):
+        fx = start_x + i * dx
+        gate_poly_centers.append((_snap(fx), 0.0))
+        if topc:
+            gate_contacts.append((_snap(fx), _snap(hw + gate_to_polycont)))
+        if botc:
+            gate_contacts.append((_snap(fx), _snap(-(hw + gate_to_polycont))))
+
+    gate_contact_width = max(geom["cpl"], contact_size)
+
+    bulk_contacts = []
+    if guard:
+        bulk_contacts = [
+            (0.0, _snap(gy / 2.0)),
+            (0.0, _snap(-gy / 2.0)),
+            (_snap(-gx / 2.0), 0.0),
+            (_snap(gx / 2.0), 0.0),
+        ]
+
+    bulk_port_width = contact_size + 2 * diff_surround
+
+    return dict(
+        drain_xs=drain_xs,
+        source_xs=source_xs,
+        sd_port_width=sd_port_width,
+        gate_poly_centers=gate_poly_centers,
+        gate_poly_width=l,
+        gate_contacts=gate_contacts,
+        gate_contact_width=gate_contact_width,
+        bulk_contacts=bulk_contacts,
+        bulk_port_width=bulk_port_width,
+        has_guard=guard,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Port / pin helper
+# ---------------------------------------------------------------------------
+
+
+def _add_mos_ports(c, port_data):
+    """Add electrical ports and logical pins to a MOSFET component."""
+    drain_ports = []
+    for i, dx in enumerate(port_data["drain_xs"]):
+        name = f"Drain_{i}"
+        c.add_port(
+            name=name,
+            center=(float(dx), 0.0),
+            width=float(port_data["sd_port_width"]),
+            orientation=90,
+            layer=_L_METAL1,
+            port_type="electrical",
+        )
+        drain_ports.append(name)
+
+    source_ports = []
+    for i, sx in enumerate(port_data["source_xs"]):
+        name = f"Source_{i}"
+        c.add_port(
+            name=name,
+            center=(float(sx), 0.0),
+            width=float(port_data["sd_port_width"]),
+            orientation=90,
+            layer=_L_METAL1,
+            port_type="electrical",
+        )
+        source_ports.append(name)
+
+    gate_ports = []
+    idx = 0
+    for gx, gy in port_data["gate_poly_centers"]:
+        name = f"Gate_{idx}"
+        c.add_port(
+            name=name,
+            center=(float(gx), float(gy)),
+            width=float(port_data["gate_poly_width"]),
+            orientation=90,
+            layer=_L_POLY,
+            port_type="electrical",
+        )
+        gate_ports.append(name)
+        idx += 1
+    for gx, gy in port_data["gate_contacts"]:
+        name = f"Gate_{idx}"
+        c.add_port(
+            name=name,
+            center=(float(gx), float(gy)),
+            width=float(port_data["gate_contact_width"]),
+            orientation=90,
+            layer=_L_METAL1,
+            port_type="electrical",
+        )
+        gate_ports.append(name)
+        idx += 1
+
+    bulk_ports = []
+    if port_data["has_guard"]:
+        for i, (bx, by) in enumerate(port_data["bulk_contacts"]):
+            name = f"Bulk_{i}"
+            c.add_port(
+                name=name,
+                center=(float(bx), float(by)),
+                width=float(port_data["bulk_port_width"]),
+                orientation=90,
+                layer=_L_METAL1,
+                port_type="electrical",
+            )
+            bulk_ports.append(name)
+
+    pin_mapping = {
+        "Drain": drain_ports,
+        "Source": source_ports,
+        "Gate": gate_ports,
+    }
+    if bulk_ports:
+        pin_mapping["Bulk"] = bulk_ports
+
+    add_electrical_pins(c, port_pin_mapping=pin_mapping)
+
 
 # ---------------------------------------------------------------------------
 # nfet
@@ -1308,9 +1442,10 @@ def nfet(
         rules["diff_spacing"] = 0.36
         rules["sub_surround"] = 0.16
 
-    _mos_draw(
+    port_data = _mos_draw(
         c, w_gate, l_gate, nf, rules, is_nfet=True, guard=grw > 0, dss=dss, asym=asym
     )
+    _add_mos_ports(c, port_data)
     return c
 
 
@@ -1373,9 +1508,10 @@ def pfet(
         rules["diff_spacing"] = 0.36
         rules["sub_surround"] = 0.16
 
-    _mos_draw(
+    port_data = _mos_draw(
         c, w_gate, l_gate, nf, rules, is_nfet=False, guard=grw > 0, dss=dss, asym=asym
     )
+    _add_mos_ports(c, port_data)
     return c
 
 
@@ -1424,5 +1560,6 @@ def nfet_06v0_nvt(
     rules["gate_extension"] = 0.35
     rules["sub_surround"] = 0.16
 
-    _mos_draw(c, w_gate, l_gate, nf, rules, is_nfet=True, guard=grw > 0)
+    port_data = _mos_draw(c, w_gate, l_gate, nf, rules, is_nfet=True, guard=grw > 0)
+    _add_mos_ports(c, port_data)
     return c

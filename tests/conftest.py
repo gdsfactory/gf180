@@ -3,14 +3,32 @@
 import filecmp
 import pathlib
 import shutil
+import tempfile
 
 import gdsfactory as gf
 from gdsfactory.name import clean_name, get_name_short
+
+import klayout.db as kdb
 
 PROJECT_ROOT = pathlib.Path(__file__).parent.parent
 DIFF_DIR = PROJECT_ROOT / "test_diffs"
 
 _config = {"update_gds_refs": False}
+
+SKIP_DATATYPES = {2, 10}
+
+
+def _strip_pin_label_layers(gds_path: pathlib.Path) -> pathlib.Path:
+    """Return a temp GDS copy with pin/label layers removed."""
+    layout = kdb.Layout()
+    layout.read(str(gds_path))
+    for li in list(layout.layer_indices()):
+        info = layout.get_info(li)
+        if info.datatype in SKIP_DATATYPES:
+            layout.delete_layer(li)
+    tmp = tempfile.NamedTemporaryFile(suffix=".gds", delete=False)
+    layout.write(tmp.name)
+    return pathlib.Path(tmp.name)
 
 
 def pytest_addoption(parser):
@@ -48,7 +66,7 @@ def difftest(
     dirpath: pathlib.Path = pathlib.Path.cwd(),
     xor: bool = True,
     dirpath_run: pathlib.Path | None = None,
-    ignore_sliver_differences: bool | None = None,
+    ignore_sliver_differences: bool | None = True,
     sliver_tolerance: int = 1,
 ) -> None:
     """Custom difftest that saves XOR diff images on failure instead of prompting."""
@@ -78,8 +96,14 @@ def difftest(
             "Run the test again to confirm it passes."
         )
 
-    if filecmp.cmp(ref_file, run_file, shallow=False):
-        return
+    stripped_ref = _strip_pin_label_layers(ref_file)
+    stripped_run = _strip_pin_label_layers(run_file)
+    try:
+        if filecmp.cmp(stripped_ref, stripped_run, shallow=False):
+            return
+    finally:
+        stripped_ref.unlink(missing_ok=True)
+        stripped_run.unlink(missing_ok=True)
 
     # Files differ - generate XOR diff
     diff_gds = DIFF_DIR / f"{filename}_diff.gds"

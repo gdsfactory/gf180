@@ -25,7 +25,7 @@ SKIP_LAYERS = {
     (235, 4),  # prBoundary
 }
 
-# Skip any datatype 5 (label layers) dynamically in xor_gds_files
+SKIP_DATATYPES = {2, 5, 10}  # pin, block
 
 
 def xor_gds_files(
@@ -61,7 +61,7 @@ def xor_gds_files(
     failures = {}
 
     for key in all_layers:
-        if key in SKIP_LAYERS or key[1] == 5:  # skip label datatypes
+        if key in SKIP_LAYERS or key[1] in SKIP_DATATYPES:
             continue
         in_ref = key in layers_ref
         in_new = key in layers_new
