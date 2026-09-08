@@ -27,7 +27,7 @@ def pcmpgr_gen(dn_rect=dn_rect, grw: float = 0.36) -> gf.Component:
     con_comp_enc = 0.07
     pcmpgr_enc_dn = 2.5
 
-    c_temp_gr = gf.Component("temp_store guard ring")
+    c_temp_gr = gf.Component()
     rect_pcmpgr_in = c_temp_gr.add_ref(
         gf.components.rectangle(
             size=(
