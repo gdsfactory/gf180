@@ -3,6 +3,7 @@ docs_dir = "."
 nav = [
   {"Home" = "index.md"},
   {"Reference" = [
+    {"Layer Stack" = "layer_stack.md"},
     {"Cells" = "cells.md"},
     {"Logic 7T" = "logic_7t.md"},
     {"Logic 9T" = "logic_9t.md"},
